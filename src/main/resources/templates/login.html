@@ -4,20 +4,6 @@
 <head>
     <title>HUTTER - Login page</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
-    <!--    <style>-->
-    <!--        body {-->
-    <!--            -moz-background-image: url(static/images/ufo.jpg);-->
-    <!--            -webkit-background-image: url(static/images/ufo.jpg);-->
-    <!--            -o-background-image: url(static/images/ufo.jpg);-->
-    <!--            background-image: url(static/images/ufo.jpg);-->
-    <!--            background-attachment: fixed;-->
-    <!--            bottom: 0px;-->
-    <!--            -moz-background-size: 100%; /* Firefox 3.6+ */-->
-    <!--            -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */-->
-    <!--            -o-background-size: 100%; /* Opera 9.6+ */-->
-    <!--            background-size: 100%;-->
-    <!--        }-->
-    <!--    </style>-->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript" src="./js/app.js"></script>
 </head>
@@ -32,11 +18,11 @@
     <ul>
         <li class="name gradient">HUTTER</li>
         <li><a href="./registration">Registration</a></li>
-        <li><a href="./">Login</a></li>
+        <li><a href="./login">Login</a></li>
     </ul>
 </div>
 
-<div id="fill">
+<div align="center" id="fill">
     <form th:action="@{/login}" method="POST" align="center">
         <h2 class="name gradient">HUTTER</h2> <br/>
         <input type="text" name="user_name" placeholder="User Name" class="form-control"/> <br/>
