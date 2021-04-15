@@ -5,6 +5,22 @@
     /* Comic Sans MS */
 }
 
+.bg{
+    /*position: absolute;*/
+    /*z-index: 1;*/
+    -moz-background-image: url(static/images/ufo.jpg);
+    -webkit-background-image: url(static/images/ufo.jpg);
+    -o-background-image: url(static/images/ufo.jpg);
+    background-image: url(static/images/ufo.jpg);
+    background-attachment: fixed;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+}
+
 .map{
     margin: auto;
     min-width: 400px;
@@ -63,6 +79,9 @@
     color: white;
     font-size: 1.2em;
     border-radius: 10px;
+
+    position: absolute;
+    z-index: 2;
 }
 
 #sidebar{
