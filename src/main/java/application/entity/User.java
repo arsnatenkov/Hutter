@@ -35,7 +35,7 @@ public class User {
     @Length(min = 5, message = "*Your password must have at least 5 characters")
     @NotEmpty(message = "*Please provide your password")
     private String password;
-    @Column(name = "name")
+    @Column(name = "first_name")
     @NotEmpty(message = "*Please provide your name")
     private String name;
     @Column(name = "last_name")

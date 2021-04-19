@@ -19,8 +19,10 @@ function init() {
     var myMap = new ymaps.Map('map', {
             center: [55.754096, 37.649238],
             zoom: 16,
-            behaviors: ['drag'],
-            controls: ['zoomControl',  'fullscreenControl', 'searchControl'], //, 'searchControl'
+            behaviors: ['drag', 'scrollZoom'],
+            controls: ['zoomControl', 'searchControl'], //, 'fullscreenControl'
+        }, {
+            searchControlProvider: 'yandex#search'
         }),
         clusterer = new ymaps.Clusterer({
             preset: 'islands#blackClusterIcons',

@@ -23,11 +23,9 @@
 
 .map{
     margin: auto;
-    min-width: 400px;
-    max-width: 800px;
+    width: 700px;
 
-    min-height: 350px;
-    max-height: 700px;
+    height: 700px;
 }
 
 .name{

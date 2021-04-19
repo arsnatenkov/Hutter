@@ -1,3 +1,2 @@
-REPLACE INTO `roles` VALUES (1, 'ADMIN');
-REPLACE INTO `roles` VALUES (2, 'HOST'); -- владелец
-REPLACE INTO `roles` VALUES (3, 'VISITOR');
+REPLACE INTO `roles` VALUES (1, 'VISITOR');
+REPLACE INTO `roles` VALUES (2, 'ADMIN');
