@@ -1,8 +1,16 @@
 package application.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
-
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "offers")
 public class Offer {
@@ -31,9 +39,9 @@ public class Offer {
     @Column(name = "address")
     private String address;
     @Column (name = "coordinate_X")
-    private Long coordinateX;
+    private String coordinateX;
     @Column(name = "coordinate_Y")
-    private Long coordinateY;
+    private String coordinateY;
     @Column(name = "description")
     private String description;
     @Column(name = "host_id")
