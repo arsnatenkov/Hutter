@@ -7,8 +7,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public interface OfferRepository extends JpaRepository<Offer, Long> {
+    List<Offer> findAll();
     List<Offer> findByAddress(String address);
-    Offer findByPublicId(Integer id);
+    Offer findByPublicId(Integer publicId);
     List<Offer> findByCostBetween(Long low, Long high);
-    Offer getOffersByPublicId(Integer publicId);
 }

@@ -7,24 +7,30 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
+
 @Service
 public class OfferService {
     private OfferRepository offerRepository;
+
     @Autowired
-    public OfferService(OfferRepository offerRepository){
+    public OfferService(OfferRepository offerRepository) {
         this.offerRepository = offerRepository;
     }
-    public List<Offer> findByAddress(String address){
+
+    public List<Offer> findByAddress(String address) {
         return offerRepository.findByAddress(address);
     }
-    public Offer findByPublicId(Integer id){
+
+    public Offer findByPublicId(Integer id) {
         return offerRepository.findByPublicId(id);
     }
-    public List<Offer> findByCostBetween(Long low, Long high){
+
+    public List<Offer> findByCostBetween(Long low, Long high) {
         return offerRepository.findByCostBetween(low, high);
     }
-    public Offer getOffersByPublicId(){
-        return offerRepository.getOffersByPublicId(1);
 
+    public List<Offer> findAll() {
+        return offerRepository.findAll();
     }
+
 }

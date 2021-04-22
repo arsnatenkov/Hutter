@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title id="title">HUTTER - Offer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <script language="javascript" type="text/javascript">
+        function OnLoad() {
+            var paramValue = window.location.href.split("?")[1].split("=")[1];
+            document.getElementById("paramValue").innerText = paramValue;
+            document.getElementById("title").innerText = "HUTTER - Offer " + paramValue;
+            fs = require("fs");
+            fs.writeFileSync("C:\\Users\\Ksenia\\Desktop\\courseWork\\Kursach2\\src\\main\\resources\\static\\meta\\data.txt",
+                paramValue);
+        }
+    </script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=f3166bfd-6c7c-40bb-a767-55a8e4259c52&lang=ru_RU&size=450,150"
+            type="text/javascript"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+</head>
+<body onload="OnLoad()">
+<div th:insert="blocks/menu :: menu"></div>
+<div id="paramValue" class="content"></div>
+
+</body>
+</html>

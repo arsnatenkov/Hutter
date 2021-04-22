@@ -41,7 +41,7 @@
 }
 
 .content{
-    top: 0px;
+    top: 0;
     width: 700px;
     min-width: 600px;
     max-width: 800px;
@@ -77,33 +77,6 @@
     border-radius: 10px;
 }
 
-#sidebar{
-    top: 0px;
-    margin: 10px 0px;
-    position: fixed;
-    width: 180px;
-    background: rgba(42, 50, 60, 0.8);
-    border-right: 4px rgba(224, 229, 234, 0.6);
-    border-radius: 10px;
-    right: -181px;
-
-    -moz-animation: all 330ms; /*mozila*/
-    -webkit-transition: all 330ms; /*safari*/
-    transition: all 330ms;
-}
-
-#sidebar.active {
-    right: 15px;
-}
-
-#sidebar ul li:first-child{
-    text-align: center;
-    color: white;
-    font-size: 1.95em;
-    list-style: none;
-    padding: 15px 10px 10px 10px;
-}
-
 #sidebar ul li:not(:first-child){
     text-align: left;
     margin-left: 10%;
@@ -119,6 +92,33 @@
 }
 
 #sidebar ul li a:hover {color: rgb(255, 198, 255)}
+
+#sidebar.active {
+    right: 15px;
+}
+
+#sidebar ul li:first-child{
+    text-align: center;
+    color: white;
+    font-size: 1.95em;
+    list-style: none;
+    padding: 15px 10px 10px 10px;
+}
+
+#sidebar{
+    top: 0;
+    margin: 10px 0;
+    position: fixed;
+    width: 180px;
+    background: rgba(42, 50, 60, 0.8);
+    border-right: 4px rgba(224, 229, 234, 0.6);
+    border-radius: 10px;
+    right: -181px;
+
+    -moz-animation: all 330ms; /*mozila*/
+    -webkit-transition: all 330ms; /*safari*/
+    transition: all 330ms;
+}
 
 #sidebar .toggle-btn {
     position: absolute;
@@ -141,3 +141,30 @@
     background-color: rgba(42, 50, 60, 0.8);
     margin: 4px 0;
 }
+
+.link-list {
+    width: 700px;
+    min-width: 600px;
+    max-width: 800px;
+    margin: 40px auto auto;
+    background-color: rgba(42, 50, 60, 0.8);
+    border-radius: 10px;
+    padding: 15px 15px 15px 25px;
+}
+
+.link-list ul li {
+    text-align: left;
+    margin-left: 10%;
+    color: white;
+    font-size: 1.2em;
+    list-style: none;
+    padding: 15px 10px;
+}
+
+.link-list ul li a {
+    color: #dfe5eb;
+    margin-left: -15px;
+    text-decoration: none;
+}
+
+.link-list ul li a:hover {color: rgb(255, 198, 255)}

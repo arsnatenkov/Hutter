@@ -21,12 +21,12 @@ public class Offer {
     @Column(name = "public_id")
     private Integer publicId;
     @Column(name = "total_area")
-    private Long total;
+    private Long totalArea;
     @Column(name = "living_space")
     private Long living;
     @Column(name = "room_area")
     private String roomArea;
-    @Column(name = "quantity_of_room")
+    @Column(name = "quantity_of_room") //TODO: roomsNumber
     private Integer quantityRoom;
     @Column(name = "cost")
     private Long cost;
@@ -38,7 +38,7 @@ public class Offer {
     private String material;
     @Column(name = "address")
     private String address;
-    @Column (name = "coordinate_X")
+    @Column(name = "coordinate_X")
     private String coordinateX;
     @Column(name = "coordinate_Y")
     private String coordinateY;
@@ -47,6 +47,24 @@ public class Offer {
     @Column(name = "host_id")
     private Integer hostId;
 
+
+    @Override
+    public String toString() {
+        return getPublicId() + ":"
+                + getTotalArea() + ":"
+                + getLiving() + ":"
+                + getRoomArea() + ":"
+                + getQuantityRoom() + ":"
+                + getCost() + ":"
+                + getQuantityToilet() + ":"
+                + getType() + ":"
+                + getMaterial() + ":"
+                + getAddress() + ":"
+                + getCoordinateX() + ":"
+                + getCoordinateY() + ":"
+                + getHostId() + ":"
+                + getDescription() + ";";
+    }
 
     // общая площадь, жилая площадь, площадь кухни, площади комнат,
     // кол-во комнат, стоимость, сан. узлы, типы сан. узлов, материал здания,

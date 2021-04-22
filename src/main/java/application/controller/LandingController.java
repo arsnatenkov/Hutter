@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.awt.*;
 import java.util.List;
 
 @Controller
@@ -19,26 +20,36 @@ public class LandingController {
     private OfferService offerService;
 
     @GetMapping("/")
-    public ModelAndView landing(){
+    public ModelAndView landing() {
         ModelAndView modelAndView = new ModelAndView();
-        Offer offer = offerService.getOffersByPublicId();
-        String result = offer.getPublicId() + ":"
-                + offer.getTotal() + ":"
-                + offer.getLiving() + ":"
-                + offer.getRoomArea() + ":"
-                + offer.getQuantityRoom() + ":"
-                + offer.getCost() + ":"
-                + offer.getQuantityToilet() + ":"
-                + offer.getType() + ":"
-                + offer.getMaterial() + ":"
-                + offer.getAddress() + ":"
-                + offer.getCoordinateX() + ":"
-                + offer.getCoordinateY() + ":"
-                + offer.getHostId() + ":"
-                + offer.getDescription() + ";";
+        List<Offer> offers = offerService.findAll();
+        StringBuilder sb = new StringBuilder();
 
-        modelAndView.addObject("offerDescription1", result);
+        for (Offer offer : offers)
+            sb.append(wrap(offer));
+
+        modelAndView.addObject("offerDescriptions", sb.toString());
         modelAndView.setViewName("landing");
         return modelAndView;
+    }
+
+    private String wrap(Offer offer) {
+        String res = "<li>" + makeLink(offer.getPublicId(), "offer", offer.getAddress()) + "<br />";
+        res += "цена: " + offer.getCost() + " ₽<br />";
+        res += "общая площадь: " + offer.getTotalArea() + " м²<br />";
+        res += "жилая площадь: " + offer.getLiving() + " м²<br />";
+        res += "кол-во комнат: " + offer.getQuantityRoom() + "<br />";
+        res += "площади комнат: " + offer.getRoomArea() + " м²<br />";
+        res += "кол-во санузлов: " + offer.getQuantityToilet() + "<br />";
+        res += "типы санузлов: " + offer.getType() + "<br />";
+        res += "строительные материалы: " + offer.getMaterial() + "<br />";
+        res += "описание: " + offer.getDescription() + "<br />";
+        res += makeLink(offer.getHostId(), "user", "Владелец") + "<br />";
+
+        return res + "</li>";
+    }
+
+    private String makeLink(int id, String type, String text) {
+        return "<a id=\"" + id + "\" href=\"/" + type + "?id=" + id + "\">" + text + "</a>";
     }
 }
