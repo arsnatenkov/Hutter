@@ -1,0 +1,71 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+    /* Comic Sans MS */
+}
+
+#sidebar ul li:not(:first-child){
+    text-align: left;
+    margin-left: 10%;
+    color: white;
+    font-size: 1.2em;
+    list-style: none;
+    padding: 15px 10px;
+}
+
+#sidebar ul li a {
+    color: #dfe5eb;
+    text-decoration: none;
+}
+
+#sidebar ul li a:hover {color: rgb(255, 198, 255)}
+
+#sidebar.active {
+    right: 15px;
+}
+
+#sidebar ul li:first-child{
+    text-align: center;
+    color: white;
+    font-size: 1.95em;
+    list-style: none;
+    padding: 15px 10px 10px 10px;
+}
+
+#sidebar{
+    top: 0;
+    margin: 10px 0;
+    position: fixed;
+    width: 180px;
+    background: rgba(42, 50, 60, 0.8);
+    border-right: 4px rgba(224, 229, 234, 0.6);
+    border-radius: 10px;
+    right: -181px;
+
+    -moz-animation: all 330ms; /*mozila*/
+    -webkit-transition: all 330ms; /*safari*/
+    transition: all 330ms;
+}
+
+#sidebar .toggle-btn {
+    position: absolute;
+    right: 200px;
+    top: 10px;
+    background: rgba(224, 229, 234, 0.6);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#sidebar .toggle-btn:hover {background: rgba(42, 50, 60, 0.8);}
+
+#sidebar .toggle-btn:hover span {background: rgba(250, 250, 250, 0.6);}
+
+#sidebar .toggle-btn span {
+    display: block;
+    width: 25px;
+    height: 4px;
+    background-color: rgba(42, 50, 60, 0.8);
+    margin: 4px 0;
+}
