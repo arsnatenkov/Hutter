@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
     font-family: monospace;
@@ -21,11 +21,10 @@
 /*    height: 100%;*/
 /*}*/
 
-.map{
+.map {
     margin: auto;
-    width: 700px;
-
-    height: 700px;
+    padding: 0 0 0 0;
+    /*width: 680px;*/
 }
 
 /*.name{*/
@@ -36,53 +35,59 @@
 /*    color: white;*/
 /*}*/
 
-.gradient{
+.gradient {
     color: #ffc0cb;
 }
 
-.content{
+.content {
     top: 0;
-    width: 700px;
-    min-width: 600px;
-    max-width: 800px;
+    width: 680px;
+    height: 440px;
     margin: 40px auto auto;
-    background-color: rgba(42, 50, 60, 0.8);
+    /*background-color: rgba(42, 50, 60, 0.8);*/
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
     border-radius: 10px;
     padding: 15px;
 }
 
-#story{
+#story {
     padding: 25px 15px 15px 20px;
     color: white;
     font-size: 1.2em;
 }
 
 .wrapper {
-    background-color: rgba(42, 50, 60, 0.8);
-    top: 0px;
-    width: 700px;
-    padding: 25px 15px 15px 20px;
-    margin: 15px auto auto;
-    text-align: center;
-    /*color: white;*/
-    font-size: 1.2em;
+    top: 15px;
+    width: 680px;
+    background: #fff;
     border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: auto;
+
+    /*background-color: rgba(42, 50, 60, 0.8);*/
+    /*top: 0;*/
+    /*width: 700px;*/
+    /*padding: 25px 15px 15px 20px;*/
+    /*margin: 15px auto auto;*/
+    /*text-align: center;*/
+    /*!*color: white;*!*/
+    /*font-size: 1.2em;*/
+    /*border-radius: 10px;*/
 }
 
-.form-btn{
+.form-btn {
     background: rgba(42, 50, 60, 0.8);
-    /*background: rgba(0,0,0,0);*/
     outline: none;
     border-bottom-width: 0;
     border-radius: 10px;
 }
 
 .link-list {
-    width: 700px;
-    min-width: 600px;
-    max-width: 800px;
+    width: 680px;
     margin: 40px auto auto;
-    background-color: rgba(42, 50, 60, 0.8);
+    /*background-color: rgba(42, 50, 60, 0.8);*/
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
     border-radius: 10px;
     padding: 15px 15px 15px 25px;
 }
@@ -102,4 +107,6 @@
     text-decoration: none;
 }
 
-.link-list ul li a:hover {color: rgb(255, 198, 255)}
+.link-list ul li a:hover {
+    color: rgb(255, 198, 255)
+}
