@@ -2,6 +2,10 @@ function openMenu() {
     document.getElementById("sidebar").classList.toggle('active');
 }
 
+function gradient() {
+    document.getElementById("menu_link2").classList.toggle('gradient');
+}
+
 $measurer = function () {
     var
         callbacks = [],

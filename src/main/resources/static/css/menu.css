@@ -20,7 +20,11 @@
 }
 
 #sidebar ul li a:hover {
-    border-bottom: 2px solid #ffc0cb;
+    border-bottom: 1px solid #ffc0cb;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
 }
 
 #sidebar.active {
@@ -40,7 +44,7 @@
     margin: 10px 0;
     position: fixed;
     width: 180px;
-    /*background: rgba(42, 50, 60, 0.8);*/
+    background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
     /*border-right: 4px rgba(224, 229, 234, 0.6);*/
@@ -69,14 +73,14 @@
 }
 
 #sidebar .toggle-btn:hover span {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgb(255, 255, 255);
 }
 
 #sidebar .toggle-btn span {
     display: block;
     width: 25px;
     height: 4px;
-    background: rgba(50, 50, 50, 0.8);
+    background: rgb(50, 50, 50);
 
     margin: 4px 0;
 }

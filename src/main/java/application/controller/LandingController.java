@@ -50,6 +50,6 @@ public class LandingController {
     }
 
     private String makeLink(int id, String type, String text) {
-        return "<a id=\"" + id + "\" href=\"/" + type + "?id=" + id + "\">" + text + "</a>";
+        return "<a class=\"" + type + "\" id=\"" + id + "\" href=\"/" + type + "?id=" + id + "\">" + text + "</a>";
     }
 }

@@ -21,7 +21,7 @@ a {
     font-size: 14px;
     line-height: 1.7;
     color: #666666;
-    margin: 0px;
+    margin: 0;
     transition: all 0.4s;
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
@@ -54,7 +54,6 @@ ul, li {
     margin: 0px;
     list-style-type: none;
 }
-
 
 /*---------------------------------------------*/
 input {
@@ -169,7 +168,7 @@ iframe {
 }
 
 .bo1 {
-    border-bottom: 2px solid #999999;
+    border-bottom: 1px solid #999999;
     text-decoration: none;
 }
 
@@ -199,6 +198,7 @@ iframe {
 
 .wrap-login {
     top: 15px;
+    bottom: 15px;
     width: 680px;
     background: #fff;
     border-radius: 10px;
@@ -207,9 +207,7 @@ iframe {
     margin: auto;
 }
 
-
 /*[ Form ]==================================================================*/
-
 .login-form {
     width: 100%;
 }
@@ -224,7 +222,6 @@ iframe {
 }
 
 /*[ Input ]------------------------------------------------------------------*/
-
 .wrap-input {
     width: 100%;
     position: relative;
@@ -358,7 +355,6 @@ iframe {
 .login-form-btn:hover:before {
     opacity: 1;
 }
-
 
 /*[ Alert validate ]------------------------------------------------------------------*/
 .validate-input {

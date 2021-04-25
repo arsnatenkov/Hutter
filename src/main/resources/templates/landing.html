@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>HUTTER - Home page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=f3166bfd-6c7c-40bb-a767-55a8e4259c52&lang=ru_RU&size=450,150"
@@ -12,7 +13,6 @@
     <script type="text/javascript" src="./js/map.js"></script>
 </head>
 <body>
-<div th:insert="blocks/menu :: menu"></div>
 <div class="content">
     <div id="map" class="map"></div>
 </div>
@@ -23,5 +23,7 @@
         <li><a>aaa</a></li>
     </ul>
 </div>
+
+<div th:insert="blocks/menu :: menu"></div>
 </body>
 </html>
