@@ -36,7 +36,7 @@ public class LandingController {
     private String wrap(Offer offer) {
         String res = "<li>" + makeLink(offer.getPublicId(), "offer", offer.getAddress()) + "<br />";
         res += "цена: " + offer.getCost() + " ₽<br />";
-        res += "общая площадь: " + offer.getTotalArea() + " м²<br />";
+        res += "общая площадь: <span class=\"space\">" + offer.getTotalArea() + " м²</span><br />";
         res += "жилая площадь: " + offer.getLiving() + " м²<br />";
         res += "кол-во комнат: " + offer.getQuantityRoom() + "<br />";
         res += "площади комнат: " + offer.getRoomArea() + " м²<br />";
