@@ -118,6 +118,44 @@ a {
 }
 
 .offer {
-    font-size: 1.5em;
-    margin-left: -10px;
+    font-size: 1.3em;
+    margin-left: 10px;
+}
+
+.offer-pic {
+    width: 220px;
+    height: 220px;
+}
+
+table {
+    width: 100%;
+    cellspacing: 0;
+    cellpadding: 5px;
+}
+
+.hat {
+    width: 100%;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-size: 1.95em;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    top: 0;
+    position: fixed;
+    margin-bottom: 40px;
+}
+
+.offer-wrapper {
+    margin: 90px auto auto;
+}
+
+.little-form {
+    width: 100%;
+    padding-bottom: 0;
+    margin: auto auto 0;
+}
+
+td {
+    padding: 15px;
 }
