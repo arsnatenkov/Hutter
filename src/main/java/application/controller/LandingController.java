@@ -37,8 +37,10 @@ public class LandingController {
         String res = "<li><table><tr>" +
                 "<td class=\"offer-pic\">" +
                 "<img src=\"images/" + offer.getPublicId() + "\" alt=\"Фото объявления\"/>" +
-                "</td>";
-        res += makeLink(offer.getPublicId(), "offer", offer.getAddress()) + "<br />";
+                "<form th:action=\"@{/}\" method=\"GET\" class=\"little-form\">" +
+                "<button class=\"login-form-btn\">Войти</button></form></td>";
+
+        res += "<td>" + makeLink(offer.getPublicId(), "offer", offer.getAddress()) + "<br />";
         res += "цена: " + offer.getCost() + " ₽<br />";
         res += "общая площадь: <span class=\"space\">" + offer.getTotalArea() + " м²</span><br />";
         res += "жилая площадь: " + offer.getLiving() + " м²<br />";
@@ -50,7 +52,7 @@ public class LandingController {
         res += "описание: " + offer.getDescription() + "<br />";
         res += makeLink(offer.getHostId(), "user", "Владелец") + "<br />";
 
-        return res + "</tr></table></li>";
+        return res + "</td></tr></table></li>";
     }
 
     private String makeLink(int id, String type, String text) {

@@ -8,27 +8,30 @@
 #sidebar ul li:not(:first-child) {
     text-align: left;
     margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10px;
     /*color: white;*/
     list-style: none;
-
-    padding: 15px;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 #sidebar ul li a {
-    color: #000000;
+    color: #000;
+    padding-left: 30px;
     text-decoration: none;
 }
 
-#sidebar ul li a:hover {
-    border-bottom: 1px solid #ffc0cb;
-    transition: all 0.4s;
+#sidebar ul li:not(:first-child):hover {
+    background: rgba(65, 105, 225, 0.8);
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
+    transition: all 0.4s;
 }
 
 #sidebar.active {
-    right: 15px;
+    right: 10px;
 }
 
 #sidebar ul li:first-child {
@@ -40,8 +43,9 @@
 }
 
 #sidebar {
+    z-index: 1;
     top: 0;
-    margin: 10px 0;
+    margin: 60px 0;
     position: fixed;
     width: 180px;
     background: rgba(255, 255, 255, 0.8);
@@ -49,7 +53,7 @@
 
     /*border-right: 4px rgba(224, 229, 234, 0.6);*/
     border-radius: 10px;
-    right: -181px;
+    right: -191px;
 
     -moz-animation: all 330ms; /*mozila*/
     -webkit-transition: all 330ms; /*safari*/
@@ -58,7 +62,7 @@
 
 #sidebar .toggle-btn {
     position: absolute;
-    right: 200px;
+    right: 195px;
     top: 10px;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -81,6 +85,5 @@
     width: 25px;
     height: 4px;
     background: rgb(50, 50, 50);
-
     margin: 4px 0;
 }

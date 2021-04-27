@@ -143,6 +143,7 @@ table {
     padding-bottom: 15px;
     top: 0;
     position: fixed;
+    z-index: 2;
     margin-bottom: 40px;
 }
 
@@ -152,7 +153,7 @@ table {
 
 .little-form {
     width: 100%;
-    padding-bottom: 0;
+    padding-top: 15px;
     margin: auto auto 0;
 }
 

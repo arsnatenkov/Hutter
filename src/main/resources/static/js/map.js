@@ -69,10 +69,10 @@ function init() {
                         this.events.fire('shapechange');
                     },
                     applyElementOffset: function () {
-                        this._$element.css({
-                            left: -(this._$element[0].offsetWidth / 2),
-                            top: -(this._$element[0].offsetHeight + this._$element.find('.arrow')[0].offsetHeight)
-                        });
+                        // this._$element.css({
+                        //     left: -(this._$element[0].offsetWidth / 2),
+                        //     top: -(this._$element[0].offsetHeight + this._$element.find('.arrow')[0].offsetHeight)
+                        // });
                     },
                     onCloseClick: function (e) {
                         e.preventDefault();
@@ -97,7 +97,7 @@ function init() {
 
             BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
                 '<div class="balloon-content">' +
-                '<a href="/offer?id=' + j + 1 + '">{{properties.name}}</a><br />' +
+                '<a href="/offer?id=' + (1 + j) + '">{{properties.name}}</a><br />' +
                 '<i id="count"></i> ' +
                 '<button id="counter-button"> [+1] </button>' +
                 '</div>', {
@@ -134,7 +134,7 @@ function init() {
                 balloonPanelMaxMapArea: 0,
                 hideIconOnBalloonOpen: false,
                 balloonOffset: [0, -2],
-                balloonLayout: MyBalloonLayout,
+                // balloonLayout: MyBalloonLayout,
                 balloonContentLayout: BalloonContentLayout,
 
             });
