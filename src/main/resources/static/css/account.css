@@ -1,8 +1,11 @@
 /* Style the tab */
 .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    /*border: 1px solid #ccc;*/
+    border-radius: 10px;
+    /*background-color: #f1f1f1;*/
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Style the buttons inside the tab */
@@ -19,11 +22,17 @@
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #ddd;
+    text-decoration: underline;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+/*rgba(65, 105, 225, 0.8)*/
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
+    text-decoration: underline;
     background-color: #ccc;
 }
 
@@ -43,4 +52,3 @@
 }
 
 .topright:hover {color: red;}
-

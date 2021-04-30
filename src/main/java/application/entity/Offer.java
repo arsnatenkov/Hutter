@@ -14,6 +14,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "offers")
 public class Offer {
+
+    //TODO: указать этаж!!!
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "offer_id")
