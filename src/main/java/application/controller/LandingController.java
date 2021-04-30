@@ -41,9 +41,7 @@ public class LandingController {
     private String wrap(Offer offer) {
         String res = "<li><table><tr>" +
                 "<td class=\"offer-pic\">" +
-                "<img src=\"images/" + offer.getPublicId() + "\" alt=\"Фото объявления\"/>" +
-                "<form th:action=\"@{/}\" method=\"GET\" class=\"little-form\">" +
-                "<button class=\"login-form-btn\">Открыть</button></form></td>";
+                "<img src=\"images/" + offer.getPublicId() + "\" alt=\"Фото объявления\"/>" +  "</td>";
 
         res += "<td>" + makeLink(offer.getPublicId(), "offer", offer.getAddress()) + "<br />";
         res += "цена: " + offer.getCost() + " ₽<br />";
