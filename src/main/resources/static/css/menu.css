@@ -23,7 +23,8 @@
 }
 
 #sidebar ul li:not(:first-child):hover {
-    background: rgba(65, 105, 225, 0.8);
+    /*background: rgba(65, 105, 225, 0.8);*/
+    background-color: #ddd;
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;

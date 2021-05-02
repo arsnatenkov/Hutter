@@ -33,32 +33,18 @@ public class LandingController {
         modelAndView.setViewName("landing");
         return modelAndView;
     }
+
     @GetMapping(path = {"/id"})
-    public Offer getOffer(@PathVariable("id") Integer id){
+    public Offer getOffer(@PathVariable("id") Integer id) {
         return offerService.findByPublicId(id);
     }
 
     private String wrap(Offer offer) {
         String res = "<li><table><tr>" +
                 "<td class=\"offer-pic\">" +
-                "<img src=\"images/" + offer.getPublicId() + "\" alt=\"Фото объявления\"/>" +  "</td>";
+                "<img src=\"images/offer" + offer.getPublicId() + "\" alt=\"Фото объявления\"/>" + "</td>";
 
-        res += "<td>" + makeLink(offer.getPublicId(), "offer", offer.getAddress()) + "<br />";
-        res += "цена: " + offer.getCost() + " ₽<br />";
-        res += "общая площадь: <span class=\"space\">" + offer.getTotalArea() + " м²</span><br />";
-        res += "жилая площадь: " + offer.getLiving() + " м²<br />";
-        res += "кол-во комнат: " + offer.getQuantityRoom() + "<br />";
-        res += "площади комнат: " + offer.getRoomArea() + " м²<br />";
-        res += "кол-во санузлов: " + offer.getQuantityToilet() + "<br />";
-        res += "типы санузлов: " + offer.getType() + "<br />";
-        res += "строительные материалы: " + offer.getMaterial() + "<br />";
-        res += "описание: " + offer.getDescription() + "<br />";
-        res += makeLink(offer.getHostId(), "user", "Владелец") + "<br />";
-
+        res += "<td>" + offer.shortDescription();
         return res + "</td></tr></table></li>";
-    }
-
-    private String makeLink(int id, String type, String text) {
-        return "<a class=\"" + type + "\" id=\"" + id + "\" href=\"/" + type + "?id=" + id + "\">" + text + "</a>";
     }
 }

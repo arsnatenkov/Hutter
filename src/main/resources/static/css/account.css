@@ -27,13 +27,13 @@
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
     transition: all 0.4s;
-/*rgba(65, 105, 225, 0.8)*/
+    /*rgba(65, 105, 225, 0.8)*/
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
     text-decoration: underline;
-    background-color: #ccc;
+    background-color: #eee;
 }
 
 /* Style the tab content */
@@ -51,4 +51,23 @@
     font-size: 28px;
 }
 
-.topright:hover {color: red;}
+.topright:hover {
+    color: red;
+}
+
+.logout-wrapper {
+    text-align: center;
+}
+
+.logout {
+    border: none;
+    background: white;
+    margin: 10px;
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+.logout:hover {
+    background: rgba(50, 50, 50, 0.23);
+}

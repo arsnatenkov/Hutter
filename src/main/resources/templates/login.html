@@ -3,7 +3,7 @@
 
 <head>
     <title>HUTTER - Login page</title>
-    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>-->
+    <link rel="shortcut icon" href="/images/home.svg" type="image/svg">
     <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
@@ -23,7 +23,7 @@
 		    </span>
         </div>
         <div class="wrap-input validate-input" data-validate="Введите имя пользователя">
-            <input class="input" type="text" name="user_name">
+            <input autocomplete="off" class="input" type="text" name="user_name">
             <span class="focus-input"></span>
         </div>
 
@@ -36,7 +36,7 @@
             </a>
         </div>
         <div class="wrap-input validate-input" data-validate="Введите пароль">
-            <input class="input" type="password" name="password">
+            <input autocomplete="off" class="input" type="password" name="password">
             <span class="focus-input"></span>
         </div>
 

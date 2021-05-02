@@ -50,6 +50,11 @@ public class Offer {
     @Column(name = "host_id")
     private Integer hostId;
 
+    @Column(name = "floor")
+    private Integer floor;
+    @Column(name = "floor_max")
+    private Integer floorMax;
+
 
     @Override
     public String toString() {
@@ -67,6 +72,26 @@ public class Offer {
                 + getCoordinateY() + ":"
                 + getHostId() + ":"
                 + getDescription() + ";";
+    }
+
+    public String shortDescription() {
+        String res = makeLink(getPublicId(), "offer", getAddress()) + "<br />";
+        res += "цена: " + getCost() + " ₽<br />";
+        res += "общая площадь: <span class=\"space\">" + getTotalArea() + " м²</span><br />";
+        res += "жилая площадь: " + getLiving() + " м²<br />";
+        res += "кол-во комнат: " + getQuantityRoom() + "<br />";
+        res += "площади комнат: " + getRoomArea() + " м²<br />";
+        res += "кол-во санузлов: " + getQuantityToilet() + "<br />";
+        res += "типы санузлов: " + getType() + "<br />";
+        res += "строительные материалы: " + getMaterial() + "<br />";
+        res += "описание: " + getDescription() + "<br />";
+        res += makeLink(getHostId(), "user", "Владелец") + "<br />";
+        return res;
+    }
+
+    private String makeLink(int id, String type, String text) {
+        return "<a class=\"" + type + "\" id=\"" + id + "\" href=\"/" +
+                type + "?id=" + id + "\">" + text + "</a>";
     }
 
     // общая площадь, жилая площадь, площадь кухни, площади комнат,

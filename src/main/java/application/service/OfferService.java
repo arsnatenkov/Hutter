@@ -1,10 +1,13 @@
 package application.service;
 
 import application.entity.Offer;
+import application.entity.Role;
 import application.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -33,4 +36,7 @@ public class OfferService {
         return offerRepository.findAll();
     }
 
+    public Offer saveOffer(Offer offer) {
+        return offerRepository.save(offer);
+    }
 }

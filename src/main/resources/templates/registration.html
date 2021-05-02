@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>HUTTER - Registration page</title>
-    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>-->
+    <link rel="shortcut icon" href="/images/home.svg" type="image/svg">
     <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
@@ -20,35 +20,38 @@
             <span class="txt1">Имя пользователя</span>
         </div>
         <div class="wrap-input validate-input" data-validate="Введите имя пользователя">
-            <input class="input" type="text" th:field="*{userName}"> <span class="focus-input"></span>
+            <input autocomplete="off" class="input" type="text" th:field="*{userName}"> <span
+                class="focus-input"></span>
         </div>
 
         <div class="p-t-13 p-b-9">
             <span class="txt1">Эл. почта</span>
         </div>
         <div class="wrap-input validate-input" data-validate="Введите имя пользователя">
-            <input type="text" th:field="*{email}" class="input"> <span class="focus-input"></span>
+            <input autocomplete="off" type="email" th:field="*{email}" class="input"> <span class="focus-input"></span>
         </div>
 
         <div class="p-t-13 p-b-9">
             <span class="txt1">Имя</span>
         </div>
         <div class="wrap-input validate-input" data-validate="Введите имя пользователя">
-            <input type="text" th:field="*{name}" class="input"> <span class="focus-input"></span>
+            <input autocomplete="off" type="text" th:field="*{name}" class="input"> <span class="focus-input"></span>
         </div>
 
         <div class="p-t-13 p-b-9">
             <span class="txt1">Фамилия</span>
         </div>
         <div class="wrap-input validate-input" data-validate="Введите имя пользователя">
-            <input type="text" th:field="*{lastName}" class="input"> <span class="focus-input"></span>
+            <input autocomplete="off" type="text" th:field="*{lastName}" class="input"> <span
+                class="focus-input"></span>
         </div>
 
         <div class="p-t-13 p-b-9">
             <span class="txt1">Пароль</span>
         </div>
         <div class="wrap-input validate-input" data-validate="Введите пароль">
-            <input class="input" type="password" th:field="*{password}"><span class="focus-input"></span>
+            <input autocomplete="off" class="input" type="password" th:field="*{password}"><span
+                class="focus-input"></span>
         </div>
 
         <h2><span class="txt1" th:utext="${successMessage}"></span></h2>

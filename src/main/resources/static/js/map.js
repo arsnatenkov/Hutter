@@ -21,7 +21,7 @@ function init() {
             preset: 'islands#blackClusterIcons',
             groupByCoordinates: false,
             clusterDisableClickZoom: true,
-            clusterHideIconOnBalloonOpen: false,
+            clusterHideIconOnBalloonOpen: false, // прячем иконку при открытии баллуна
             geoObjectHideIconOnBalloonOpen: false,
             clusterBalloonContentLayout: customBalloonContentLayout,
         }),
@@ -130,10 +130,14 @@ function init() {
                 balloonContentBody: addresses[j],
                 placemarkId: j,
             }, {
+                iconLayout: 'default#image',
+                iconHeight: 20,
+                iconWidth: 20,
+                iconImageHref: "/images/search.svg",
                 preset: 'islands#blackCircleDotIcon',
                 balloonPanelMaxMapArea: 0,
                 hideIconOnBalloonOpen: false,
-                balloonOffset: [0, -2],
+                balloonOffset: [0, 10],
                 // balloonLayout: MyBalloonLayout,
                 balloonContentLayout: BalloonContentLayout,
 
