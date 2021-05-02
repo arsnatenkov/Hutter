@@ -4,25 +4,28 @@ import application.entity.Offer;
 import application.entity.User;
 import application.service.OfferService;
 import application.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
 public class OfferController {
+    @Autowired
     OfferService offerService;
+    @Autowired
     UserService userService;
 
-    @PostMapping(value = "/addOffer")
+    @PostMapping(value = "/visitor/addOffer")
     public ModelAndView addOffer(@Valid Offer offer, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         List<Offer> offerExists = offerService.findByAddress(offer.getAddress());
@@ -38,7 +41,14 @@ public class OfferController {
             modelAndView.addObject("offer", new Offer());
         }
 
-        modelAndView.setViewName("/addOffer");
+        modelAndView.setViewName("/visitor/addOffer");
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/visitor/addOffer")
+    public ModelAndView createOffer() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/visitor/addOffer");
         return modelAndView;
     }
 

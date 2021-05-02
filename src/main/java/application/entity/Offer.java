@@ -49,7 +49,12 @@ public class Offer {
     private String description;
     @Column(name = "host_id")
     private Integer hostId;
-
+    @Column(name = "rooms_spaces")
+    private String roomsSpaces;
+    @Column(name = "has_parking")
+    private Boolean hasParking;
+    @Column(name = "parking_type")
+    private String parkingType;
     @Column(name = "floor")
     private Integer floor;
     @Column(name = "floor_max")

@@ -42,7 +42,7 @@ public class LandingController {
     private String wrap(Offer offer) {
         String res = "<li><table><tr>" +
                 "<td class=\"offer-pic\">" +
-                "<img src=\"images/offer" + offer.getPublicId() + "\" alt=\"Фото объявления\"/>" + "</td>";
+                "<img src=\"images/offer/offer" + offer.getPublicId() + ".jpg\" alt=\"Фото объявления\"/>" + "</td>";
 
         res += "<td>" + offer.shortDescription();
         return res + "</td></tr></table></li>";
