@@ -347,12 +347,13 @@ iframe {
     border-radius: 10px;
     top: 0;
     left: 0;
+    opacity: 0;
     background: #4169e1;
     background: -webkit-linear-gradient(45deg, #4169e1, #ffc0cb);
     background: -o-linear-gradient(45deg, #4169e1, #ffc0cb);
     background: -moz-linear-gradient(45deg, #4169e1, #ffc0cb);
     background: linear-gradient(45deg, #4169e1, #ffc0cb);
-    opacity: 0;
+    color: #fff;
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;

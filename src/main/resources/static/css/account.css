@@ -22,18 +22,35 @@
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
+    background-color: #eee;
+
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
     transition: all 0.4s;
-    /*rgba(65, 105, 225, 0.8)*/
+    /*     rgba(65, 105, 225, 0.8) */
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-    text-decoration: underline;
-    background-color: #eee;
+    /*text-decoration: underline;*/
+    /*background-color: #eee;*/
+
+    background: #4169e1;
+    background: -webkit-linear-gradient(45deg, #4169e1, #ffc0cb);
+    background: -o-linear-gradient(45deg, #4169e1, #ffc0cb);
+    background: -moz-linear-gradient(45deg, #4169e1, #ffc0cb);
+    background: linear-gradient(45deg, #4169e1, #ffc0cb);
+
+    -webkit-box-shadow: 0 30px 0 0 #fff inset, 0 -3px 0px #fff inset;
+    -moz-box-shadow: 0 30px 0 0 #fff inset, 0 -3px 0px #fff inset;
+    box-shadow: 0 30px 0px 10px #fff inset, 0 -3px 0px #fff inset;
+
+    -webkit-transition: all 0s;
+    -o-transition: all 0s;
+    -moz-transition: all 0s;
+    transition: all 0s;
 }
 
 /* Style the tab content */
@@ -60,14 +77,7 @@
 }
 
 .logout {
-    border: none;
-    background: white;
-    margin: 10px;
-    height: 40px;
-    width: 100px;
-    border-radius: 10px;
-}
-
-.logout:hover {
-    background: rgba(50, 50, 50, 0.23);
+    height: 50px;
+    width: 130px;
+    margin: 10px auto auto;
 }

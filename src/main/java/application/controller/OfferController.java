@@ -62,23 +62,24 @@ public class OfferController {
         ModelAndView modelAndView = new ModelAndView();
         StringBuilder sb = new StringBuilder();
 
-        sb.append(guestUI(offer));
-
         if (user.getActive() && user.getId().equals(offer.getHostId()))
             sb.append(hostUI(offer));
 
+        sb.append(guestUI(offer));
+
         modelAndView.addObject("offerDisplay", sb.toString());
+
         modelAndView.setViewName("offer");
         return modelAndView;
     }
 
     private String hostUI(Offer offer) {
-        return "<div class=\"hostUI\"><a href=/edit?id=\"" + offer.getPublicId() + "\">Изменить</a></div>";
+        return "<div class=\"hostUI\"><a href=/edit?id=" + offer.getPublicId() + ">Изменить</a></div>";
     }
 
     private String guestUI(Offer offer) {
         String title = offer.getAddress() + ", " + offer.getTotalArea() + "м²";
-        String body = offer.shortDescription() + offer.getDescription() + "<br/>";
+        String body = offer.shortDescription() +"<br/>";
         return "<h2>" + title + "</h2>" + body;
     }
 }

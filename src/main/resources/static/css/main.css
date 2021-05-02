@@ -113,9 +113,9 @@ a {
     text-decoration: none;
 }
 
-.link-list ul li a:hover {
-    color: #ffc0cb;
-}
+/*.link-list ul li a:hover {*/
+/*    color: #ffc0cb;*/
+/*}*/
 
 .offer {
     font-size: 1.3em;
@@ -149,6 +149,13 @@ table {
 
 .offer-wrapper {
     margin: 90px auto auto;
+    height: auto;
+    padding-left: 100px;
+    font-size: 1.3em;
+}
+
+.offer-wrapper h2{
+    padding-left: 100px;
 }
 
 .little-form {
@@ -159,4 +166,20 @@ table {
 
 td {
     padding: 15px;
+}
+
+.offer-icons {
+    height: 35px;
+    width: 35px;
+}
+
+.menu-icons {
+    height: 25px;
+    width: 25px;
+    margin-bottom: -5px;
+    margin-left: 5px;
+}
+
+.chat:hover {
+    color: #fff;
 }

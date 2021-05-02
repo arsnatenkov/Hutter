@@ -4,44 +4,20 @@
     <meta charset="UTF-8">
     <title id="title">HUTTER - Offer</title>
     <link rel="shortcut icon" href="/images/home.svg" type="image/svg">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
-    <script language="javascript" type="text/javascript">
-        function OnLoad() {
-            var paramValue = window.location.href.split("?")[1].split("=")[1];
-            document.getElementById("paramValue").innerText = paramValue;
-            document.getElementById("title").innerText = "HUTTER - Offer " + paramValue;
-            fs = require("fs");
-            fs.writeFileSync("C:\\Users\\Ksenia\\Desktop\\courseWork\\Kursach2\\src\\main\\resources\\static\\meta\\data.txt",
-                paramValue);
-        }
-    </script>
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=f3166bfd-6c7c-40bb-a767-55a8e4259c52&lang=ru_RU&size=450,150"
-            type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/offer.css}"/>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript" src="./js/app.js"></script>
 </head>
-<body onload="OnLoad()">
-<div th:utext="offerDisplay" class="offer-wrapper content">
-</div>
+<body>
+<div th:utext="${offerDisplay}" class="offer-wrapper content"></div>
 <div class="offer-wrapper content">
-    <table>
-        <tr>
-            <td class="offer-pic">
-                <img src="images/1" alt="Фото объявления"/>
-            </td>
-            <td><a class="offer" href="/offer?id=5">Покровский бульвар, 18/15</a>
-                <br>цена: 0 ₽<br>общая площадь: <span class="space">990 м²</span><br>жилая площадь: 99 м²
-                <br>кол-во комнат: 99<br>площади комнат: 1 м²<br>кол-во санузлов: 99
-                <br>типы санузлов: muzhskoi<br>строительные материалы: zhelezo blin
-                <br>описание: hooeption<br><a class="user" href="/user?id=2">Владелец</a></td>
-        </tr>
-    </table>
+
 </div>
-<br><br><br>
-<br><br><br>
-<br><br><br>
-<br><br><br>
+
+
 <div class="name gradient hat">HUTTER</div>
 <div th:insert="blocks/menu :: menu"></div>
 </body>

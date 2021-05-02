@@ -18,7 +18,7 @@ function init() {
         }),
         counter = 0,
         clusterer = new ymaps.Clusterer({
-            preset: 'islands#blackClusterIcons',
+            preset: 'islands#grayClusterIcons',
             groupByCoordinates: false,
             clusterDisableClickZoom: true,
             clusterHideIconOnBalloonOpen: false, // прячем иконку при открытии баллуна
@@ -28,6 +28,33 @@ function init() {
         addresses = [],
         spaces = [],
         geoObjects = [];
+
+    /**
+     * Кластеризатор расширяет коллекцию, что позволяет использовать один обработчик
+     * для обработки событий всех геообъектов.
+     * Будем менять цвет иконок и кластеров при наведении.
+     */
+    clusterer.events
+        // Можно слушать сразу несколько событий, указывая их имена в массиве.
+        .add(['mouseenter', 'mouseleave'], function (e) {
+            var target = e.get('target'),
+                type = e.get('type');
+            if (typeof target.getGeoObjects != 'undefined') {
+                // Событие произошло на кластере.
+                if (type === 'mouseenter') {
+                    target.options.set('preset', 'islands#pinkClusterIcons');
+                } else {
+                    target.options.set('preset', 'islands#grayClusterIcons');
+                }
+            } else {
+                // Событие произошло на геообъекте.
+                if (type === 'mouseenter') {
+                    target.options.set('preset', 'islands#pinkCircleDotIcon');
+                } else {
+                    target.options.set('preset', 'islands#grayCircleDotIcon');
+                }
+            }
+        });
 
     for (var q = 0, l = document.getElementsByClassName("offer").length; q < l; ++q) {
         addresses[q] = document.getElementsByClassName("offer")[q].innerHTML;
@@ -121,7 +148,6 @@ function init() {
                     }
                 });
 
-            // var myPlacemark = new ymaps.Placemark(coord, getPointData(i), getPointOptions());
             var placemark = new ymaps.Placemark(coord, {
                 name: addresses[j],
                 // balloonContent: addresses[j],
@@ -130,14 +156,13 @@ function init() {
                 balloonContentBody: addresses[j],
                 placemarkId: j,
             }, {
-                iconLayout: 'default#image',
-                iconHeight: 20,
-                iconWidth: 20,
-                iconImageHref: "/images/search.svg",
-                preset: 'islands#blackCircleDotIcon',
+                // iconLayout: 'default#image',
+                // iconImageSize: [20, 20],
+                // iconImageHref: "/images/search.svg",
+                preset: 'islands#grayCircleDotIcon',
                 balloonPanelMaxMapArea: 0,
                 hideIconOnBalloonOpen: false,
-                balloonOffset: [0, 10],
+                balloonOffset: [0, -10],
                 // balloonLayout: MyBalloonLayout,
                 balloonContentLayout: BalloonContentLayout,
 

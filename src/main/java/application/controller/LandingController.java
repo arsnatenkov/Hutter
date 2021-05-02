@@ -44,7 +44,7 @@ public class LandingController {
                 "<td class=\"offer-pic\">" +
                 "<img src=\"images/offer/offer" + offer.getPublicId() + ".jpg\" alt=\"Фото объявления\"/>" + "</td>";
 
-        res += "<td>" + offer.shortDescription();
+        res += "<td>" + offer.linkTitle() + offer.shortDescription();
         return res + "</td></tr></table></li>";
     }
 }

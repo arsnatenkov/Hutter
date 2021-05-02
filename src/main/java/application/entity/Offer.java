@@ -79,22 +79,41 @@ public class Offer {
                 + getDescription() + ";";
     }
 
+    public String linkTitle() {
+        return makeLink(getPublicId(), "offer", getAddress()) + "<br/>";
+    }
+
     public String shortDescription() {
-        String res = makeLink(getPublicId(), "offer", getAddress()) + "<br />";
-        res += "цена: " + getCost() + " ₽<br />";
-        res += "общая площадь: <span class=\"space\">" + getTotalArea() + " м²</span><br />";
-        res += "жилая площадь: " + getLiving() + " м²<br />";
-        res += "кол-во комнат: " + getQuantityRoom() + "<br />";
-        res += "площади комнат: " + getRoomArea() + " м²<br />";
-        res += "кол-во санузлов: " + getQuantityToilet() + "<br />";
-        res += "типы санузлов: " + getType() + "<br />";
-        res += "строительные материалы: " + getMaterial() + "<br />";
-        res += "описание: " + getDescription() + "<br />";
-        res += makeLink(getHostId(), "user", "Владелец") + "<br />";
+        String res = icon("ruble") + "цена: " + getCost() + " ₽<br/><br/>";
+
+        res += icon("plans") + "общая площадь: <span class=\"space\">" + getTotalArea() + " м²</span><br/>";
+        res += "жилая площадь: " + getLiving() + " м²<br/><br/>";
+
+        res += icon("living-room") + "кол-во комнат: " + getQuantityRoom() + "<br/>";
+        res += "площади комнат: " + getRoomArea() + " м²<br/><br/>";
+
+        res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/>";
+        res += "типы санузлов: " + getType() + "<br/><br/>";
+
+        res += icon("brick") + "строительные материалы: " + getMaterial() + "<br/><br/>";
+
+        String description = getDescription().length() < 50 ? getDescription() :
+                getDescription().substring(0, 47) + "...";
+
+        res += icon("document") + "описание: " + description + "<br/><br/>";
+//        res += makeLink(getHostId(), "user", "Владелец") + "<br />";
+
+        res += "<a href=\"chat" + getHostId() + "\" class=\"login-form-btn chat\">" +
+                "Начать чат с владельцем</a><br />";
         return res;
     }
 
-    private String makeLink(int id, String type, String text) {
+    static public String icon(String name) {
+        return "<img class=\"offer-icons\" src=\"images/" + name +
+                ".svg\" alt=\"" + name + "\">&nbsp;";
+    }
+
+    static public String makeLink(int id, String type, String text) {
         return "<a class=\"" + type + "\" id=\"" + id + "\" href=\"/" +
                 type + "?id=" + id + "\">" + text + "</a>";
     }
