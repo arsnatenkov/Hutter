@@ -10,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +24,7 @@ public class OfferController {
     @Autowired
     UserService userService;
 
-    @PostMapping(value = "/visitor/addOffer")
+    @PostMapping(value = "/addOffer")
     public ModelAndView addOffer(@Valid Offer offer, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         List<Offer> offerExists = offerService.findByAddress(offer.getAddress());
@@ -41,14 +40,7 @@ public class OfferController {
             modelAndView.addObject("offer", new Offer());
         }
 
-        modelAndView.setViewName("/visitor/addOffer");
-        return modelAndView;
-    }
-
-    @GetMapping(value = "/visitor/addOffer")
-    public ModelAndView createOffer() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/visitor/addOffer");
+        modelAndView.setViewName("addOffer");
         return modelAndView;
     }
 
@@ -56,17 +48,16 @@ public class OfferController {
     public ModelAndView offer(HttpServletRequest request) {
         String id = request.getParameter("id");
         Offer offer = offerService.findByPublicId(Integer.parseInt(id));
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
         ModelAndView modelAndView = new ModelAndView();
         StringBuilder sb = new StringBuilder();
+        User user = userService.findUserByUserName(auth.getName());
+        if(user != null) {
+            if (user.getActive() && user.getId().equals(offer.getHostId()))
+                sb.append(hostUI(offer));
 
-        if (user.getActive() && user.getId().equals(offer.getHostId()))
-            sb.append(hostUI(offer));
-
+        }
         sb.append(guestUI(offer));
-
         modelAndView.addObject("offerDisplay", sb.toString());
 
         modelAndView.setViewName("offer");
@@ -79,7 +70,7 @@ public class OfferController {
 
     private String guestUI(Offer offer) {
         String title = offer.getAddress() + ", " + offer.getTotalArea() + "м²";
-        String body = offer.shortDescription() +"<br/>";
+        String body = offer.longDescription() +"<br/>";
         return "<h2>" + title + "</h2>" + body;
     }
 }

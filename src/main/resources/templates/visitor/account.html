@@ -68,9 +68,9 @@
     <div id="HostedOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Ваши объявления</h3>
-        <div th:utext="${hostedOffers}">
-            <p>Ваши объявления будут тут.</p>
-        </div>
+<!--        <div th:utext="${hostedOffers}">-->
+<!--            <p>Ваши объявления будут тут.</p>-->
+<!--        </div>-->
     </div>
 
     <div id="FavouriteOffers" class="tabcontent">
@@ -94,7 +94,7 @@
 
     <div id="AddOffer" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
-        <a th:href="@{/visitor/addOffer}">Создать</a>
+        <a th:href="@{addOffer}">Создать</a>
     </div>
 </div>
 

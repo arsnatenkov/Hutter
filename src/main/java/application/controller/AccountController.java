@@ -30,23 +30,4 @@ public class AccountController {
         return modelAndView;
     }
 
-//    @PostMapping(value = "/visitor/account")
-//    public ModelAndView addOffer(@Valid Offer offer, BindingResult bindingResult) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        List<Offer> offerExists = offerService.findByAddress(offer.getAddress());
-//
-//        if (offerExists != null && offerExists.contains(offer)) {
-//            bindingResult
-//                    .rejectValue("address", "error.offer",
-//                            "There is already an offer registered with same offer address provided");
-//        }
-//        if (!bindingResult.hasErrors()) {
-//            offerService.saveOffer(offer);
-//            modelAndView.addObject("successMessage", "Offer successfully added");
-//            modelAndView.addObject("offer", new Offer());
-//        }
-//
-//        modelAndView.setViewName("/visitor/account");
-//        return modelAndView;
-//    }
 }

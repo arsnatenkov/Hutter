@@ -34,11 +34,6 @@ public class LandingController {
         return modelAndView;
     }
 
-    @GetMapping(path = {"/id"})
-    public Offer getOffer(@PathVariable("id") Integer id) {
-        return offerService.findByPublicId(id);
-    }
-
     private String wrap(Offer offer) {
         String res = "<li><table><tr>" +
                 "<td class=\"offer-pic\">" +
