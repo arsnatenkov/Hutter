@@ -432,7 +432,6 @@ iframe {
 .check-wrap {
     width: 100%;
 }
-
 .semi1 {
     width: 35%;
     margin: 0;
@@ -446,7 +445,7 @@ iframe {
     margin: 0;
     padding: 0;
     right: -300px;
-    top: -125px;
+    top: -127px;
 }
 
 .floors {
@@ -457,5 +456,12 @@ iframe {
 .between {
     position: relative;
     right: -250px;
-    top: -85px;
+    top: -86px;
+}
+
+#description {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: 150px;
+    resize: none;
 }
