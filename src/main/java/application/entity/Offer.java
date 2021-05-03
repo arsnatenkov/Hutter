@@ -123,6 +123,7 @@ public class Offer {
     }
 
     static public String icon(String name) {
+//        return "";
         return "<img class=\"offer-icons\" src=\"images/" + name +
                 ".svg\" alt=\"" + name + "\">&nbsp;";
     }

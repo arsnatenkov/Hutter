@@ -168,17 +168,8 @@ td {
     padding: 15px;
 }
 
-.offer-icons {
-    height: 35px;
-    width: 35px;
-}
 
-.menu-icons {
-    height: 25px;
-    width: 25px;
-    margin-bottom: -5px;
-    margin-left: 5px;
-}
+
 
 .chat:hover {
     color: #fff;
