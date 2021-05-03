@@ -83,7 +83,7 @@ public class Offer {
         return makeLink(getPublicId(), "offer", getAddress()) + "<br/>";
     }
 
-    public String shortDescription() {
+    public String longDescription() {
         String res = icon("ruble") + "цена: " + getCost() + " ₽<br/><br/>";
 
         res += icon("plans") + "общая площадь: <span class=\"space\">" + getTotalArea() + " м²</span><br/>";
@@ -97,11 +97,25 @@ public class Offer {
 
         res += icon("brick") + "строительные материалы: " + getMaterial() + "<br/><br/>";
 
-        String description = getDescription().length() < 50 ? getDescription() :
-                getDescription().substring(0, 47) + "...";
+        String description = getDescription();
+//        String description = getDescription().length() < 50 ? getDescription() :
+//                getDescription().substring(0, 47) + "...";
 
         res += icon("document") + "описание: " + description + "<br/><br/>";
-//        res += makeLink(getHostId(), "user", "Владелец") + "<br />";
+
+        res += "<a href=\"chat" + getHostId() + "\" class=\"login-form-btn chat\">" +
+                "Начать чат с владельцем</a><br />";
+        return res;
+    }
+
+    public String shortDescription() {
+        String res = icon("ruble") + "цена: " + getCost() + " ₽<br/><br/>";
+
+        res += icon("plans") + "общая площадь: <span class=\"space\">" + getTotalArea() + " м²</span><br/>";
+
+        res += icon("living-room") + "кол-во комнат: " + getQuantityRoom() + "<br/>";
+
+        res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/>";
 
         res += "<a href=\"chat" + getHostId() + "\" class=\"login-form-btn chat\">" +
                 "Начать чат с владельцем</a><br />";

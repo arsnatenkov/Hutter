@@ -79,7 +79,7 @@ public class OfferController {
 
     private String guestUI(Offer offer) {
         String title = offer.getAddress() + ", " + offer.getTotalArea() + "м²";
-        String body = offer.shortDescription() +"<br/>";
+        String body = offer.longDescription() +"<br/>";
         return "<h2>" + title + "</h2>" + body;
     }
 }
