@@ -36,6 +36,9 @@ public class OfferController {
         }
 
         if (!bindingResult.hasErrors()) {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userService.findUserByUserName(auth.getName());
+            offer.setHostId(user.getId());
             offerService.saveOffer(offer);
             modelAndView.addObject("successMessage", "Offer successfully added");
             modelAndView.addObject("offer", new Offer());
