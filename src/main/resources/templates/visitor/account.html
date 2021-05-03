@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/account.css}"/>
     <script type="text/javascript" src="/js/tabs.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
 </head>
 <body>
@@ -68,17 +69,17 @@
     <div id="HostedOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Ваши объявления</h3>
-<!--        <div th:utext="${hostedOffers}">-->
-<!--            <p>Ваши объявления будут тут.</p>-->
-<!--        </div>-->
+        <div th:utext="${hostedOffers}">
+            <p>Ваши объявления будут тут.</p>
+        </div>
     </div>
 
     <div id="FavouriteOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Избранные объявления</h3>
-        <!--        <div th:utext="${favouriteOffers}">-->
-        <!--            <p>Избранные объявления будут тут.</p>-->
-        <!--        </div>-->
+        <div th:utext="${favouriteOffers}">
+            <p>Избранные объявления будут тут.</p>
+        </div>
 
     </div>
 
@@ -87,14 +88,17 @@
         <h3>Вы действительно хотите выйти из аккаунта?</h3>
         <form class="logout-wrapper" th:action="@{/logout}" method="get">
             <div class="container-login-form-btn m-t-17">
-                <button class="login-form-btn logout" name="registration" type="submit">Да</button>
+                <button class="login-form-btn logout" name="registration" type="submit">Выйти</button>
             </div>
         </form>
     </div>
 
     <div id="AddOffer" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
-        <a th:href="@{addOffer}">Создать</a>
+        <h3>Перейти на страницу создания объявления?</h3>
+        <div class="container-login-form-btn m-t-17 logout-wrapper">
+            <a th:href="@{/addOffer}" class="login-form-btn logout" type="submit">Перейти</a>
+        </div>
     </div>
 </div>
 

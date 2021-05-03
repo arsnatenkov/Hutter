@@ -25,7 +25,7 @@ public class OfferController {
     UserService userService;
 
     @PostMapping(value = "/addOffer")
-    public ModelAndView addOffer(@Valid Offer offer, BindingResult bindingResult) {
+    public ModelAndView createNewOffer(@Valid Offer offer, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         List<Offer> offerExists = offerService.findByAddress(offer.getAddress());
 
@@ -34,12 +34,22 @@ public class OfferController {
                     .rejectValue("address", "error.offer",
                             "There is already an offer registered with same offer address provided");
         }
+
         if (!bindingResult.hasErrors()) {
             offerService.saveOffer(offer);
             modelAndView.addObject("successMessage", "Offer successfully added");
             modelAndView.addObject("offer", new Offer());
         }
 
+        modelAndView.setViewName("addOffer");
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/addOffer")
+    public ModelAndView addOffer() {
+        ModelAndView modelAndView = new ModelAndView();
+        Offer offer = new Offer();
+        modelAndView.addObject("offer", offer);
         modelAndView.setViewName("addOffer");
         return modelAndView;
     }
@@ -52,10 +62,10 @@ public class OfferController {
         ModelAndView modelAndView = new ModelAndView();
         StringBuilder sb = new StringBuilder();
         User user = userService.findUserByUserName(auth.getName());
-        if(user != null) {
+
+        if (user != null) {
             if (user.getActive() && user.getId().equals(offer.getHostId()))
                 sb.append(hostUI(offer));
-
         }
         sb.append(guestUI(offer));
         modelAndView.addObject("offerDisplay", sb.toString());
@@ -70,7 +80,7 @@ public class OfferController {
 
     private String guestUI(Offer offer) {
         String title = offer.getAddress() + ", " + offer.getTotalArea() + "м²";
-        String body = offer.longDescription() +"<br/>";
+        String body = offer.longDescription() + "<br/>";
         return "<h2>" + title + "</h2>" + body;
     }
 }

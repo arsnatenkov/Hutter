@@ -65,7 +65,5 @@ public class LoginController {
         modelAndView.setViewName("/visitor/account");
         return modelAndView;
     }
-
-
 }
 

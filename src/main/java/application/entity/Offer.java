@@ -52,6 +52,7 @@ public class Offer {
     @Column(name = "rooms_spaces")
     private String roomsSpaces;
     @Column(name = "has_parking")
+//    private String hasParking;
     private Boolean hasParking;
     @Column(name = "parking_type")
     private String parkingType;
@@ -111,14 +112,15 @@ public class Offer {
     public String shortDescription() {
         String res = icon("ruble") + "цена: " + getCost() + " ₽<br/><br/>";
 
-        res += icon("plans") + "общая площадь: <span class=\"space\">" + getTotalArea() + " м²</span><br/>";
+        res += icon("plans") + "общая площадь: <span class=\"space\">" +
+                getTotalArea() + " м²</span><br/>";
 
-        res += icon("living-room") + "кол-во комнат: " + getQuantityRoom() + "<br/>";
+        res += icon("living-room") + "кол-во комнат: " + getQuantityRoom() + "<br/><br/>";
 
-        res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/>";
+        res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/><br/>";
 
         res += "<a href=\"chat" + getHostId() + "\" class=\"login-form-btn chat\">" +
-                "Начать чат с владельцем</a><br />";
+                "Начать чат с владельцем</a>";
         return res;
     }
 

@@ -80,4 +80,9 @@
     height: 50px;
     width: 130px;
     margin: 10px auto auto;
+    text-decoration: none;
+}
+
+.logout:hover {
+    color: white;
 }

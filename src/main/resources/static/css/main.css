@@ -168,9 +168,21 @@ td {
     padding: 15px;
 }
 
-
-
+.chat {
+    text-decoration: none;
+}
 
 .chat:hover {
+    color: #fff;
+}
+
+.back-btn {
+    text-decoration: none;
+    top: 10px;
+    right: 10px;
+    width: 220px;
+}
+
+.back-btn:hover {
     color: #fff;
 }
