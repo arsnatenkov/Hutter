@@ -13,19 +13,16 @@ import java.util.Random;
 
 @Service
 public class OfferService {
-    private OfferRepository offerRepository;
 
     @Autowired
-    public OfferService(OfferRepository offerRepository) {
-        this.offerRepository = offerRepository;
-    }
+    private OfferRepository offerRepository;
 
     public List<Offer> findByAddress(String address) {
         return offerRepository.findByAddress(address);
     }
 
-    public Offer findByPublicId(Integer id) {
-        return offerRepository.findByPublicId(id);
+    public Offer findById(Integer id) {
+        return offerRepository.findById(id);
     }
 
     public List<Offer> findByCostBetween(Long low, Long high) {

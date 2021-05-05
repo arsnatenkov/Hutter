@@ -2,6 +2,7 @@ package application.controller;
 
 import application.entity.User;
 import application.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
+@RequiredArgsConstructor
 public class LoginController {
 
     @Autowired

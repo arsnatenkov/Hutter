@@ -2,15 +2,15 @@ package application.controller;
 
 import application.entity.Offer;
 import application.service.OfferService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.List;
 
+
+@RequiredArgsConstructor
 public class AccountController {
 
     @Autowired

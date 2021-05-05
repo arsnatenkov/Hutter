@@ -1,20 +1,17 @@
 package application.controller;
 
 import application.entity.Offer;
-import application.entity.User;
 import application.service.OfferService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.awt.*;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class LandingController {
 
     @Autowired
@@ -37,7 +34,7 @@ public class LandingController {
     private String wrap(Offer offer) {
         String res = "<li><table><tr>" +
                 "<td class=\"offer-pic\">" +
-                "<img src=\"images/offer/offer" + offer.getPublicId() + ".jpg\" alt=\"Фото объявления\"/>" + "</td>";
+                "<img src=\"images/offer/offer" + offer.getId() + ".jpg\" alt=\"Фото объявления\"/>" + "</td>";
 
         res += "<td>" + offer.linkTitle() + offer.shortDescription();
         return res + "</td></tr></table></li>";

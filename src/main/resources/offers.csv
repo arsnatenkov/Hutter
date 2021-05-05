@@ -1,18 +1,18 @@
 "1","Юбилейная 39 к2, кв 12",NULL,NULL,"11000000","хату на тату","1","35","кирпич-пеноблок","1","2","1","20 и 15","69","раздельный",0,NULL,NULL,NULL,NULL
-"2","покровский бульвар дом 11",NULL,NULL,"0","hooeption","2","99","zhelezo blin","2","99","99","1","990","muzhskoi",0,NULL,NULL,NULL,NULL
-"3","Старая басманная 1",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"4","Большая спортивная арена Олимпийского комплекса Лужники",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"5","Московский государственный университет имени М.В. Ломоносова",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"6","Плотников переулок, 21с1",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"7","Лялин переулок, 24-26с2А",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"8","улица Земляной Вал, 30с2",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"9","Атриум",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"10","Моховая улица, 11с10",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"11","Таганский район",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"12","Тессинский переулок, 3А",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"13","Подколокольный переулок, 16с5",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"14","Хитровский переулок, 3Ас1",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"15","Большой Трёхсвятительский переулок, 3",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"16","Покровский бульвар, 11с4",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"17","Подсосенский переулок, 26с6",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
-"18","улица Земляной Вал, 34Ас1",NULL,NULL,NULL,NULL,NULL,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"2","покровский бульвар дом 11",NULL,NULL,"0","hooeption",1,"99","zhelezo blin","2","99","99","1","990","muzhskoi",0,NULL,NULL,NULL,NULL
+"3","Старая басманная 1",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"4","Большая спортивная арена Олимпийского комплекса Лужники",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"5","Московский государственный университет имени М.В. Ломоносова",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"6","Плотников переулок, 21с1",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"7","Лялин переулок, 24-26с2А",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"8","улица Земляной Вал, 30с2",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"9","Атриум",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"10","Моховая улица, 11с10",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"11","Таганский район",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"12","Тессинский переулок, 3А",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"13","Подколокольный переулок, 16с5",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"14","Хитровский переулок, 3Ас1",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"15","Большой Трёхсвятительский переулок, 3",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"16","Покровский бульвар, 11с4",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"17","Подсосенский переулок, 26с6",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL
+"18","улица Земляной Вал, 34Ас1",NULL,NULL,NULL,NULL,1,"0","кирпич",NULL,"17","20",NULL,"2000","общ туалет",0,NULL,NULL,NULL,NULL

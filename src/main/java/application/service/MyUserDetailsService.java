@@ -1,5 +1,7 @@
 package application.service;
 
+import application.converter.UserDtoToUser;
+import application.dto.UserDTO;
 import application.entity.Role;
 import application.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserService userService;
+    //@Autowired
+    //private UserDtoToUser userDtoToUser;
 
     @Override
     @Transactional

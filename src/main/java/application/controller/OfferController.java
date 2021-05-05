@@ -1,9 +1,11 @@
 package application.controller;
 
+import application.dto.UserDTO;
 import application.entity.Offer;
 import application.entity.User;
 import application.service.OfferService;
 import application.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class OfferController {
     @Autowired
     OfferService offerService;
@@ -60,7 +63,7 @@ public class OfferController {
     @GetMapping(value = "/offer")
     public ModelAndView offer(HttpServletRequest request) {
         String id = request.getParameter("id");
-        Offer offer = offerService.findByPublicId(Integer.parseInt(id));
+        Offer offer = offerService.findById(Integer.parseInt(id));
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
         StringBuilder sb = new StringBuilder();
@@ -78,7 +81,7 @@ public class OfferController {
     }
 
     private String hostUI(Offer offer) {
-        return "<div class=\"hostUI\"><a href=/edit?id=" + offer.getPublicId() + ">Изменить</a></div>";
+        return "<div class=\"hostUI\"><a href=/edit?id=" + offer.getId() + ">Изменить</a></div>";
     }
 
     private String guestUI(Offer offer) {

@@ -21,8 +21,6 @@ public class Offer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "offer_id")
     private Integer id;
-    @Column(name = "public_id")
-    private Integer publicId;
     @Column(name = "total_area")
     private Long totalArea;
     @Column(name = "living_space")
@@ -48,7 +46,7 @@ public class Offer {
     @Column(name = "description")
     private String description;
     @Column(name = "host_id")
-    private Integer hostId;
+    private Long hostId;
     @Column(name = "rooms_spaces")
     private String roomsSpaces;
     @Column(name = "has_parking")
@@ -64,7 +62,7 @@ public class Offer {
 
     @Override
     public String toString() {
-        return getPublicId() + ":"
+        return getId() + ":"
                 + getTotalArea() + ":"
                 + getLiving() + ":"
                 + getRoomArea() + ":"
@@ -81,7 +79,7 @@ public class Offer {
     }
 
     public String linkTitle() {
-        return makeLink(getPublicId(), "offer", getAddress()) + "<br/>";
+        return makeLink(getId(), "offer", getAddress()) + "<br/>";
     }
 
     public String longDescription() {
@@ -113,13 +111,13 @@ public class Offer {
         String res = icon("ruble") + "цена: " + getCost() + " ₽<br/><br/>";
 
         res += icon("plans") + "общая площадь: <span class=\"space\">" +
-                getTotalArea() + " м²</span><br/>";
+                getTotalArea() + " м²</span><br/><br/>";
 
         res += icon("living-room") + "кол-во комнат: " + getQuantityRoom() + "<br/><br/>";
 
         res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/><br/>";
 
-        res += "<a href=\"chat" + getHostId() + "\" class=\"login-form-btn chat\">" +
+        res += "<a href=\"/conversation/" + getHostId() + "\" class=\"login-form-btn chat\">" +
                 "Начать чат с владельцем</a>";
         return res;
     }
