@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class OfferController {
     @Autowired
     UserService userService;
 
-    @PostMapping(value = "/addOffer")
+    @PostMapping(value = "/create")
     public ModelAndView createNewOffer(@Valid Offer offer, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         List<Offer> offerExists = offerService.findByAddress(offer.getAddress());
@@ -46,16 +45,16 @@ public class OfferController {
             modelAndView.addObject("offer", new Offer());
         }
 
-        modelAndView.setViewName("addOffer");
+        modelAndView.setViewName("create");
         return modelAndView;
     }
 
-    @GetMapping(value = "/addOffer")
+    @GetMapping(value = "/create")
     public ModelAndView addOffer() {
         ModelAndView modelAndView = new ModelAndView();
         Offer offer = new Offer();
         modelAndView.addObject("offer", offer);
-        modelAndView.setViewName("addOffer");
+        modelAndView.setViewName("create");
         return modelAndView;
     }
 

@@ -3518,7 +3518,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-success {
     color: #fff;
-    background-color: #5cb85c;
+    /*background-color: #5cb85c;*/
     border-color: #4cae4c
 }
 

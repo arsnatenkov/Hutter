@@ -1,0 +1,141 @@
+/*-------------------------------------------------------------------*/
+
+.invert {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
+.f-group-btn-wrap {
+    /*float: right;*/
+    width: 60px;
+}
+
+.f-group-btn {
+    /*float: right;*/
+    margin-top: -10px;
+    margin-bottom: 10px;
+    height: 40px;
+    background: #333333;
+    box-shadow: none;
+}
+
+.f-group-btn:hover {
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.5) inset;
+}
+
+.f-group-btn:hover img {
+    -webkit-filter: invert(0);
+    filter: invert(0);
+}
+
+.f-group-btn img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.force-scroll {
+    height: 60%;
+}
+
+.msg-box {
+    /*position: relative;*/
+    /*top: -200px;*/
+    margin-top: 30px;
+}
+
+hr {
+    height: 1px;
+    margin: 0px;
+    background: #555555;
+}
+
+.content-flex {
+    width: 680px;
+    height: 600px;
+    margin: 40px auto 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+.msg-display-wrapper {
+    background: rgba(0, 0, 0, 0);
+    word-break: break-all;
+}
+
+.msg-display-header {
+    padding-left: 5px;
+    background: rgba(0, 0, 0, 0);
+}
+
+.msg-display-body {
+    border-radius: 10px;
+    padding: 5px 15px;
+    width: 45%;
+    background: rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+/*.f-group {*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
+/*}*/
+
+.msg-head {
+    width: 150px;
+    /*margin: 20px auto auto 50px;*/
+    /*margin-left: 50px;*/
+    /*margin-bottom: 20px;*/
+}
+
+.msg-input {
+    background: #f7f7f7;
+    border-radius: 10px;
+    width: 90%;
+    padding: 10px 5px;
+    margin: auto;
+    box-shadow: none;
+    font-size: 14px;
+}
+
+a.offer {
+    font-size: 24px;
+}
+
+.validation {
+    margin-top: 15px;
+    margin-right: 10%;
+}
+
+.time {
+    font-size: 12px;
+    color: #666;
+}
+
+.msg-right {
+    background: red;
+    float: right;
+    margin-right: 0px;
+}
+
+.msg-hat {
+    height: 70px;
+    padding: 10px;
+}
+
+.msg-hat td {
+    height: 50px;
+    margin: auto;
+    /*     margin-right: 50px; */
+    width: 30%;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.msg-hat button{
+    width: 50%;
+    float: right;
+}

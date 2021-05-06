@@ -1,69 +1,78 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<!--<head th:replace="template.html :: header('Conversation', false)"></head>-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="_csrf" th:if="${csrf}" th:content="${_csrf.token}"/>
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title th:text="${title}">Social Network</title>
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/jquery-ui.min.css" th:href="@{/css/jquery-ui.min.css}"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/custom.css" th:href="@{/css/custom.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
-
-</head>
+<head th:replace="/blocks/header.html :: header('Offer')"></head>
 
 <body class="scroll">
 <div th:utext="${offerDisplay}" class="offer-wrapper content"></div>
 
 
-<div class="col-md-9 unique">
-    <h2><span th:text="#{conversation.with}">Conversation with</span>
-        <a th:replace="template.html :: messageUser(${companion})"></a>
-    </h2>
-    <div class="panel panel-default" th:each="m : ${messages}">
-        <div class="panel-heading">
-            <div class="card">
-                <a th:replace="template.html :: messageUser(${m.sender})"></a>
-            </div>
-        </div>
-        <div class="panel-body">
-            <div class="message-left" th:value="${#temporals.format(m.time, 'dd.MM.yyyy')}"></div>
-            <div class="message-left" th:text="${m.message}">Hello! How are you?</div>
-        </div>
+<div class="content-flex">
+    <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Conversation with</span>
+        <!--        <a class="txt1 heading-chat" th:replace="template.html :: messageUser(${companion})"></a>-->
+        <a class="txt1 heading-chat" th:href="@{'/?host={id}'(id=${companion.id})}">
+            <span th:text="${companion.name}">Имя пользователя</span>
+        </a>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading" th:text="#{conversation.new}">
-            New message
+    <hr>
+    <div class="force-scroll scroll">
+        <div class="col-md-9 m-l-15 m-r-15">
+
+            <div class="msg-display-wrapper" th:each="m : ${messages}">
+                <div class="msg-display-header">
+                    <div class="txt1">
+                        <a th:replace="template.html :: messageUser(${m.sender})"></a>
+                    </div>
+                </div>
+                <div class="msg-display-body">
+                    <div class="msg-l time" th:value="${#temporals.format(m.time, 'dd.MM.yyyy')}">06.05.2021</div>
+                    <div class="msg-l" th:text="${m.message}">Добрый день!</div>
+                </div>
+            </div>
+
         </div>
-        <div class="panel-body">
-            <form th:action="@{'/conversation/{id}'(id=${companion.id})}" th:object="${newMessage}" method="POST">
-                <div class="form-group">
-                    <textarea class="form-control" rows="5" id="comment" th:field="*{message}"></textarea>
-                    <div th:if="${#fields.hasErrors('message')}" style="margin-bottom: 25px" class="text-danger">
-                        <ul>
-                            <li th:each="err : ${#fields.errors('message')}" th:text="${err}" />
+
+    </div>
+    <hr>
+    <div class="msg-box">
+        <!--    <div class="panel panel-default msg-box">-->
+        <div class="1">
+            <form th:object="${newMessage}" method="POST"
+                  th:action="@{'/conversation/{hostId}/{offerId}'(offerId=${offer.getId()},hostId=${companion.id})}">
+                <table class="msg-hat">
+                    <tr>
+                        <td class="txt1 msg-head">
+                            <!--                     th:text="#{conversation.new}">-->
+                            Новое сообщение
+                        </td>
+                        <td class="f-group-btn-wrap">
+                            <button type="submit" name="submit" class="btn f-group-btn">
+                                <img class="invert" alt="send" src="/images/send.svg">
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <div class="f-group">
+                    <textarea autocomplete="off" class="input scroll msg-input" rows="5" id="comment"
+                              th:field="*{message}"></textarea>
+                    <div th:if="${#fields.hasErrors('message')}" style="margin-bottom: 25px"
+                         class="txt1 validation-message">
+                        <ul class="validation">
+                            <li th:each="err : ${#fields.errors('message')}" th:text="${err}">&nbsp;</li>
                         </ul>
                     </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" name="submit" class="btn btn-success" >
-                        <span th:text="#{conversation.send}">Send</span> &raquo;
-                    </button>
-                </div>
+
             </form>
         </div>
     </div>
 </div>
-
+<br/>
+<br/>
+<br/>
 <div class="name gradient hat">HUTTER</div>
+
+<div th:insert="blocks/menu :: menu"></div>
 
 <!--<div th:insert="blocks/menu :: menu"></div>-->
 

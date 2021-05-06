@@ -76,7 +76,8 @@ public class Offer {
     }
 
     public String linkTitle() {
-        return makeLink(getId(), "offer", getAddress()) + "<br/>";
+        return "<a class=\"offer\" id=\"" + getId() + "\" href=\"/conversation/" +
+                getHostId() + "/" + getId() + "\">" + getAddress() + "</a>" + "<br/>";
     }
 
     public String longDescription() {
@@ -99,8 +100,6 @@ public class Offer {
 
         res += icon("document") + "описание: " + description + "<br/><br/>";
 
-        res += "<a href=\"/conversation/" + getHostId() + "/" + getId() + "\" class=\"login-form-btn chat\">" +
-                "Подробнее</a><br />";
         return res;
     }
 
@@ -115,19 +114,14 @@ public class Offer {
         res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/><br/>";
 
         res += "<a href=\"/conversation/" + getHostId() + "/" + getId() + "\" class=\"login-form-btn chat\">" +
-                "Начать чат с владельцем</a>";
+                "Подробнее</a>";
         return res;
     }
 
     static public String icon(String name) {
 //        return "";
-        return "<img class=\"offer-icons\" src=\"images/" + name +
+        return "<img class=\"offer-icons\" src=\"/images/" + name +
                 ".svg\" alt=\"" + name + "\">&nbsp;";
-    }
-
-    static public String makeLink(long id, String type, String text) {
-        return "<a class=\"" + type + "\" id=\"" + id + "\" href=\"/" +
-                type + "?id=" + id + "\">" + text + "</a>";
     }
 
     // общая площадь, жилая площадь, площадь кухни, площади комнат,

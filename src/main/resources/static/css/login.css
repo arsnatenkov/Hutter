@@ -79,6 +79,7 @@ input {
 textarea {
     outline: none;
     border: none;
+    resize: none;
 }
 
 textarea:focus, input:focus {
@@ -432,6 +433,7 @@ iframe {
 .check-wrap {
     width: 100%;
 }
+
 .semi1 {
     width: 35%;
     margin: 0;
@@ -466,7 +468,7 @@ iframe {
     resize: none;
 }
 
-.validation-message{
+.validation-message {
     color: red;
     /*     color: #c80000; */
     text-align: right;
@@ -476,8 +478,14 @@ iframe {
     width: 100%;
 }
 
-.unique {
-    position: relative;
-    right: -250px;
-    top: -500px;
+.heading-chat {
+    font-size: 24px;
+    margin: auto;
+    text-align: center;
+    /*border-bottom: 1px black;*/
+}
+
+.heading-chat a {
+    color: #ffc0cb;
+    font-size: 24px;
 }

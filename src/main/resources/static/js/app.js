@@ -6,6 +6,15 @@ function gradient() {
     document.getElementById("menu_link2").classList.toggle('gradient');
 }
 
+// function move() {
+//     var lst = document.getElementsByClassName("msg-obj");
+//     for (var i = 0, len = lst.length; i < len;++i){
+//        lst[i].classList.toggle('msg-right');
+//     }
+//     document.getElementsByClassName("msg-obj") = lst;
+//     // document.getElementById("msg-obj").classList.toggle('msg-right');
+// }
+
 $measurer = function () {
     var
         callbacks = [],

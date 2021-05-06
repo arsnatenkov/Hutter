@@ -40,7 +40,7 @@ public class MessageController {
     @Autowired
     private UserToUserDto userToUserDto;
 
-    private void addConversationToModel(Long hostId, Model model) {
+    private void addConversationToModel(Long hostId, Model model, Offer offer) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         UserDTO userDTO = userToUserDto.convert(user);
@@ -55,6 +55,7 @@ public class MessageController {
 
         model.addAttribute("messages", messages);
         model.addAttribute("companion", companion);
+        model.addAttribute("offer", offer);
     }
 
     @GetMapping("/messages")
@@ -92,9 +93,10 @@ public class MessageController {
         }
         sb.append(guestUI(offer));
         modelAndView.addObject("offerDisplay", sb.toString());
-        addConversationToModel(companionId, model);
+        addConversationToModel(companionId, model, offer);
         model.addAttribute("newMessage", new MessageDTO());
-        modelAndView.setViewName("offer1");
+//        modelAndView.setViewName("offer1");
+        modelAndView.setViewName("/conversation");
         return modelAndView;
     }
 
@@ -103,7 +105,7 @@ public class MessageController {
                               @Valid @ModelAttribute("newMessage") MessageDTO messageDTO, BindingResult bindingResult,
                               Model model) {
         if (bindingResult.hasErrors()) {
-            addConversationToModel(companionId, model);
+            addConversationToModel(companionId, model, offerService.findById(offerId));
             return "conversation";
         }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
