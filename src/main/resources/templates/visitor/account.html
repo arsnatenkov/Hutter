@@ -51,7 +51,6 @@
 
 <div class="wrapper">
     <p>Click on the x button in the top right corner to close the current tab:</p>
-
     <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'Settings')" id="defaultOpen">
             <img alt="settings" src="/images/user/settings.svg">&nbsp;Настройки</button>
@@ -82,6 +81,8 @@
 <!--            <p>Ваши объявления будут тут.</p>-->
 <!--        </div>-->
         <ul th:utext="${hostedOffers}" id="panel-group">
+
+        </ul>
     </div>
 
     <div id="FavouriteOffers" class="tabcontent">
