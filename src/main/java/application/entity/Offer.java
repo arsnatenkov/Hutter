@@ -103,7 +103,7 @@ public class Offer {
         return res;
     }
 
-    public String shortDescription() {
+    public String shortDescription(String map) {
         String res = icon("ruble") + "цена: " + getCost() + " ₽<br/><br/>";
 
         res += icon("plans") + "общая площадь: <span class=\"space\">" +
@@ -112,9 +112,19 @@ public class Offer {
         res += icon("living-room") + "кол-во комнат: " + getQuantityRoom() + "<br/><br/>";
 
         res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/><br/>";
+        if(map == "conversation"){
+            res += "<a href=\"/" + map +"/" + getHostId() + "/" + getId() + "\" class=\"login-form-btn chat\">" +
+                    "Подробнее</a>";
+        }
+        if(map == "messages"){
+            res += "<a href=\"/" + map + "\" class=\"login-form-btn chat\">" +
+                    "Подробнее</a>";
+        }
+        if(map == "offer"){
+            res += "<a href=\"/" + map +"?id=" + getId() + "\" class=\"login-form-btn chat\">" +
+                    "Подробнее</a>";
+        }
 
-        res += "<a href=\"/conversation/" + getHostId() + "/" + getId() + "\" class=\"login-form-btn chat\">" +
-                "Подробнее</a>";
         return res;
     }
 

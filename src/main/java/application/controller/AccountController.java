@@ -8,12 +8,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-
+@Controller
 @RequiredArgsConstructor
 public class AccountController {
 
@@ -22,7 +23,7 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/visitor/account")
+    @GetMapping(value = "/visitor/account")
     public ModelAndView account() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -31,7 +32,7 @@ public class AccountController {
         StringBuilder sb = new StringBuilder();
 
         for (Offer offer : offers)
-            sb.append(offer.getAddress()).append("<br/>");
+            sb.append(offer.linkTitle()).append("<br/>");
 
         modelAndView.addObject("hostedOffers", sb.toString());
         modelAndView.setViewName("/visitor/account");

@@ -28,6 +28,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+
 public class MessageController {
     @Autowired
     private OfferService offerService;
@@ -58,7 +59,7 @@ public class MessageController {
         model.addAttribute("offer", offer);
     }
 
-    @GetMapping("/messages")
+    @GetMapping(value = "/messages")
     public String getMessages(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
@@ -74,33 +75,37 @@ public class MessageController {
         return "messages";
     }
 
-    @GetMapping("/conversation/{companionId}/{offerId}")
+    @GetMapping(value = "/conversation/{companionId}/{offerId}")
     public ModelAndView getConversation(@PathVariable("companionId") Long companionId,
                                         @PathVariable("offerId") Integer offerId,
                                         HttpServletRequest request, Model model) {
-        //        String id = request.getParameter("id");
-//        Offer offer = offerService.findById(Integer.parseInt(id));
-
         Offer offer = offerService.findById(offerId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
         StringBuilder sb = new StringBuilder();
         User user = userService.findUserByUserName(auth.getName());
-
         if (user != null) {
-            if (user.getActive() && user.getId().equals(offer.getHostId()))
-                sb.append(hostUI(offer));
+            if(user.getId().equals(offer.getHostId())){
+                modelAndView.setViewName("/messages");
+            }else {
+                if (user.getActive() && user.getId().equals(offer.getHostId())){
+                    sb.append(hostUI(offer));
+                }
+                sb.append(guestUI(offer));
+                modelAndView.addObject("offerDisplay", sb.toString());
+                addConversationToModel(companionId, model, offer);
+                model.addAttribute("newMessage", new MessageDTO());
+
+                modelAndView.setViewName("/conversation");
+            }
         }
-        sb.append(guestUI(offer));
-        modelAndView.addObject("offerDisplay", sb.toString());
-        addConversationToModel(companionId, model, offer);
-        model.addAttribute("newMessage", new MessageDTO());
-//        modelAndView.setViewName("offer1");
-        modelAndView.setViewName("/conversation");
+
+
+
         return modelAndView;
     }
 
-    @PostMapping("/conversation/{companionId}/{offerId}")
+    @PostMapping(value = "/conversation/{companionId}/{offerId}")
     public String postMessage(@PathVariable("companionId") Long companionId, @PathVariable("offerId") Integer offerId,
                               @Valid @ModelAttribute("newMessage") MessageDTO messageDTO, BindingResult bindingResult,
                               Model model) {
@@ -116,27 +121,9 @@ public class MessageController {
         messageDTO.setReceiver(companion);
         messageDTO.setTime(LocalDateTime.now());
         messagesService.postMessage(messageDTO);
-        return "redirect:/conversation/" + messageDTO.getReceiver().getId();
+        return "redirect:/conversation/" + messageDTO.getReceiver().getId() + "/" + offerId;
     }
 
-//    private ModelAndView insertOffer(HttpServletRequest request) {
-//        String id = request.getParameter("id");
-//        Offer offer = offerService.findById(Integer.parseInt(id));
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        ModelAndView modelAndView = new ModelAndView();
-//        StringBuilder sb = new StringBuilder();
-//        User user = userService.findUserByUserName(auth.getName());
-//
-//        if (user != null) {
-//            if (user.getActive() && user.getId().equals(offer.getHostId()))
-//                sb.append(hostUI(offer));
-//        }
-//        sb.append(guestUI(offer));
-//        modelAndView.addObject("offerDisplay", sb.toString());
-//
-//        modelAndView.setViewName("offer");
-//        return modelAndView;
-//    }
 
     private String hostUI(Offer offer) {
         return "<div class=\"hostUI\"><a href=/edit?id=" + offer.getId() + ">Изменить</a></div>";
