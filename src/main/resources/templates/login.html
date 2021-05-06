@@ -44,8 +44,10 @@
             <button name="submit" type="submit" class="login-form-btn">
                 Войти
             </button>
-            <div th:if="${param.error}">
-                <p style="color: #FF1C19;">User Name or Password invalid, please verify</p>
+            <div class="wide txt1 validation-message" th:if="${param.error}">
+<!--                <p style="color: #FF1C19;">-->
+                    User Name or Password invalid, please verify
+<!--                </p>-->
             </div>
         </div>
 

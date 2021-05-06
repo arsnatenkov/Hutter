@@ -466,6 +466,16 @@ iframe {
     resize: none;
 }
 
+.validation-message{
+    color: red;
+    /*     color: #c80000; */
+    text-align: right;
+}
+
+.wide {
+    width: 100%;
+}
+
 .unique {
     position: relative;
     right: -250px;

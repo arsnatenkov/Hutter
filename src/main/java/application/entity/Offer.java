@@ -15,8 +15,6 @@ import javax.persistence.*;
 @Table(name = "offers")
 public class Offer {
 
-    //TODO: указать этаж!!!
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "offer_id")
@@ -50,7 +48,6 @@ public class Offer {
     @Column(name = "rooms_spaces")
     private String roomsSpaces;
     @Column(name = "has_parking")
-//    private String hasParking;
     private Boolean hasParking;
     @Column(name = "parking_type")
     private String parkingType;
@@ -103,7 +100,7 @@ public class Offer {
         res += icon("document") + "описание: " + description + "<br/><br/>";
 
         res += "<a href=\"/conversation/" + getHostId() + "/" + getId() + "\" class=\"login-form-btn chat\">" +
-                "Начать чат с владельцем</a><br />";
+                "Подробнее</a><br />";
         return res;
     }
 
