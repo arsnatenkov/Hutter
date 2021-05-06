@@ -75,9 +75,18 @@ public class Offer {
                 + getDescription() + ";";
     }
 
-    public String linkTitle() {
-        return "<a class=\"offer\" id=\"" + getId() + "\" href=\"/conversation/" +
+    public String linkTitle(String aClass) {
+        return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/conversation/" +
                 getHostId() + "/" + getId() + "\">" + getAddress() + "</a>" + "<br/>";
+    }
+
+    public String editBtn() {
+        return "<div id=\"edit\" class=\"btn f-group-btn\">" +
+                "<a href=\"/edit\">" +
+                "<img class=\"invert\" alt=\"edit\" src=\"/images/edit.svg\">" +
+                "</a>" +
+                "</div>";
+//        return "<div class=\"hostUI\"><a href=/edit?id=" + getId() + ">Изменить</a></div>";
     }
 
     public String saveBtn() {
@@ -97,10 +106,15 @@ public class Offer {
     public String longDescription() {
         String res = "";
         res += "<div class=\"center-div scroll\">";
-        res += "<div class=\"inner-div\">";
-        res += icon("ruble") + "цена: " + getCost() + " ₽<br/><br/>";
+        res += "<div class=\"inner-div\"><div class=\"text-container\">";
+        res += icon("ruble") + "цена: " + (getCost() == null ?
+                "не указана" : (getCost() + " ₽")) + "<br/><br/>";
+
         res += icon("plans") + "общая площадь: <span class=\"space\">" + getTotalArea() + " м²</span><br/>";
         res += "жилая площадь: " + getLiving() + " м²<br/><br/>";
+
+        res += icon("floor") + "этаж: " + getFloor() + "<br/>";
+        res += "высота здания: " + getFloorMax() + "<br/><br/>";
 
         res += icon("living-room") + "кол-во комнат: " + getQuantityRoom() + "<br/>";
         res += "площади комнат: " + getRoomArea() + " м²<br/><br/>";
@@ -121,31 +135,33 @@ public class Offer {
 
         res += "</div>";
         res += "</div>";
+        res += "</div>";
         return res;
     }
 
     public String shortDescription(String map) {
-        String res = icon("ruble") + "цена: " + getCost() + " ₽<br/><br/>";
-
+        String res = icon("ruble") + "цена: " + (getCost() == null ?
+                "не указана" : (getCost() + " ₽")) + "<br/><br/>";
         res += icon("plans") + "общая площадь: <span class=\"space\">" +
                 getTotalArea() + " м²</span><br/><br/>";
+
+        res += icon("floor") + "этаж: " + getFloor() + "<br/><br/>";
 
         res += icon("living-room") + "кол-во комнат: " + getQuantityRoom() + "<br/><br/>";
 
         res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/><br/>";
-        if(map == "conversation"){
-            res += "<a href=\"/" + map +"/" + getHostId() + "/" + getId() + "\" class=\"login-form-btn chat\">" +
+        if (map == "conversation") {
+            res += "<a href=\"/" + map + "/" + getHostId() + "/" + getId() + "\" class=\"login-form-btn chat\">" +
                     "Подробнее</a>";
         }
-        if(map == "messages"){
+        if (map == "messages") {
             res += "<a href=\"/" + map + "\" class=\"login-form-btn chat\">" +
                     "Подробнее</a>";
         }
-        if(map == "offer"){
-            res += "<a href=\"/" + map +"?id=" + getId() + "\" class=\"login-form-btn chat\">" +
+        if (map == "offer") {
+            res += "<a href=\"/" + map + "?id=" + getId() + "\" class=\"login-form-btn chat\">" +
                     "Подробнее</a>";
         }
-
         return res;
     }
 
@@ -153,6 +169,15 @@ public class Offer {
 //        return "";
         return "<img class=\"offer-icons\" src=\"/images/" + name +
                 ".svg\" alt=\"" + name + "\">&nbsp;";
+    }
+
+    public String guestUI(boolean auth) {
+        String title = getAddress() + ", " + getTotalArea() + "м²";
+        if (auth) {
+            title += saveBtn();
+        }
+        String body = longDescription() + "<br/>";
+        return "<h2>" + title + "</h2><hr>" + body + "<br/>";
     }
 
     // общая площадь, жилая площадь, площадь кухни, площади комнат,

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="/blocks/header.html :: header('Offer')"></head>
 
 <body class="scroll">
+
 <div th:utext="${offerDisplay}" class="offer-wrapper content"></div>
 
 
 <div class="content-flex">
     <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Conversation with</span>
-        <!--        <a class="txt1 heading-chat" th:replace="template.html :: messageUser(${companion})"></a>-->
         <a class="txt1 heading-chat" th:href="@{'/?host={id}'(id=${companion.id})}">
             <span th:text="${companion.name}">Имя пользователя</span>
         </a>
@@ -52,9 +51,10 @@
                         </td>
                     </tr>
                 </table>
-                <div class="f-group">
+                <div class="f-group wrap-input validate-input msg-validate">
                     <textarea placeholder="Введите текст" autocomplete="off" class="input scroll msg-input" rows="5" id="comment"
                               th:field="*{message}"></textarea>
+                    <span class="focus-input"></span>
                     <div th:if="${#fields.hasErrors('message')}" style="margin-bottom: 25px"
                          class="txt1 validation-message">
                         <ul class="validation">

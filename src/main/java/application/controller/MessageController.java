@@ -85,13 +85,14 @@ public class MessageController {
         StringBuilder sb = new StringBuilder();
         User user = userService.findUserByUserName(auth.getName());
         if (user != null) {
-            if(user.getId().equals(offer.getHostId())){
+            if (user.getId().equals(offer.getHostId())) {
+                sb.append(offer.editBtn());
+                sb.append(offer.guestUI(true));
+                modelAndView.addObject("myOfferDisplay", sb.toString());
+
                 modelAndView.setViewName("/messages");
-            }else {
-                if (user.getActive() && user.getId().equals(offer.getHostId())){
-                    sb.append(hostUI(offer));
-                }
-                sb.append(guestUI(offer));
+            } else {
+                sb.append(offer.guestUI(true));
                 modelAndView.addObject("offerDisplay", sb.toString());
                 addConversationToModel(companionId, model, offer);
                 model.addAttribute("newMessage", new MessageDTO());
@@ -99,8 +100,6 @@ public class MessageController {
                 modelAndView.setViewName("/conversation");
             }
         }
-
-
 
         return modelAndView;
     }
@@ -122,16 +121,5 @@ public class MessageController {
         messageDTO.setTime(LocalDateTime.now());
         messagesService.postMessage(messageDTO);
         return "redirect:/conversation/" + messageDTO.getReceiver().getId() + "/" + offerId;
-    }
-
-
-    private String hostUI(Offer offer) {
-        return "<div class=\"hostUI\"><a href=/edit?id=" + offer.getId() + ">Изменить</a></div>";
-    }
-
-    private String guestUI(Offer offer) {
-        String title = offer.getAddress() + ", " + offer.getTotalArea() + "м²" + offer.saveBtn();
-        String body = offer.longDescription() + "<br/>";
-        return "<h2>" + title + "</h2><hr>" + body + "<hr><br/>";
     }
 }

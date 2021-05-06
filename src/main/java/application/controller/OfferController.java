@@ -70,22 +70,22 @@ public class OfferController {
 
         if (user != null) {
             if (user.getActive() && user.getId().equals(offer.getHostId()))
-                sb.append(hostUI(offer));
+                sb.append(offer.editBtn());
         }
-        sb.append(guestUI(offer));
+        sb.append(offer.guestUI(false));
         modelAndView.addObject("offerDisplay", sb.toString());
 
         modelAndView.setViewName("offer");
         return modelAndView;
     }
 
-    private String hostUI(Offer offer) {
-        return "<div class=\"hostUI\"><a href=/edit?id=" + offer.getId() + ">Изменить</a></div>";
-    }
-
-    private String guestUI(Offer offer) {
-        String title = offer.getAddress() + ", " + offer.getTotalArea() + "м²";
-        String body = offer.longDescription() + "<br/>";
-        return "<h2>" + title + "</h2>" + body;
-    }
+//    private String hostUI(Offer offer) {
+//        return "<div class=\"hostUI\"><a href=/edit?id=" + offer.getId() + ">Изменить</a></div>";
+//    }
+//
+//    private String guestUI(Offer offer) {
+//        String title = offer.getAddress() + ", " + offer.getTotalArea() + "м²";
+//        String body = offer.longDescription() + "<br/>";
+//        return "<h2>" + title + "</h2>" + body;
+//    }
 }

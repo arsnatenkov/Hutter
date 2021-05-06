@@ -3,6 +3,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    word-break: break-all;
     /*filter: alpha(Opacity=50);*/
 }
 
@@ -162,14 +163,20 @@ table {
     padding-bottom: 60px;
 }
 
+.text-container{
+    width: 80%;
+    margin: auto;
+}
+
 .inner-div {
     width: 100%;
+    margin: auto;
 }
 
 .center-div {
-    width: 85%;
+    width: 100%;
     margin: auto;
-    height: 340px;
+    height: 75%;
 }
 
 .offer-wrapper h2 {

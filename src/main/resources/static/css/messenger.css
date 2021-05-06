@@ -92,7 +92,7 @@ hr {
 .msg-input {
     background: #f7f7f7;
     border-radius: 10px;
-    width: 80%;
+    width: 100%;
     padding: 15px;
     font-family: monospace;
     margin: auto;
@@ -149,4 +149,14 @@ a.offer {
 #save{
     float: right;
     margin-top: 0;
+}
+
+#edit{
+    float: right;
+    margin-top: 0;
+}
+
+.msg-validate {
+    margin: auto;
+    width: 80%;
 }

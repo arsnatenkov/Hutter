@@ -4,7 +4,8 @@ function init() {
     var customBalloonContentLayout = ymaps.templateLayoutFactory.createClass([
         '<ul class=list>',
         '{% for geoObject in properties.geoObjects %}',
-        '<li><a data-placemarkid="{{ geoObject.properties.placemarkId }}" ' +
+        '<li><a href="/offer?id={{ geoObject.properties.offerId }}" ' +
+        'data-placemarkid="{{ geoObject.properties.placemarkId }}" ' +
         'class="list_item">{{ geoObject.properties.balloonContentHeader|raw }}</a></li>',
         '{% endfor %}',
         '</ul>',
@@ -26,6 +27,7 @@ function init() {
             clusterBalloonContentLayout: customBalloonContentLayout,
         }),
         addresses = [],
+        ids = [],
         spaces = [],
         geoObjects = [];
 
@@ -58,6 +60,7 @@ function init() {
 
     for (var q = 0, l = document.getElementsByClassName("offer").length; q < l; ++q) {
         addresses[q] = document.getElementsByClassName("offer")[q].innerHTML;
+        ids[q] = document.getElementsByClassName("offer")[q].getAttribute("id");
         spaces[q] = document.getElementsByClassName("space")[q].innerHTML;
     }
 
@@ -66,6 +69,32 @@ function init() {
         ymaps.geocode(addresses[i]).then(function (res) {
             var coord = res.geoObjects.get(0).geometry.getCoordinates();
             const j = id;
+
+            BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
+                '<div class="balloon-content">' +
+                '<a href="/offer?id={{ properties.offerId }}">{{properties.name}}</a><br />' +
+                // '<i id="count"></i> ' +
+                // '<button id="counter-button"> [+1] </button>' +
+                '</div>', {
+                    build: function () {
+                        BalloonContentLayout.superclass.build.call(this);
+                        $('#counter-button').bind('click', this.onCounterClick);
+                        $('#count').html(counter);
+                    },
+                    clear: function () {
+                        $('#counter-button').unbind('click', this.onCounterClick);
+                        BalloonContentLayout.superclass.clear.call(this);
+                    },
+
+                    onCounterClick: function () {
+                        $('#count').html(++counter);
+                        if (counter === 5) {
+                            alert('Вы славно потрудились.');
+                            counter = 0;
+                            $('#count').html(counter);
+                        }
+                    }
+                });
 
             MyBalloonLayout = ymaps.templateLayoutFactory.createClass(
                 '<div class="popover top">' +
@@ -122,32 +151,6 @@ function init() {
                     }
                 });
 
-            BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
-                '<div class="balloon-content">' +
-                '<a href="/offer?id=' + (1 + j) + '">{{properties.name}}</a><br />' +
-                '<i id="count"></i> ' +
-                '<button id="counter-button"> [+1] </button>' +
-                '</div>', {
-                    build: function () {
-                        BalloonContentLayout.superclass.build.call(this);
-                        $('#counter-button').bind('click', this.onCounterClick);
-                        $('#count').html(counter);
-                    },
-                    clear: function () {
-                        $('#counter-button').unbind('click', this.onCounterClick);
-                        BalloonContentLayout.superclass.clear.call(this);
-                    },
-
-                    onCounterClick: function () {
-                        $('#count').html(++counter);
-                        if (counter === 5) {
-                            alert('Вы славно потрудились.');
-                            counter = 0;
-                            $('#count').html(counter);
-                        }
-                    }
-                });
-
             var placemark = new ymaps.Placemark(coord, {
                 name: addresses[j],
                 // balloonContent: addresses[j],
@@ -155,6 +158,7 @@ function init() {
                 balloonContentHeader: spaces[j],
                 balloonContentBody: addresses[j],
                 placemarkId: j,
+                offerId: ids[j],
             }, {
                 // iconLayout: 'default#image',
                 // iconImageSize: [20, 20],
