@@ -102,7 +102,7 @@ public class Offer {
 
         res += icon("document") + "описание: " + description + "<br/><br/>";
 
-        res += "<a href=\"chat" + getHostId() + "\" class=\"login-form-btn chat\">" +
+        res += "<a href=\"/conversation/" + getHostId() + "/" + getId() + "\" class=\"login-form-btn chat\">" +
                 "Начать чат с владельцем</a><br />";
         return res;
     }
@@ -117,7 +117,7 @@ public class Offer {
 
         res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/><br/>";
 
-        res += "<a href=\"/conversation/" + getHostId() + "\" class=\"login-form-btn chat\">" +
+        res += "<a href=\"/conversation/" + getHostId() + "/" + getId() + "\" class=\"login-form-btn chat\">" +
                 "Начать чат с владельцем</a>";
         return res;
     }
@@ -128,7 +128,7 @@ public class Offer {
                 ".svg\" alt=\"" + name + "\">&nbsp;";
     }
 
-    static public String makeLink(int id, String type, String text) {
+    static public String makeLink(long id, String type, String text) {
         return "<a class=\"" + type + "\" id=\"" + id + "\" href=\"/" +
                 type + "?id=" + id + "\">" + text + "</a>";
     }

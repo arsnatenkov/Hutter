@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="template.html :: header('Conversation', false)"></head>
+<!--<head th:replace="template.html :: header('Conversation', false)"></head>-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:if="${csrf}" th:content="${_csrf.token}"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title th:text="${title}">Social Network</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/jquery-ui.min.css" th:href="@{/css/jquery-ui.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css" th:href="@{/css/custom.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+
+</head>
 
 <body class="scroll">
 <div th:utext="${offerDisplay}" class="offer-wrapper content"></div>
 
 
-<div class="col-md-9">
+<div class="col-md-9 unique">
     <h2><span th:text="#{conversation.with}">Conversation with</span>
         <a th:replace="template.html :: messageUser(${companion})"></a>
     </h2>
@@ -18,7 +35,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <div class="message-left" th:value="${#temporals.format(m.time, 'dd.MM.yyyy')}">22.11.2018 12:25</div>
+            <div class="message-left" th:value="${#temporals.format(m.time, 'dd.MM.yyyy')}"></div>
             <div class="message-left" th:text="${m.message}">Hello! How are you?</div>
         </div>
     </div>

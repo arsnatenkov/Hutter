@@ -25,6 +25,10 @@ public class OfferService {
         return offerRepository.findById(id);
     }
 
+    public List<Offer> findByHostId(Long hostId){
+        return offerRepository.findByHostId(hostId);
+    }
+
     public List<Offer> findByCostBetween(Long low, Long high) {
         return offerRepository.findByCostBetween(low, high);
     }

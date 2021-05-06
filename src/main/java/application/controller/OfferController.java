@@ -1,6 +1,5 @@
 package application.controller;
 
-import application.dto.UserDTO;
 import application.entity.Offer;
 import application.entity.User;
 import application.service.OfferService;
@@ -60,25 +59,25 @@ public class OfferController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/offer")
-    public ModelAndView offer(HttpServletRequest request) {
-        String id = request.getParameter("id");
-        Offer offer = offerService.findById(Integer.parseInt(id));
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        ModelAndView modelAndView = new ModelAndView();
-        StringBuilder sb = new StringBuilder();
-        User user = userService.findUserByUserName(auth.getName());
-
-        if (user != null) {
-            if (user.getActive() && user.getId().equals(offer.getHostId()))
-                sb.append(hostUI(offer));
-        }
-        sb.append(guestUI(offer));
-        modelAndView.addObject("offerDisplay", sb.toString());
-
-        modelAndView.setViewName("offer");
-        return modelAndView;
-    }
+//    @GetMapping(value = "/offer")
+//    public ModelAndView offer(HttpServletRequest request) {
+//        String id = request.getParameter("id");
+//        Offer offer = offerService.findById(Integer.parseInt(id));
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        ModelAndView modelAndView = new ModelAndView();
+//        StringBuilder sb = new StringBuilder();
+//        User user = userService.findUserByUserName(auth.getName());
+//
+//        if (user != null) {
+//            if (user.getActive() && user.getId().equals(offer.getHostId()))
+//                sb.append(hostUI(offer));
+//        }
+//        sb.append(guestUI(offer));
+//        modelAndView.addObject("offerDisplay", sb.toString());
+//
+//        modelAndView.setViewName("offer1");
+//        return modelAndView;
+//    }
 
     private String hostUI(Offer offer) {
         return "<div class=\"hostUI\"><a href=/edit?id=" + offer.getId() + ">Изменить</a></div>";

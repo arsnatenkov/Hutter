@@ -15,7 +15,8 @@ public interface OfferRepository extends JpaRepository<Offer, Long> {
 
     Offer findById(Integer publicId);
 
-    List<Offer> findByHostId(Integer hostId);
+    List<Offer> findByHostId(Long hostId);
+
 
     List<Offer> findByCostBetween(Long low, Long high);
 }

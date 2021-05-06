@@ -26,8 +26,6 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-import static application.utils.ServerUtils.getUserFromSession;
-
 @Controller
 @RequiredArgsConstructor
 public class MessageController {
@@ -76,17 +74,32 @@ public class MessageController {
     }
 
     @GetMapping("/conversation/{companionId}/{offerId}")
-    public ModelAndView getConversation(@PathVariable Long companionId,
-                                        @PathVariable Long offerId,
+    public ModelAndView getConversation(@PathVariable("companionId") Long companionId,
+                                        @PathVariable("offerId") Integer offerId,
                                         HttpServletRequest request, Model model) {
+        //        String id = request.getParameter("id");
+//        Offer offer = offerService.findById(Integer.parseInt(id));
+
+        Offer offer = offerService.findById(offerId);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        ModelAndView modelAndView = new ModelAndView();
+        StringBuilder sb = new StringBuilder();
+        User user = userService.findUserByUserName(auth.getName());
+
+        if (user != null) {
+            if (user.getActive() && user.getId().equals(offer.getHostId()))
+                sb.append(hostUI(offer));
+        }
+        sb.append(guestUI(offer));
+        modelAndView.addObject("offerDisplay", sb.toString());
         addConversationToModel(companionId, model);
         model.addAttribute("newMessage", new MessageDTO());
-        return insertOffer(request);
-//        return "conversation";
+        modelAndView.setViewName("offer1");
+        return modelAndView;
     }
 
-    @PostMapping("/conversation/{companionId}")
-    public String postMessage(@PathVariable Long companionId,
+    @PostMapping("/conversation/{companionId}/{offerId}")
+    public String postMessage(@PathVariable("companionId") Long companionId, @PathVariable("offerId") Integer offerId,
                               @Valid @ModelAttribute("newMessage") MessageDTO messageDTO, BindingResult bindingResult,
                               Model model) {
         if (bindingResult.hasErrors()) {
@@ -104,24 +117,24 @@ public class MessageController {
         return "redirect:/conversation/" + messageDTO.getReceiver().getId();
     }
 
-    private ModelAndView insertOffer(HttpServletRequest request) {
-        String id = request.getParameter("id");
-        Offer offer = offerService.findById(Integer.parseInt(id));
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        ModelAndView modelAndView = new ModelAndView();
-        StringBuilder sb = new StringBuilder();
-        User user = userService.findUserByUserName(auth.getName());
-
-        if (user != null) {
-            if (user.getActive() && user.getId().equals(offer.getHostId()))
-                sb.append(hostUI(offer));
-        }
-        sb.append(guestUI(offer));
-        modelAndView.addObject("offerDisplay", sb.toString());
-
-        modelAndView.setViewName("offer");
-        return modelAndView;
-    }
+//    private ModelAndView insertOffer(HttpServletRequest request) {
+//        String id = request.getParameter("id");
+//        Offer offer = offerService.findById(Integer.parseInt(id));
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        ModelAndView modelAndView = new ModelAndView();
+//        StringBuilder sb = new StringBuilder();
+//        User user = userService.findUserByUserName(auth.getName());
+//
+//        if (user != null) {
+//            if (user.getActive() && user.getId().equals(offer.getHostId()))
+//                sb.append(hostUI(offer));
+//        }
+//        sb.append(guestUI(offer));
+//        modelAndView.addObject("offerDisplay", sb.toString());
+//
+//        modelAndView.setViewName("offer");
+//        return modelAndView;
+//    }
 
     private String hostUI(Offer offer) {
         return "<div class=\"hostUI\"><a href=/edit?id=" + offer.getId() + ">Изменить</a></div>";

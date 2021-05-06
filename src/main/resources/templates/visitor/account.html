@@ -76,9 +76,10 @@
     <div id="HostedOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Ваши объявления</h3>
-        <div th:utext="${hostedOffers}">
-            <p>Ваши объявления будут тут.</p>
-        </div>
+<!--        <div th:utext="${hostedOffers}">-->
+<!--            <p>Ваши объявления будут тут.</p>-->
+<!--        </div>-->
+        <ul th:utext="${hostedOffers}" id="panel-group">
     </div>
 
     <div id="FavouriteOffers" class="tabcontent">
