@@ -1,3 +1,8 @@
+img {
+    height: 30px;
+    width: 30px;
+}
+
 /* Style the tab */
 .tab {
     overflow: hidden;
@@ -18,12 +23,14 @@
     padding: 14px 16px;
     transition: 0.3s;
     font-size: 17px;
+    border-radius: 10px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
     /*text-decoration: underline;*/
-    background-color: #eee;
+    /*background-color: #eee;*/
+    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.5) inset;
 
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
@@ -43,9 +50,9 @@
     background: -moz-linear-gradient(45deg, #4169e1, #ffc0cb);
     background: linear-gradient(45deg, #4169e1, #ffc0cb);
 
-    -webkit-box-shadow: 0 30px 0 0 #fff inset, 0 -3px 0px #fff inset;
-    -moz-box-shadow: 0 30px 0 0 #fff inset, 0 -3px 0px #fff inset;
-    box-shadow: 0 30px 0px 10px #fff inset, 0 -3px 0px #fff inset;
+    -webkit-box-shadow: 0 35px 0 0 #fff inset, 0 -3px 0px #fff inset;
+    -moz-box-shadow: 0 35px 0 0 #fff inset, 0 -3px 0px #fff inset;
+    box-shadow: 0 35px 0px 10px #fff inset, 0 -3px 0px #fff inset;
 
     -webkit-transition: all 0s;
     -o-transition: all 0s;

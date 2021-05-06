@@ -99,9 +99,9 @@
     transition: all 0.4s;
 }
 
-#sidebar .toggle-btn:hover span {
-    background-color: rgb(255, 255, 255);
-}
+/*#sidebar .toggle-btn:hover span {*/
+/*    background-color: rgb(255, 255, 255);*/
+/*}*/
 
 #sidebar .toggle-btn span {
     display: block;

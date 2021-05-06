@@ -181,6 +181,7 @@ td {
     top: 10px;
     right: 10px;
     width: 220px;
+    margin: auto;
 }
 
 .back-btn:hover {

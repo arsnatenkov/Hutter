@@ -51,11 +51,18 @@
     <p>Click on the x button in the top right corner to close the current tab:</p>
 
     <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Settings')" id="defaultOpen">Настройки</button>
-        <button class="tablinks" onclick="openTab(event, 'HostedOffers')">Ваши объявления</button>
-        <button class="tablinks" onclick="openTab(event, 'FavouriteOffers')">Избранное</button>
-        <button class="tablinks" onclick="openTab(event, 'AddOffer')">Создать</button>
-        <button class="tablinks" onclick="openTab(event, 'Logout')">Выйти</button>
+        <button class="tablinks" onclick="openTab(event, 'Settings')" id="defaultOpen">
+            <img alt="settings" src="/images/user/settings.svg">&nbsp;Настройки</button>
+        <button class="tablinks" onclick="openTab(event, 'HostedOffers')">
+            <img alt="hosted" src="/images/user/crown.svg">&nbsp;Ваши&nbsp;объявления</button>
+        <button class="tablinks" onclick="openTab(event, 'FavouriteOffers')">
+            <img alt="starred" src="/images/user/star.svg">&nbsp;Избранное</button>
+        <button class="tablinks" onclick="openTab(event, 'AddOffer')">
+            <img alt="create" src="/images/user/plus.svg">&nbsp;Создать</button>
+        <button class="tablinks" onclick="openTab(event, 'Messages')">
+            <img alt="chat" src="/images/user/chat.svg">&nbsp;Сообщения</button>
+        <button class="tablinks" onclick="openTab(event, 'Logout')">
+            <img alt="logout" src="/images/user/logout.svg">&nbsp;Выйти</button>
     </div>
 
     <div id="Settings" class="tabcontent">
@@ -80,7 +87,20 @@
         <div th:utext="${favouriteOffers}">
             <p>Избранные объявления будут тут.</p>
         </div>
+    </div>
 
+    <div id="AddOffer" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
+        <h3>Перейти на страницу создания объявления?</h3>
+        <div class="container-login-form-btn m-t-17 logout-wrapper">
+            <a th:href="@{/addOffer}" class="login-form-btn logout" type="submit">Перейти</a>
+        </div>
+    </div>
+
+    <div id="Messages" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
+        <h3>Сообщения</h3>
+        <p>Сообщения будут тут.</p>
     </div>
 
     <div id="Logout" class="tabcontent">
@@ -91,14 +111,6 @@
                 <button class="login-form-btn logout" name="registration" type="submit">Выйти</button>
             </div>
         </form>
-    </div>
-
-    <div id="AddOffer" class="tabcontent">
-        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
-        <h3>Перейти на страницу создания объявления?</h3>
-        <div class="container-login-form-btn m-t-17 logout-wrapper">
-            <a th:href="@{/addOffer}" class="login-form-btn logout" type="submit">Перейти</a>
-        </div>
     </div>
 </div>
 
