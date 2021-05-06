@@ -157,13 +157,25 @@ table {
 
 .offer-wrapper {
     margin: 90px auto auto;
-    height: auto;
-    padding-left: 100px;
     font-size: 1.3em;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.inner-div {
+    width: 100%;
+}
+
+.center-div {
+    width: 85%;
+    margin: auto;
+    height: 340px;
 }
 
 .offer-wrapper h2 {
-    padding-left: 100px;
+    width: 60%;
+    text-align: center;
+    margin: auto auto 20px;
 }
 
 .little-form {

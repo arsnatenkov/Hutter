@@ -30,10 +30,9 @@
 }
 
 .f-group-btn img {
-    width: 100%;
-    height: 100%;
+    width: 30px;
+    height: 30px;
 }
-
 
 .force-scroll {
     height: 60%;
@@ -47,20 +46,19 @@
 
 hr {
     height: 1px;
-    margin: 0px;
+    margin: 0;
     background: #555555;
 }
 
 .content-flex {
     width: 680px;
-    height: 600px;
+    height: 720px;
     margin: 40px auto 100px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding-top: 15px;
     padding-bottom: 15px;
 }
-
 
 .msg-display-wrapper {
     background: rgba(0, 0, 0, 0);
@@ -94,11 +92,13 @@ hr {
 .msg-input {
     background: #f7f7f7;
     border-radius: 10px;
-    width: 90%;
-    padding: 10px 5px;
+    width: 80%;
+    padding: 15px;
+    font-family: monospace;
     margin: auto;
     box-shadow: none;
     font-size: 14px;
+    height: 150px;
 }
 
 a.offer {
@@ -123,14 +123,16 @@ a.offer {
 
 .msg-hat {
     height: 70px;
+    width: 90%;
     padding: 10px;
+    margin: auto;
 }
 
 .msg-hat td {
     height: 50px;
     margin: auto;
     /*     margin-right: 50px; */
-    width: 30%;
+    width: 20%;
     padding-left: 50px;
     padding-right: 50px;
 }
@@ -138,4 +140,13 @@ a.offer {
 .msg-hat button{
     width: 50%;
     float: right;
+}
+
+.up {
+    margin: -40px;
+}
+
+#save{
+    float: right;
+    margin-top: 0;
 }

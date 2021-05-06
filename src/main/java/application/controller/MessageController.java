@@ -143,8 +143,8 @@ public class MessageController {
     }
 
     private String guestUI(Offer offer) {
-        String title = offer.getAddress() + ", " + offer.getTotalArea() + "м²";
+        String title = offer.getAddress() + ", " + offer.getTotalArea() + "м²" + offer.saveBtn();
         String body = offer.longDescription() + "<br/>";
-        return "<h2>" + title + "</h2>" + body;
+        return "<h2>" + title + "</h2><hr>" + body + "<hr><br/>";
     }
 }

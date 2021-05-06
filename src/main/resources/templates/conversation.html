@@ -36,14 +36,14 @@
     <hr>
     <div class="msg-box">
         <!--    <div class="panel panel-default msg-box">-->
-        <div class="1">
+        <div class="up">
             <form th:object="${newMessage}" method="POST"
                   th:action="@{'/conversation/{hostId}/{offerId}'(offerId=${offer.getId()},hostId=${companion.id})}">
                 <table class="msg-hat">
                     <tr>
                         <td class="txt1 msg-head">
                             <!--                     th:text="#{conversation.new}">-->
-                            Новое сообщение
+                            Новое сообщение:
                         </td>
                         <td class="f-group-btn-wrap">
                             <button type="submit" name="submit" class="btn f-group-btn">
@@ -53,7 +53,7 @@
                     </tr>
                 </table>
                 <div class="f-group">
-                    <textarea autocomplete="off" class="input scroll msg-input" rows="5" id="comment"
+                    <textarea placeholder="Введите текст" autocomplete="off" class="input scroll msg-input" rows="5" id="comment"
                               th:field="*{message}"></textarea>
                     <div th:if="${#fields.hasErrors('message')}" style="margin-bottom: 25px"
                          class="txt1 validation-message">
@@ -67,8 +67,6 @@
         </div>
     </div>
 </div>
-<br/>
-<br/>
 <br/>
 <div class="name gradient hat">HUTTER</div>
 

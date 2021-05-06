@@ -80,9 +80,25 @@ public class Offer {
                 getHostId() + "/" + getId() + "\">" + getAddress() + "</a>" + "<br/>";
     }
 
-    public String longDescription() {
-        String res = icon("ruble") + "цена: " + getCost() + " ₽<br/><br/>";
+    public String saveBtn() {
+//        btn f-group-btn
+        return "<div id=\"save\" class=\"btn f-group-btn\">" +
+                "<a href=\"/save\">" +
+                "<img class=\"invert\" alt=\"save\" src=\"/images/save.svg\">" +
+                "</a>" +
+                "</div>";
+//        return "<div id=\"save\" class=\"f-group-btn-wrap\">" +
+//                "<a href=\"/save\" class=\"btn f-group-btn\">" +
+//                "<img class=\"invert\" alt=\"save\" src=\"/images/save.svg\">" +
+//                "</a>" +
+//                "</div>";
+    }
 
+    public String longDescription() {
+        String res = "";
+        res += "<div class=\"center-div scroll\">";
+        res += "<div class=\"inner-div\">";
+        res += icon("ruble") + "цена: " + getCost() + " ₽<br/><br/>";
         res += icon("plans") + "общая площадь: <span class=\"space\">" + getTotalArea() + " м²</span><br/>";
         res += "жилая площадь: " + getLiving() + " м²<br/><br/>";
 
@@ -94,12 +110,17 @@ public class Offer {
 
         res += icon("brick") + "строительные материалы: " + getMaterial() + "<br/><br/>";
 
-        String description = getDescription();
-//        String description = getDescription().length() < 50 ? getDescription() :
-//                getDescription().substring(0, 47) + "...";
+        if (getHasParking()) {
+            res += icon("parking") + "парковка: есть<br/>";
+            res += "тип парковки: " + getParkingType() + "<br/><br/>";
+        } else {
+            res += icon("parking") + "парковка: отсутствует<br/><br/>";
+        }
 
-        res += icon("document") + "описание: " + description + "<br/><br/>";
+        res += icon("document") + "описание: " + getDescription() + "<br/><br/>";
 
+        res += "</div>";
+        res += "</div>";
         return res;
     }
 
