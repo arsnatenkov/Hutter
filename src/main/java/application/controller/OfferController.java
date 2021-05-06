@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +51,15 @@ public class OfferController {
         return modelAndView;
     }
 
+    @PutMapping(value = "/edit")
+    public ModelAndView updateOffer(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        String id = request.getParameter("id");
+        Offer offer = offerService.findById(Integer.parseInt(id));
+        offer.setCost(100L);
+        modelAndView.setViewName("edit");
+        return modelAndView;
+    }
     @GetMapping(value = "/create")
     public ModelAndView addOffer() {
         ModelAndView modelAndView = new ModelAndView();
@@ -79,13 +89,4 @@ public class OfferController {
         return modelAndView;
     }
 
-//    private String hostUI(Offer offer) {
-//        return "<div class=\"hostUI\"><a href=/edit?id=" + offer.getId() + ">Изменить</a></div>";
-//    }
-//
-//    private String guestUI(Offer offer) {
-//        String title = offer.getAddress() + ", " + offer.getTotalArea() + "м²";
-//        String body = offer.longDescription() + "<br/>";
-//        return "<h2>" + title + "</h2>" + body;
-//    }
 }

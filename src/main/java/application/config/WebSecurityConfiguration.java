@@ -36,11 +36,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.
                 authorizeRequests()
-                .antMatchers("/", "/offer", "/create", "/conversation").permitAll()
+                .antMatchers("/", "/offer", "/create", "/conversation", "/error").permitAll()
                 .antMatchers(loginPage).permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/visitor/account").hasAuthority("VISITOR")
                 .antMatchers("/conversation").hasAuthority("VISITOR")
+                .antMatchers("/edit").hasAuthority("VISITOR")
                 .anyRequest()
                 .authenticated()
                 .and().csrf().disable()

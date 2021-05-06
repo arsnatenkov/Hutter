@@ -47,11 +47,11 @@ public class MessageController {
         UserDTO userDTO = userToUserDto.convert(user);
         UserDTO companion = userService.getUserById(hostId);
         List<MessageDTO> messages;
-        if (messagesService.findConversation(userDTO.getId(), hostId) != null) {
-            messages = messagesService.findConversation(userDTO.getId(), hostId);
+        if (messagesService.findConversation(userDTO.getId(), hostId, offer.getId()) != null) {
+            messages = messagesService.findConversation(userDTO.getId(), hostId, offer.getId());
         } else {
             messagesService.saveMessage(new Message(user, userDtoToUser.convert(userService.getUserById(hostId))));
-            messages = messagesService.findConversation(user.getId(), hostId);
+            messages = messagesService.findConversation(user.getId(), hostId, offer.getId());
         }
 
         model.addAttribute("messages", messages);
@@ -119,6 +119,7 @@ public class MessageController {
         messageDTO.setSender(userDTO);
         messageDTO.setReceiver(companion);
         messageDTO.setTime(LocalDateTime.now());
+        messageDTO.setOfferId(offerId);
         messagesService.postMessage(messageDTO);
         return "redirect:/conversation/" + messageDTO.getReceiver().getId() + "/" + offerId;
     }

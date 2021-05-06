@@ -18,6 +18,7 @@ public class MessageDtoToMessage {
         }
 
         return Message.builder()
+                .offerId(messageDTO.getOfferId())
                 .time(messageDTO.getTime())
                 .message(messageDTO.getMessage())
                 .sender(userDtoToUser.convert(messageDTO.getSender()))
