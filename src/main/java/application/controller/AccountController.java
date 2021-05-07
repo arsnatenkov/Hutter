@@ -12,8 +12,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -42,6 +44,12 @@ public class AccountController {
                     .append(offer.linkTitle("list-norm-font", "messages"))
                     .append("&nbsp;&nbsp;").append(offer.editBtn()).append("</li><br/>");
         sb.append("</ul>");
+        modelAndView.addObject("hostedOffers", sb.toString());
+
+
+        for(Favourite favourite : favourites)
+            sb1.append("<div>").append(offerService.findById(favourite.getOfferId()).linkTitle("list-norm-font", "conversation"))
+                .append("</div>").append("<br/>");
 
         modelAndView.addObject("hostedOffers", sb.toString());
         sb = new StringBuilder();
@@ -58,4 +66,13 @@ public class AccountController {
         modelAndView.setViewName("/visitor/account");
         return modelAndView;
     }
+
+    @PostMapping(value = "/delete")
+    public void deleteOffer(HttpServletRequest request){
+        String id = request.getParameter("id");
+        Offer offer = offerService.findById(Integer.parseInt(id));
+        offerService.deleteOffer(offer);
+        //return "redirect:/visitor/account";
+    }
+
 }

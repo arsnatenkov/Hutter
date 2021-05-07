@@ -11,8 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,7 +41,7 @@ public class OfferController {
 
         if (user != null) {
             if (user.getActive() && user.getId().equals(offer.getHostId()))
-                sb.append(offer.editBtn());
+                sb.append(offer.deleteBtn());
         }
         sb.append(offer.guestUI(false));
         modelAndView.addObject("offerDisplay", sb.toString());
@@ -83,32 +83,6 @@ public class OfferController {
         return "redirect:/visitor/account";
     }
 
-    @GetMapping(value = "/edit")
-    public ModelAndView edit(){
-        ModelAndView modelAndView = new ModelAndView();
-        Offer offer = new Offer();
-        modelAndView.addObject("offer", offer);
-        modelAndView.setViewName("edit");
-        return modelAndView;
-    }
-    @PostMapping(value = "/edit")
-    public ModelAndView updateOffer(HttpServletRequest request, @RequestParam Long cost){
-        ModelAndView modelAndView = new ModelAndView();
-        String id = request.getParameter("id");
-        Offer offer = offerService.findById(Integer.parseInt(id));
-        modelAndView.addObject("offer", offer);
-        offer.setCost(cost);
-        modelAndView.setViewName("edit");
-        return modelAndView;
-    }
 
-    @PostMapping(value = "/delete")
-    public String deleteOffer(HttpServletRequest request){
-        ModelAndView modelAndView = new ModelAndView();
-        String id = request.getParameter("id");
-        Offer offer = offerService.findById(Integer.parseInt(id));
-        offerService.deleteOffer(offer);
-        return "redirect:/visitor/account";
-    }
 
 }
