@@ -32,7 +32,8 @@ public class AccountController {
         StringBuilder sb = new StringBuilder();
 
         for (Offer offer : offers)
-            sb.append(offer.linkTitle("list-norm-font")).append(offer.editBtn()).append("<br/>");
+            sb.append("<div>").append(offer.linkTitle("list-norm-font"))
+                    .append(offer.editBtn()).append("</div>").append("<br/>");
 
         modelAndView.addObject("hostedOffers", sb.toString());
         modelAndView.setViewName("/visitor/account");
