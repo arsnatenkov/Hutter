@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,47 +28,7 @@ public class OfferController {
     @Autowired
     UserService userService;
 
-    @PostMapping(value = "/create")
-    public ModelAndView createNewOffer(@Valid Offer offer, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-        List<Offer> offerExists = offerService.findByAddress(offer.getAddress());
 
-        if (offerExists != null && offerExists.contains(offer)) {
-            bindingResult
-                    .rejectValue("address", "error.offer",
-                            "There is already an offer registered with same offer address provided");
-        }
-
-        if (!bindingResult.hasErrors()) {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user = userService.findUserByUserName(auth.getName());
-            offer.setHostId(user.getId());
-            offerService.saveOffer(offer);
-            modelAndView.addObject("successMessage", "Offer successfully added");
-            modelAndView.addObject("offer", new Offer());
-        }
-
-        modelAndView.setViewName("create");
-        return modelAndView;
-    }
-
-    @PutMapping(value = "/edit")
-    public ModelAndView updateOffer(HttpServletRequest request){
-        ModelAndView modelAndView = new ModelAndView();
-        String id = request.getParameter("id");
-        Offer offer = offerService.findById(Integer.parseInt(id));
-        offer.setCost(100L);
-        modelAndView.setViewName("edit");
-        return modelAndView;
-    }
-    @GetMapping(value = "/create")
-    public ModelAndView addOffer() {
-        ModelAndView modelAndView = new ModelAndView();
-        Offer offer = new Offer();
-        modelAndView.addObject("offer", offer);
-        modelAndView.setViewName("create");
-        return modelAndView;
-    }
 
     @GetMapping(value = "/offer")
     public ModelAndView offer(HttpServletRequest request) {
@@ -87,6 +48,67 @@ public class OfferController {
 
         modelAndView.setViewName("offer");
         return modelAndView;
+    }
+
+    @GetMapping(value = "/create")
+    public ModelAndView addOffer() {
+        ModelAndView modelAndView = new ModelAndView();
+        Offer offer = new Offer();
+        modelAndView.addObject("offer", offer);
+        modelAndView.setViewName("create");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/create")
+    public String createNewOffer(@Valid Offer offer, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Offer> offerExists = offerService.findByAddress(offer.getAddress());
+
+        if (offerExists != null && offerExists.contains(offer)) {
+            bindingResult
+                    .rejectValue("address", "error.offer",
+                            "There is already an offer registered with same offer address provided");
+        }
+
+        if (!bindingResult.hasErrors()) {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userService.findUserByUserName(auth.getName());
+            offer.setHostId(user.getId());
+            offerService.saveOffer(offer);
+            modelAndView.addObject("successMessage", "Offer successfully added");
+            modelAndView.addObject("offer", new Offer());
+        }
+
+        modelAndView.setViewName("create");
+        return "redirect:/visitor/account";
+    }
+
+    @GetMapping(value = "/edit")
+    public ModelAndView edit(){
+        ModelAndView modelAndView = new ModelAndView();
+        Offer offer = new Offer();
+        modelAndView.addObject("offer", offer);
+        modelAndView.setViewName("edit");
+        return modelAndView;
+    }
+    @PostMapping(value = "/edit")
+    public ModelAndView updateOffer(HttpServletRequest request, @RequestParam Long cost){
+        ModelAndView modelAndView = new ModelAndView();
+        String id = request.getParameter("id");
+        Offer offer = offerService.findById(Integer.parseInt(id));
+        modelAndView.addObject("offer", offer);
+        offer.setCost(cost);
+        modelAndView.setViewName("edit");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/delete")
+    public String deleteOffer(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        String id = request.getParameter("id");
+        Offer offer = offerService.findById(Integer.parseInt(id));
+        offerService.deleteOffer(offer);
+        return "redirect:/visitor/account";
     }
 
 }

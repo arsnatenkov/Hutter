@@ -82,11 +82,11 @@ public class Offer {
         }
         if (map == "messages") {
             return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/" + map +
-                    "</a>" + "<br/>";
+                    "\">" + getAddress() + "</a>" + "<br/>";
         }
         if (map == "offer") {
             return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/" + map +
-                    "?id=" + getId() + "</a>" + "<br/>";
+                    "?id=" + getId() + "\">" + getAddress() + "</a>" + "<br/>";
         }
         return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/error" + "</a>" + "<br/>";
     }

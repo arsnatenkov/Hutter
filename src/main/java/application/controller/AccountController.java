@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,7 +33,6 @@ public class AccountController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         List<Offer> offers = offerService.findByHostId(user.getId());
-        List<Offer> favouriteOffers = new ArrayList<>();
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
         StringBuilder sb = new StringBuilder();
         StringBuilder sb1 = new StringBuilder();
@@ -46,11 +44,9 @@ public class AccountController {
 
 
         for(Favourite favourite : favourites)
-            favouriteOffers.add(offerService.findById(favourite.getOfferId()));
+            sb1.append("<div>").append(offerService.findById(favourite.getOfferId()).linkTitle("list-norm-font", "conversation"))
+                .append("</div>").append("<br/>");
 
-        for(Offer offer : favouriteOffers)
-            sb1.append("<div>").append(offer.linkTitle("list-norm-font", "conversation"))
-                    .append("</div>").append("<br/>");
 
 
 
