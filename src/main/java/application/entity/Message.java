@@ -18,6 +18,9 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "offer_id")
+    private Integer offerId;
+
     @Column(name = "time")
     private LocalDateTime time;
 

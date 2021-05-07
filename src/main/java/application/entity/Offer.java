@@ -75,14 +75,25 @@ public class Offer {
                 + getDescription() + ";";
     }
 
-    public String linkTitle(String aClass) {
-        return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/conversation/" +
-                getHostId() + "/" + getId() + "\">" + getAddress() + "</a>" + "<br/>";
+    public String linkTitle(String aClass, String map) {
+        if (map == "conversation") {
+            return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/" + map +
+                    "/" + getHostId() + "/" + getId() + "\">" + getAddress() + "</a>" + "<br/>";
+        }
+        if (map == "messages") {
+            return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/" + map +
+                    "\">" + getAddress() + "</a>" + "<br/>";
+        }
+        if (map == "offer") {
+            return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/" + map +
+                    "?id=" + getId() + "\">" + getAddress() + "</a>" + "<br/>";
+        }
+        return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/error" + "</a>" + "<br/>";
     }
 
     public String editBtn() {
         return "<div id=\"edit\" class=\"btn f-group-btn\">" +
-                "<a href=\"/edit\">" +
+                "<a href=\"/edit?id=" + getId() + "\">" +
                 "<img class=\"invert\" alt=\"edit\" src=\"/images/edit.svg\">" +
                 "</a>" +
                 "</div>";
@@ -110,28 +121,28 @@ public class Offer {
         res += icon("ruble") + "цена: " + (getCost() == null ?
                 "не указана" : (getCost() + " ₽")) + "<br/><br/>";
 
-        res += icon("plans") + "общая площадь: <span class=\"space\">" + getTotalArea() + " м²</span><br/>";
-        res += "жилая площадь: " + getLiving() + " м²<br/><br/>";
+        res += icon("plans") + "общая площадь: <span class=\"space\">" + (getTotalArea() == null ? "не указана" : (getTotalArea() + " м²")) + "</span><br/>";
+        res += "жилая площадь: " + (getLiving() == null ? "не указана" : (getLiving() + " м²")) + "<br/><br/>";
 
-        res += icon("floor") + "этаж: " + getFloor() + "<br/>";
-        res += "высота здания: " + getFloorMax() + "<br/><br/>";
+        res += icon("floor") + "этаж: " + (getFloor()==null?"не указан":getFloor()) + "<br/>";
+        res += "высота здания: " + (getFloorMax() == null ? "не указана" : getFloorMax()) + "<br/><br/>";
 
-        res += icon("living-room") + "кол-во комнат: " + getQuantityRoom() + "<br/>";
-        res += "площади комнат: " + getRoomArea() + " м²<br/><br/>";
+        res += icon("living-room") + "кол-во комнат: " + (getQuantityRoom() == null ? "не указано" : getQuantityRoom()) + "<br/>";
+        res += "площади комнат: " + (getRoomArea() == null ? "не указана" : (getRoomArea() + " м²")) + "<br/><br/>";
 
-        res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/>";
-        res += "типы санузлов: " + getType() + "<br/><br/>";
+        res += icon("bathroom") + "кол-во санузлов: " + (getQuantityToilet() == null ? "не указано" : getQuantityToilet()) + "<br/>";
+        res += "типы санузлов: " + (getType() == null ? "не указана" : getType()) + "<br/><br/>";
 
-        res += icon("brick") + "строительные материалы: " + getMaterial() + "<br/><br/>";
+        res += icon("brick") + "строительные материалы: " + (getMaterial() == null ? "не указаны" : getMaterial()) + "<br/><br/>";
 
-        if (getHasParking()) {
+        if (getHasParking() != null && getHasParking()) {
             res += icon("parking") + "парковка: есть<br/>";
             res += "тип парковки: " + getParkingType() + "<br/><br/>";
         } else {
             res += icon("parking") + "парковка: отсутствует<br/><br/>";
         }
 
-        res += icon("document") + "описание: " + getDescription() + "<br/><br/>";
+        res += icon("document") + "описание: " + (getDescription() == null ? "не указано" : getDescription()) + "<br/><br/>";
 
         res += "</div>";
         res += "</div>";
@@ -143,13 +154,13 @@ public class Offer {
         String res = icon("ruble") + "цена: " + (getCost() == null ?
                 "не указана" : (getCost() + " ₽")) + "<br/><br/>";
         res += icon("plans") + "общая площадь: <span class=\"space\">" +
-                getTotalArea() + " м²</span><br/><br/>";
+                (getTotalArea() == null ? "не указана" : (getTotalArea() + " м²")) + "</span><br/><br/>";
 
-        res += icon("floor") + "этаж: " + getFloor() + "<br/><br/>";
+        res += icon("floor") + "этаж: " + (getFloor()==null?"не указан":getFloor()) + "<br/><br/>";
 
-        res += icon("living-room") + "кол-во комнат: " + getQuantityRoom() + "<br/><br/>";
+        res += icon("living-room") + "кол-во комнат: " + (getQuantityRoom() == null ? "не указано" : getQuantityRoom()) + "<br/><br/>";
 
-        res += icon("bathroom") + "кол-во санузлов: " + getQuantityToilet() + "<br/><br/>";
+        res += icon("bathroom") + "кол-во санузлов: " + (getQuantityToilet() == null ? "не указано" : getQuantityToilet()) + "<br/><br/>";
         if (map == "conversation") {
             res += "<a href=\"/" + map + "/" + getHostId() + "/" + getId() + "\" class=\"login-form-btn chat\">" +
                     "Подробнее</a>";

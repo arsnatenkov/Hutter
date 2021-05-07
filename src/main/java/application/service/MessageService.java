@@ -37,8 +37,8 @@ public class MessageService {
     }
 
     @Transactional(readOnly = true)
-    public List<MessageDTO> findConversation(Long userId, Long companionId) {
-        List<Message> all = messageRepository.findConversation(userId, companionId);
+    public List<MessageDTO> findConversation(Long userId, Long companionId, Integer offerId) {
+        List<Message> all = messageRepository.findConversation(userId, companionId, offerId);
         List<MessageDTO> messages = new LinkedList<>();
         if(all != null){
             all.forEach(m -> messages.add(messageToMessageDto.convert(m, userId)));

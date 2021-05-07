@@ -23,7 +23,7 @@
                         <a th:replace="template.html :: messageUser(${m.receiver})"></a>
                     </div>
                 </div>
-                <div class="panel-body"><a th:href="@{'/conversation/' + ${m.companionId}}" th:text="${m.message}">Hello!
+                <div class="panel-body"><a th:href="@{'/conversation/' + ${m.companionId} + '/' + ${m.getOfferId()}}" th:text="${m.message}">Hello!
                     How are you?</a></div>
             </div>
         </div>
@@ -31,7 +31,7 @@
     <hr/>
 </div>
 
-<div th:utext="${myOfferDisplay}" class="offer-wrapper content"></div>
+<!--<div th:utext="${myOfferDisplay}" class="offer-wrapper content"></div>-->
 
 </body>
 </html>

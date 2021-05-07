@@ -1,7 +1,9 @@
 package application.controller;
 
+import application.entity.Favourite;
 import application.entity.Offer;
 import application.entity.User;
+import application.service.FavouriteService;
 import application.service.OfferService;
 import application.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,8 @@ public class AccountController {
     private OfferService offerService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private FavouriteService favouriteService;
 
     @GetMapping(value = "/visitor/account")
     public ModelAndView account() {
@@ -29,13 +33,24 @@ public class AccountController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         List<Offer> offers = offerService.findByHostId(user.getId());
+        List<Favourite> favourites = favouriteService.findByUserId(user.getId());
         StringBuilder sb = new StringBuilder();
+        StringBuilder sb1 = new StringBuilder();
 
         for (Offer offer : offers)
-            sb.append("<div>").append(offer.linkTitle("list-norm-font"))
+            sb.append("<div>").append(offer.linkTitle("list-norm-font", "messages"))
                     .append(offer.editBtn()).append("</div>").append("<br/>");
-
         modelAndView.addObject("hostedOffers", sb.toString());
+
+
+        for(Favourite favourite : favourites)
+            sb1.append("<div>").append(offerService.findById(favourite.getOfferId()).linkTitle("list-norm-font", "conversation"))
+                .append("</div>").append("<br/>");
+
+
+
+
+        modelAndView.addObject("favouriteOffers", sb1.toString());
         modelAndView.setViewName("/visitor/account");
         return modelAndView;
     }

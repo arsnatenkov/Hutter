@@ -91,9 +91,9 @@
     <div id="FavouriteOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Избранные объявления</h3>
-        <div th:utext="${favouriteOffers}">
+        <ul th:utext="${favouriteOffers}" id="panel-group">
             <p>Избранные объявления будут тут.</p>
-        </div>
+        </ul>
     </div>
 
     <div id="AddOffer" class="tabcontent">

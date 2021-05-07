@@ -40,4 +40,8 @@ public class OfferService {
     public Offer saveOffer(Offer offer) {
         return offerRepository.save(offer);
     }
+
+    public void deleteOffer(Offer offer){
+        offerRepository.delete(offer);
+    }
 }
