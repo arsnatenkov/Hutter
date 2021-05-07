@@ -35,24 +35,27 @@ public class AccountController {
         List<Offer> offers = offerService.findByHostId(user.getId());
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
         StringBuilder sb = new StringBuilder();
-        StringBuilder sb1 = new StringBuilder();
 
+        sb.append("<ul>");
         for (Offer offer : offers)
-            sb.append("<div>").append(offer.linkTitle("list-norm-font", "messages"))
-                    .append(offer.editBtn()).append("</div>").append("<br/>");
+            sb.append("<li class=\"offer-list\">")
+                    .append(offer.linkTitle("list-norm-font", "messages"))
+                    .append("&nbsp;&nbsp;").append(offer.editBtn()).append("</li><br/>");
+        sb.append("</ul>");
+
         modelAndView.addObject("hostedOffers", sb.toString());
+        sb = new StringBuilder();
 
+        sb.append("<ul>");
+        for (Favourite favourite : favourites)
+            sb.append("<li class=\"offer-list\">").append(offerService.findById(favourite.getOfferId())
+                    .linkTitle("list-norm-font", "conversation"))
+                    .append("</li><br/>");
+        sb.append("</ul>");
 
-        for(Favourite favourite : favourites)
-            sb1.append("<div>").append(offerService.findById(favourite.getOfferId()).linkTitle("list-norm-font", "conversation"))
-                .append("</div>").append("<br/>");
+        modelAndView.addObject("favouriteOffers", sb.toString());
 
-
-
-
-        modelAndView.addObject("favouriteOffers", sb1.toString());
         modelAndView.setViewName("/visitor/account");
         return modelAndView;
     }
-
 }

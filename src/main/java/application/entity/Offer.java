@@ -76,25 +76,25 @@ public class Offer {
     }
 
     public String linkTitle(String aClass, String map) {
-        if (map == "conversation") {
+        if (map.equals("conversation")) {
             return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/" + map +
-                    "/" + getHostId() + "/" + getId() + "\">" + getAddress() + "</a>" + "<br/>";
+                    "/" + getHostId() + "/" + getId() + "\">" + getAddress() + "</a>";
         }
-        if (map == "messages") {
+        if (map.equals("messages")) {
             return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/" + map +
-                    "\">" + getAddress() + "</a>" + "<br/>";
+                    "\">" + getAddress() + "</a>";
         }
-        if (map == "offer") {
+        if (map.equals("offer")) {
             return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/" + map +
-                    "?id=" + getId() + "\">" + getAddress() + "</a>" + "<br/>";
+                    "?id=" + getId() + "\">" + getAddress() + "</a>";
         }
-        return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/error" + "</a>" + "<br/>";
+        return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/error" + "</a>";
     }
 
     public String editBtn() {
-        return "<div id=\"edit\" class=\"btn f-group-btn\">" +
-                "<a href=\"/edit?id=" + getId() + "\">" +
-                "<img class=\"invert\" alt=\"edit\" src=\"/images/edit.svg\">" +
+        return "<div class=\"btn f-group-btn offer-delete\">" +
+                "<a href=\"/delete?id=" + getId() + "\">" +
+                "<img class=\"invert\" alt=\"delete\" src=\"/images/delete.svg\">" +
                 "</a>" +
                 "</div>";
 //        return "<div class=\"hostUI\"><a href=/edit?id=" + getId() + ">Изменить</a></div>";

@@ -23,6 +23,7 @@ public class LandingController {
 
     @Autowired
     private UserService userService;
+
     //TODO добавить фильтры
     @GetMapping(value = "/")
     public ModelAndView landing() {
@@ -31,18 +32,14 @@ public class LandingController {
         StringBuilder sb = new StringBuilder();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        for (Offer offer : offers)
-            if(user != null){
-                if(offer.getHostId() == user.getId()){
-                    sb.append(wrap(offer, "messages"));
-                }else{
-                    sb.append(wrap(offer, "conversation"));
-                }
-            }else{
+        for (Offer offer : offers) {
+            if (user != null) {
+                sb.append(wrap(offer, offer.getHostId().equals(user.getId()) ?
+                        "messages" : "conversation"));
+            } else {
                 sb.append(wrap(offer, "offer"));
             }
-
-
+        }
 
         modelAndView.addObject("offerDescriptions", sb.toString());
         modelAndView.setViewName("landing");
@@ -51,10 +48,11 @@ public class LandingController {
 
     private String wrap(Offer offer, String map) {
         String res = "<li><table><tr>" +
-                "<td class=\"offer-pic\">" +
-                "<img src=\"images/offer/offer" + offer.getId() + ".jpg\" alt=\"Фото объявления\"/>" + "</td>";
+                "<td class=\"offer-pic\"><div>" +
+                "<img src=\"/images/offer/offer" + offer.getId() +
+                ".jpg\" alt=\"Фото объявления\"/></div></td>";
 
-        res += "<td>" + offer.linkTitle("", map) + offer.shortDescription(map);
+        res += "<td>" + offer.linkTitle("", map) + "<br/>" + offer.shortDescription(map);
         return res + "</td></tr></table></li>";
     }
 }
