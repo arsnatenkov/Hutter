@@ -36,31 +36,23 @@ public class AccountController {
         User user = userService.findUserByUserName(auth.getName());
         List<Offer> offers = offerService.findByHostId(user.getId());
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
-        StringBuilder sb = new StringBuilder();
 
+        StringBuilder sb = new StringBuilder();
         sb.append("<ul>");
         for (Offer offer : offers)
             sb.append("<li class=\"offer-list\">")
                     .append(offer.linkTitle("list-norm-font", "messages"))
-                    .append("&nbsp;&nbsp;").append(offer.editBtn()).append("</li><br/>");
+                    .append("&nbsp;&nbsp;").append(offer.deleteBtn()).append("</li><br/>");
         sb.append("</ul>");
         modelAndView.addObject("hostedOffers", sb.toString());
 
-
-        for(Favourite favourite : favourites)
-            sb1.append("<div>").append(offerService.findById(favourite.getOfferId()).linkTitle("list-norm-font", "conversation"))
-                .append("</div>").append("<br/>");
-
-        modelAndView.addObject("hostedOffers", sb.toString());
         sb = new StringBuilder();
-
         sb.append("<ul>");
         for (Favourite favourite : favourites)
             sb.append("<li class=\"offer-list\">").append(offerService.findById(favourite.getOfferId())
                     .linkTitle("list-norm-font", "conversation"))
                     .append("</li><br/>");
         sb.append("</ul>");
-
         modelAndView.addObject("favouriteOffers", sb.toString());
 
         modelAndView.setViewName("/visitor/account");
@@ -68,7 +60,7 @@ public class AccountController {
     }
 
     @PostMapping(value = "/delete")
-    public void deleteOffer(HttpServletRequest request){
+    public void deleteOffer(HttpServletRequest request) {
         String id = request.getParameter("id");
         Offer offer = offerService.findById(Integer.parseInt(id));
         offerService.deleteOffer(offer);

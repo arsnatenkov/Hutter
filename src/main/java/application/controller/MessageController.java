@@ -86,7 +86,7 @@ public class MessageController {
         User user = userService.findUserByUserName(auth.getName());
         if (user != null) {
             if (user.getId().equals(offer.getHostId())) {
-                sb.append(offer.editBtn());
+                sb.append(offer.deleteBtn());
                 sb.append(offer.guestUI(true));
                 modelAndView.addObject("myOfferDisplay", sb.toString());
 

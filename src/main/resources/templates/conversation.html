@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/blocks/header.html :: header('Offer')"></head>
+
+
+
+<head th:replace="/blocks/header.html :: header(@{'Объявление №{id}'(id=${offer.getId()})})"></head>
 
 <body class="scroll">
 
