@@ -5,6 +5,9 @@
 
 
 <head th:replace="/blocks/header.html :: header('Объявление') "></head>
+=======
+<head th:replace="/blocks/header.html :: header(@{'Объявление №{id}'(id=${offer.getId()})})"></head>
+>>>>>>> 0756715489061503207b77b1c61d3b21669c0afd
 
 <body class="scroll">
 
