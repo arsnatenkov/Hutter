@@ -1,148 +1,44 @@
 <!DOCTYPE html>
 <html>
-<!--<head>-->
-<!--    <title>HUTTER - Home page</title>-->
-<!--    <link rel="shortcut icon" href="/images/home.svg" type="image/svg">-->
-<!--    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>-->
-<!--    <link href="https://yandex.st/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>-->
-<!--    <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>-->
-<!--    <script src="https://api-maps.yandex.ru/2.1/?apikey=f3166bfd-6c7c-40bb-a767-55a8e4259c52&lang=ru_RU"-->
-<!--            type="text/javascript"></script>-->
-<!--    <script type="text/javascript" src="./js/map.js"></script>-->
-<!--    <style>-->
-<!--        html, body {-->
-<!--            width: 100%;-->
-<!--            height: 100%;-->
-<!--            padding: 0;-->
-<!--            margin: 0;-->
-<!--        }-->
-
-<!--        #map {-->
-<!--            margin: auto;-->
-<!--            width: 100%;-->
-<!--            height: 100%;-->
-<!--        }-->
-
-<!--        .popover {-->
-<!--            padding: 10px;-->
-<!--            margin: auto;-->
-<!--            display: block;-->
-<!--        }-->
-
-<!--        .popover .close {-->
-<!--            position: absolute;-->
-<!--            right: 5px;-->
-<!--            top: 1px;-->
-<!--        }-->
-
-<!--        .btn {-->
-<!--            margin-top: 10px;-->
-<!--        }-->
-
-<!--        .content {-->
-<!--            top: 0;-->
-<!--            width: 680px;-->
-<!--            height: 440px;-->
-<!--            margin: 90px auto auto;-->
-<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);-->
-<!--            border-radius: 10px;-->
-<!--            padding-top: 15px;-->
-<!--            padding-bottom: 15px;-->
-<!--        }-->
-<!--    </style>-->
-
-<!--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>-->
-<!--    <script type="text/javascript" src="./js/app.js"></script>-->
-<!--</head>-->
-
 <head th:replace="/blocks/header.html :: header('Домашняя страница')"></head>
 
 <body class="scroll">
 <div class="content">
     <div id="map"></div>
 </div>
+<div class="offer-search">
+<!--    TODO: изменить action формы на подходящий-->
+    <form th:action="@{/action}" method="POST" class="login-form validate-form flex-sb flex-w">
+        <div class="p-t-31 p-b-9">
+		    <span class="txt1">
+			    Искать
+		    </span>
+        </div>
+        <!--        <div class="wrap-input validate-input" data-validate="Введите имя пользователя">-->
+        <input autocomplete="off" class="input" type="text" name="user_name">
+        <!--            <span class="focus-input"></span>-->
+        <!--        </div>-->
 
+        <!--        <div class="wrap-input validate-input" data-validate="Введите пароль">-->
+        <input autocomplete="off" class="input" type="password" name="password">
+        <!--            <span class="focus-input"></span>-->
+        <!--        </div>-->
+
+        <div class="container-login-form-btn m-t-17">
+            <button name="submit" type="submit" class="login-form-btn">
+                Искать
+            </button>
+            <div class="wide txt1 validation-message" th:if="${param.error}">
+                <!--                <p style="color: #FF1C19;">-->
+                Неверные данные
+                <!--                </p>-->
+            </div>
+        </div>
+
+    </form>
+</div>
 <div class="link-list">
-    <ul th:utext="${offerDescriptions}" id="panel-group">
-<!--        <li>-->
-<!--            <table>-->
-<!--                <tr>-->
-<!--                    <td class="offer-pic">-->
-<!--                        <img src="images/offer/beer1.jpg" alt="Фото объявления"/>-->
-<!--                        <form th:action="@{/}" method="GET" class="little-form">-->
-<!--                            <button class="login-form-btn">-->
-<!--                                Войти-->
-<!--                            </button>-->
-<!--                        </form>-->
-<!--                    </td>-->
-<!--                    <td><a class="offer" id="o1" href="/offer?id=1">Юбилейная 39 к2</a>-->
-<!--                        <br>цена: 11000000 ₽<br>общая площадь: <span class="space">69 м²</span><br>жилая площадь: 35 м²-->
-<!--                        <br>кол-во комнат: 2<br>площади комнат: 20 и 15 м²<br>кол-во санузлов: 1-->
-<!--                        <br>типы санузлов: раздельный<br>строительные материалы: кирпич-пеноблок-->
-<!--                        <br>описание: хату на тату<br><a class="user" id="u1" href="/user?id=1">Владелец</a></td>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <table>-->
-<!--                <tr>-->
-<!--                    <td class="offer-pic">-->
-<!--                        <img src="images/1" alt="Фото объявления"/>-->
-<!--                    </td>-->
-<!--                    <td><a class="offer" id="o2" href="/offer?id=2">улица Воронцово Поле, 2</a>-->
-<!--                        <br>цена: 0 ₽<br>общая площадь: <span class="space">90 м²</span><br>жилая площадь: 99 м²-->
-<!--                        <br>кол-во комнат: 99<br>площади комнат: 1 м²<br>кол-во санузлов: 99-->
-<!--                        <br>типы санузлов: muzhskoi<br>строительные материалы: zhelezo blin-->
-<!--                        <br>описание: hooeption<br><a class="user" id="u2" href="/user?id=2">Владелец</a></td>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <table>-->
-<!--                <tr>-->
-<!--                    <td class="offer-pic">-->
-<!--                        <img src="images/1" alt="Фото объявления"/>-->
-<!--                    </td>-->
-<!--                    <td><a class="offer" href="/offer?id=3">улица Воронцово Поле, 1</a>-->
-<!--                        <br>цена: 0 ₽<br>общая площадь: <span class="space">990 м²</span><br>жилая площадь: 99 м²-->
-<!--                        <br>кол-во комнат: 99<br>площади комнат: 1 м²<br>кол-во санузлов: 99-->
-<!--                        <br>типы санузлов: muzhskoi<br>строительные материалы: zhelezo blin-->
-<!--                        <br>описание: hooeption<br><a class="user" href="/user?id=2">Владелец</a></td>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <table>-->
-<!--                <tr>-->
-<!--                    <td class="offer-pic">-->
-<!--                        <img src="images/1" alt="Фото объявления"/>-->
-<!--                    </td>-->
-<!--                    <td><a class="offer" href="/offer?id=4">Большой Николоворобинский переулок, 7, стр. 1</a>-->
-<!--                        <br>цена: 0 ₽<br>общая площадь: <span class="space">990 м²</span><br>жилая площадь: 99 м²-->
-<!--                        <br>кол-во комнат: 99<br>площади комнат: 1 м²<br>кол-во санузлов: 99-->
-<!--                        <br>типы санузлов: muzhskoi<br>строительные материалы: zhelezo blin-->
-<!--                        <br>описание: hooeption<br><a class="user" href="/user?id=2">Владелец</a></td>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <table>-->
-<!--                <tr>-->
-<!--                    <td class="offer-pic">-->
-<!--                        <img src="images/1" alt="Фото объявления"/>-->
-<!--                    </td>-->
-<!--                    <td><a class="offer" href="/offer?id=5">Покровский бульвар, 18/15</a>-->
-<!--                        <br>цена: 0 ₽<br>общая площадь: <span class="space">990 м²</span><br>жилая площадь: 99 м²-->
-<!--                        <br>кол-во комнат: 99<br>площади комнат: 1 м²<br>кол-во санузлов: 99-->
-<!--                        <br>типы санузлов: muzhskoi<br>строительные материалы: zhelezo blin-->
-<!--                        <br>описание: hooeption<br><a class="user" href="/user?id=2">Владелец</a></td>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </li>-->
-    </ul>
+    <ul th:utext="${offerDescriptions}" id="panel-group"></ul>
 </div>
 
 <div class="name gradient hat">HUTTER</div>
