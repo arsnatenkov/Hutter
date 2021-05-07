@@ -1,6 +1,7 @@
 package application.service;
 
 import application.entity.Favourite;
+import application.entity.Offer;
 import application.repository.FavouriteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,13 @@ public class FavouriteService {
 
     public List<Favourite> findByUserId(Long userId){
         return favouriteRepository.findByUserId(userId);
+    }
+
+    public List<Favourite> findByOfferId(Integer offerId){
+        return favouriteRepository.findByOfferId(offerId);
+    }
+
+    public void deleteFavourite(Favourite favourite){
+        favouriteRepository.delete(favourite);
     }
 }

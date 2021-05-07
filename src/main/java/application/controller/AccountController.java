@@ -1,9 +1,11 @@
 package application.controller;
 
 import application.entity.Favourite;
+import application.entity.Message;
 import application.entity.Offer;
 import application.entity.User;
 import application.service.FavouriteService;
+import application.service.MessageService;
 import application.service.OfferService;
 import application.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,8 @@ public class AccountController {
     private UserService userService;
     @Autowired
     private FavouriteService favouriteService;
+    @Autowired
+    private MessageService messageService;
 
     @GetMapping(value = "/visitor/account")
     public ModelAndView account() {
@@ -61,10 +65,19 @@ public class AccountController {
     }
 
     @PostMapping(value = "/delete/{offerId}")
-    public void deleteOffer(@PathVariable("offerId") Integer offerId) {
+    public String deleteOffer(@PathVariable("offerId") Integer offerId) {
         Offer offer = offerService.findById(offerId);
+        List<Message> messages = messageService.findByOfferId(offer.getId());
+        List<Favourite> favourites = favouriteService.findByOfferId(offer.getId());
         offerService.deleteOffer(offer);
-        //return "redirect:/visitor/account";
+        for(Message message : messages){
+            messageService.deleteMessage(message);
+        }
+        for(Favourite favourite : favourites){
+            favouriteService.deleteFavourite(favourite);
+        }
+
+        return "redirect:/visitor/account";
     }
 
 }

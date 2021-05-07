@@ -61,7 +61,15 @@ public class MessageService {
         messageRepository.save(message);
     }
 
+    public List<Message> findByOfferId(Integer offerId){
+        return messageRepository.findByOfferId(offerId);
+    }
+
     public void saveMessage(Message message){
         messageRepository.save(message);
+    }
+
+    public void deleteMessage(Message message){
+        messageRepository.delete(message);
     }
 }

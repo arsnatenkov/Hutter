@@ -17,6 +17,5 @@ public interface OfferRepository extends JpaRepository<Offer, Long> {
 
     List<Offer> findByHostId(Long hostId);
 
-
     List<Offer> findByCostBetween(Long low, Long high);
 }
