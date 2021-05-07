@@ -91,11 +91,9 @@ public class Offer {
         return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/error" + "</a>" + "<br/>";
     }
 
-    public String editBtn() {
+    public String deleteBtn() {
         return "<div id=\"edit\" class=\"btn f-group-btn\">" +
-                "<a href=\"/edit?id=" + getId() + "\">" +
                 "<img class=\"invert\" alt=\"edit\" src=\"/images/edit.svg\">" +
-                "</a>" +
                 "</div>";
 //        return "<div class=\"hostUI\"><a href=/edit?id=" + getId() + ">Изменить</a></div>";
     }

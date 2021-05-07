@@ -193,6 +193,7 @@ table {
 
 td {
     padding: 15px;
+    word-break: normal;
 }
 
 .chat {

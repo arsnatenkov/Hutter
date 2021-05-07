@@ -78,7 +78,7 @@ public class MessageController {
     @GetMapping(value = "/conversation/{companionId}/{offerId}")
     public ModelAndView getConversation(@PathVariable("companionId") Long companionId,
                                         @PathVariable("offerId") Integer offerId,
-                                        HttpServletRequest request, Model model) {
+                                        Model model) {
         Offer offer = offerService.findById(offerId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();

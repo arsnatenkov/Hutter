@@ -12,8 +12,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -39,7 +41,7 @@ public class AccountController {
 
         for (Offer offer : offers)
             sb.append("<div>").append(offer.linkTitle("list-norm-font", "messages"))
-                    .append(offer.editBtn()).append("</div>").append("<br/>");
+                    .append(offer.deleteBtn()).append("</div>").append("<br/>");
         modelAndView.addObject("hostedOffers", sb.toString());
 
 
@@ -53,6 +55,14 @@ public class AccountController {
         modelAndView.addObject("favouriteOffers", sb1.toString());
         modelAndView.setViewName("/visitor/account");
         return modelAndView;
+    }
+
+    @PostMapping(value = "/delete")
+    public void deleteOffer(HttpServletRequest request){
+        String id = request.getParameter("id");
+        Offer offer = offerService.findById(Integer.parseInt(id));
+        offerService.deleteOffer(offer);
+        //return "redirect:/visitor/account";
     }
 
 }
