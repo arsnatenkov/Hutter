@@ -18,6 +18,8 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
             "(m.sender.id = :companionId AND m.receiver.id = :userId AND m.offerId = :offerId) ORDER BY m.time")
     List<Message> findConversation(@Param("userId") Long userId, @Param("companionId") Long companionId, @Param("offerId") Integer offerId);
 
+    List<Message> findByOfferId(Integer offerId);
+
     Message findFirstBySenderIdOrReceiverIdOrderByIdDesc(Long userId, Long theSameUserId);
 
 }
