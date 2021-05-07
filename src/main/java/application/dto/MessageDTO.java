@@ -13,10 +13,9 @@ import java.time.LocalDateTime;
 public class MessageDTO {
 
     private LocalDateTime time;
-
+    private Integer offerId;
     @NotNull
     @Size(min=3, max = 3000)
-    private Integer offerId;
     private String message;
     private UserDTO sender;
     private UserDTO receiver;

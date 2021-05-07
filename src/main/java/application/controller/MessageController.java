@@ -123,4 +123,40 @@ public class MessageController {
         messagesService.postMessage(messageDTO);
         return "redirect:/conversation/" + messageDTO.getReceiver().getId() + "/" + offerId;
     }
+
+    @GetMapping(value = "/conversationHost/{companionId}/{offerId}")
+    public ModelAndView getConversationHost(@PathVariable("companionId") Long companionId,
+                                        @PathVariable("offerId") Integer offerId,
+                                        Model model) {
+        Offer offer = offerService.findById(offerId);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.findUserByUserName(auth.getName());
+        if (user != null) {
+            addConversationToModel(companionId, model, offer);
+            model.addAttribute("newMessage", new MessageDTO());
+            modelAndView.setViewName("/conversationHost");
+        }
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/conversationHost/{companionId}/{offerId}")
+    public String postMessageHost(@PathVariable("companionId") Long companionId, @PathVariable("offerId") Integer offerId,
+                              @Valid @ModelAttribute("newMessage") MessageDTO messageDTO, BindingResult bindingResult,
+                              Model model) {
+        if (bindingResult.hasErrors()) {
+            addConversationToModel(companionId, model, offerService.findById(offerId));
+            return "conversationHost";
+        }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        UserDTO userDTO = userToUserDto.convert(user);
+        UserDTO companion = userService.getUserById(companionId);
+        messageDTO.setSender(userDTO);
+        messageDTO.setReceiver(companion);
+        messageDTO.setTime(LocalDateTime.now());
+        messageDTO.setOfferId(offerId);
+        messagesService.postMessage(messageDTO);
+        return "redirect:/conversationHost/" + messageDTO.getReceiver().getId() + "/" + offerId;
+    }
 }

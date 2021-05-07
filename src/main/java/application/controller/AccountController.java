@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -59,10 +60,9 @@ public class AccountController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/delete")
-    public void deleteOffer(HttpServletRequest request) {
-        String id = request.getParameter("id");
-        Offer offer = offerService.findById(Integer.parseInt(id));
+    @PostMapping(value = "/delete/{offerId}")
+    public void deleteOffer(@PathVariable("offerId") Integer offerId) {
+        Offer offer = offerService.findById(offerId);
         offerService.deleteOffer(offer);
         //return "redirect:/visitor/account";
     }
