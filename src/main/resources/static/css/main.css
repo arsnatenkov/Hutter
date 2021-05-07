@@ -2,8 +2,9 @@ body {
     /*background-image: url(/images/pattern.jpg);*/
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
-    word-break: break-all;
+    background-size: cover;;
+    word-break: normal;
+    /*word-break: break-all;*/
     /*filter: alpha(Opacity=50);*/
 }
 
@@ -37,7 +38,7 @@ a {
 .map {
     margin: auto;
     padding: 0;
-    width: 680px;
+    width: 70%;
     height: 410px;
 }
 
@@ -67,10 +68,8 @@ a {
     margin-top: 10px;
 }
 
-
 .content {
-    top: 0;
-    width: 680px;
+    width: 70%;
     height: 440px;
     margin: 40px auto auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -87,7 +86,7 @@ a {
 
 .wrapper {
     top: 15px;
-    width: 680px;
+    width: 70%;
     background: #fff;
     border-radius: 10px;
     position: relative;
@@ -102,10 +101,11 @@ a {
 }
 
 .link-list {
-    width: 680px;
+    width: 70%;
     margin: 40px auto auto;
     border-radius: 10px;
-    padding: 15px 15px 15px 25px;
+    padding-bottom: 25px;
+    /*padding: 15px 15px 15px 25px;*/
 }
 
 .link-list ul li {
@@ -122,17 +122,13 @@ a {
     text-decoration: none;
 }
 
-/*.link-list ul li a:hover {*/
-/*    color: #ffc0cb;*/
-/*}*/
-
 .offer {
     font-size: 1.3em;
     margin-left: 10px;
 }
 
 .offer-pic {
-    width: 40%;
+    width: auto;
     /*height: 100%;*/
     padding: 0 10px 0 0;
 }
@@ -150,7 +146,9 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
 }
+
 table {
     width: 100%;
     cellspacing: 0;
@@ -192,11 +190,12 @@ table {
 .center-div {
     width: 100%;
     margin: auto;
+    word-break: break-all;
     height: 75%;
 }
 
 .offer-wrapper h2 {
-    width: 60%;
+    width: 80%;
     text-align: center;
     margin: auto auto 20px;
 }
@@ -209,7 +208,7 @@ table {
 
 td {
     padding: 15px;
-    word-break: normal;
+    width: 350px;
 }
 
 .chat {
@@ -238,7 +237,7 @@ td {
 }
 
 .scroll::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0px 0 0px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin: 2px;
     background-color: #F5F5F5;
@@ -252,6 +251,62 @@ td {
 
 .scroll::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    -webkit-box-shadow: inset 0px 0 0px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
     background-color: #333;
+}
+
+.offer-search-wrap {
+    width: 70%;
+    margin: 25px auto auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.offer-search {
+    width: 90%;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+.search-form {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.search-form td {
+    /*     height: 100%; */
+    /*     width: 100%; */
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    /*     padding: 0; */
+}
+
+.search-btn {
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0);
+    border: none;
+    box-shadow: none;
+}
+
+.search-form-col{
+    width: 42%;
+}
+
+.cost-borders input {
+    width: 45%;
+    margin: auto;
+    padding: 0;
+}
+
+.flex-h {
+    height: 95%;
+    padding-top: 20px;
+    width: 70%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
 }

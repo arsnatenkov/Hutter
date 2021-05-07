@@ -43,6 +43,10 @@ a {
     -moz-transition: all 0.4s;
 }
 
+/*a:visited {*/
+/*    color: #4169e1;*/
+/*}*/
+
 a:focus {
     outline: none !important;
 }

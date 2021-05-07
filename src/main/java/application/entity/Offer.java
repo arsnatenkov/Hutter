@@ -95,21 +95,20 @@ public class Offer {
         return "<div class=\"btn f-group-btn offer-delete\">" +
                 "<img class=\"invert\" alt=\"delete\" src=\"/images/delete.svg\">" +
                 "</div>";
-//        return "<div class=\"hostUI\"><a href=/edit?id=" + getId() + ">Изменить</a></div>";
+    }
+
+    public String discussBtn() {
+        return "<a href=\"/conversation/" + getHostId() + "/" + getId() + "\">" +
+                "<div class=\"chat-btn\"><div class=\"btn f-group-btn inner-chat-btn\">" +
+                "<img class=\"invert\" alt=\"chat\" src=\"/images/chat.svg\">" +
+                "</div></div></a>";
     }
 
     public String saveBtn() {
-//        btn f-group-btn
-        return "<div id=\"save\" class=\"btn f-group-btn\">" +
+        return "<div id=\"save\" class=\"btn f-group-btn save-btn\">" +
                 "<a href=\"/save\">" +
                 "<img class=\"invert\" alt=\"save\" src=\"/images/save.svg\">" +
-                "</a>" +
-                "</div>";
-//        return "<div id=\"save\" class=\"f-group-btn-wrap\">" +
-//                "<a href=\"/save\" class=\"btn f-group-btn\">" +
-//                "<img class=\"invert\" alt=\"save\" src=\"/images/save.svg\">" +
-//                "</a>" +
-//                "</div>";
+                "</a></div>";
     }
 
     public String longDescription() {
@@ -122,7 +121,7 @@ public class Offer {
         res += icon("plans") + "общая площадь: <span class=\"space\">" + (getTotalArea() == null ? "не указана" : (getTotalArea() + " м²")) + "</span><br/>";
         res += "жилая площадь: " + (getLiving() == null ? "не указана" : (getLiving() + " м²")) + "<br/><br/>";
 
-        res += icon("floor") + "этаж: " + (getFloor()==null?"не указан":getFloor()) + "<br/>";
+        res += icon("floor") + "этаж: " + (getFloor() == null ? "не указан" : getFloor()) + "<br/>";
         res += "высота здания: " + (getFloorMax() == null ? "не указана" : getFloorMax()) + "<br/><br/>";
 
         res += icon("living-room") + "кол-во комнат: " + (getQuantityRoom() == null ? "не указано" : getQuantityRoom()) + "<br/>";
@@ -154,7 +153,7 @@ public class Offer {
         res += icon("plans") + "общая площадь: <span class=\"space\">" +
                 (getTotalArea() == null ? "не указана" : (getTotalArea() + " м²")) + "</span><br/><br/>";
 
-        res += icon("floor") + "этаж: " + (getFloor()==null?"не указан":getFloor()) + "<br/><br/>";
+        res += icon("floor") + "этаж: " + (getFloor() == null ? "не указан" : getFloor()) + "<br/><br/>";
 
         res += icon("living-room") + "кол-во комнат: " + (getQuantityRoom() == null ? "не указано" : getQuantityRoom()) + "<br/><br/>";
 
@@ -182,10 +181,14 @@ public class Offer {
 
     public String guestUI(boolean auth) {
         String title = getAddress() + ", " + getTotalArea() + "м²";
+        String body = longDescription() + "<br/>";
+
         if (auth) {
             title += saveBtn();
+        } else {
+            body += "<hr>" + discussBtn();
         }
-        String body = longDescription() + "<br/>";
+
         return "<h2>" + title + "</h2><hr>" + body + "<br/>";
     }
 

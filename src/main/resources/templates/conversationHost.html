@@ -12,13 +12,14 @@
     </a>
   </div>
   <hr>
-  <div class="force-scroll scroll">
+  <div class="force-scroll scroll conv-wrap">
     <div class="col-md-9 m-l-15 m-r-15">
-
       <div class="msg-display-wrapper" th:each="m : ${messages}">
         <div class="msg-display-header">
           <div class="txt1">
-            <a th:replace="template.html :: messageUser(${m.sender})"></a>
+            <a th:fragment="messageUser(${m.sender})">
+              <span th:text="${m.sender.name}">Ivan Ivanych</span>
+            </a>
           </div>
         </div>
         <div class="msg-display-body">
@@ -66,8 +67,7 @@
   </div>
 </div>
 <br/>
-<div class="name gradient hat">HUTTER</div>
-
+<div th:insert="blocks/hat :: hat"></div>
 <div th:insert="blocks/menu :: menu"></div>
 </body>
 

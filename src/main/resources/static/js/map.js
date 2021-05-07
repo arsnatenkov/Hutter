@@ -44,14 +44,14 @@ function init() {
             if (typeof target.getGeoObjects != 'undefined') {
                 // Событие произошло на кластере.
                 if (type === 'mouseenter') {
-                    target.options.set('preset', 'islands#pinkClusterIcons');
+                    target.options.set('preset', 'islands#blackClusterIcons');
                 } else {
                     target.options.set('preset', 'islands#grayClusterIcons');
                 }
             } else {
                 // Событие произошло на геообъекте.
                 if (type === 'mouseenter') {
-                    target.options.set('preset', 'islands#pinkCircleDotIcon');
+                    target.options.set('preset', 'islands#blackCircleDotIcon');
                 } else {
                     target.options.set('preset', 'islands#grayCircleDotIcon');
                 }

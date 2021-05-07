@@ -2,9 +2,8 @@
 <html lang="en">
 <head th:replace="/blocks/header.html :: header('Объявление')"></head>
 <body class="scroll">
-<div th:utext="${offerDisplay}" class="offer-wrapper content"></div>
-
-<div class="name gradient hat">HUTTER</div>
+<div th:utext="${offerDisplay}" class="offer-wrapper flex-h"></div>
+<div th:insert="blocks/hat :: hat"></div>
 <div th:insert="blocks/menu :: menu"></div>
 </body>
 </html>

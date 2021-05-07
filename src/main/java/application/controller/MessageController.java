@@ -89,7 +89,6 @@ public class MessageController {
                 sb.append(offer.deleteBtn());
                 sb.append(offer.guestUI(true));
                 modelAndView.addObject("myOfferDisplay", sb.toString());
-
                 modelAndView.setViewName("/messages");
             } else {
                 sb.append(offer.guestUI(true));
