@@ -35,13 +35,15 @@
 }
 
 .force-scroll {
-    height: 60%;
+    height: 45%;
 }
 
-.msg-box {
+.msg-box-chat {
     /*position: relative;*/
     /*top: -200px;*/
-    margin-top: 30px;
+    height: 40%;
+    min-height: 300px;
+    margin: 0;
 }
 
 hr {
@@ -53,12 +55,17 @@ hr {
 .content-flex {
     width: 80%;
     /*width: 680px;*/
-    height: 720px;
+    height: 80%;
+    min-height: 500px;
     margin: 40px auto 100px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+.content-flex form {
+    height: 20%;
 }
 
 .msg-display-wrapper {
@@ -99,7 +106,7 @@ hr {
     margin: auto;
     box-shadow: none;
     font-size: 14px;
-    height: 150px;
+    height: 30%;
 }
 
 a.offer {
@@ -138,21 +145,21 @@ a.offer {
     padding-right: 50px;
 }
 
-.msg-hat button{
+.msg-hat button {
     width: 50%;
     float: right;
 }
 
 .up {
-    margin: -40px;
+    margin: 0;
 }
 
-#save{
+#save {
     float: right;
     margin-top: 0;
 }
 
-#edit{
+#edit {
     float: right;
     margin-top: 0;
 }
@@ -191,6 +198,19 @@ a.offer {
 
 .container {
     width: 80%;
+    margin: 10% auto auto;
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.container h2 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.panel-default {
+    width: 80%;
     margin: auto;
-    margin-top: 10%;
 }

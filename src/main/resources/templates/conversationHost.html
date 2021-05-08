@@ -6,70 +6,63 @@
 
 
 <div class="content-flex">
-  <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Conversation with</span>
-    <a class="txt1 heading-chat" th:href="@{'/?host={id}'(id=${companion.id})}">
-      <span th:text="${companion.name}">Имя пользователя</span>
-    </a>
-  </div>
-  <hr>
-  <div class="force-scroll scroll conv-wrap">
-    <div class="col-md-9 m-l-15 m-r-15">
-      <div class="msg-display-wrapper" th:each="m : ${messages}">
-        <div class="msg-display-header">
-          <div class="txt1">
-            <a th:fragment="messageUser(${m.sender})">
-              <span th:text="${m.sender.name}">Ivan Ivanych</span>
-            </a>
-          </div>
-        </div>
-        <div class="msg-display-body">
-          <div class="msg-l time" th:value="${#temporals.format(m.time, 'dd.MM.yyyy')}">06.05.2021</div>
-          <div class="msg-l" th:text="${m.message}">Добрый день!</div>
-        </div>
-      </div>
-
+    <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Conversation with</span>
+        <a class="txt1 heading-chat" th:href="@{'/?host={id}'(id=${companion.id})}">
+            <span th:text="${companion.name}">Имя пользователя</span>
+        </a>
     </div>
-
-  </div>
-  <hr>
-  <div class="msg-box">
-    <!--    <div class="panel panel-default msg-box">-->
-    <div class="up">
-      <form th:object="${newMessage}" method="POST"
-            th:action="@{'/conversationHost/{hostId}/{offerId}'(offerId=${offer.getId()},hostId=${companion.id})}">
-        <table class="msg-hat">
-          <tr>
-            <td class="txt1 msg-head">
-              <!--                     th:text="#{conversation.new}">-->
-              Новое сообщение:
-            </td>
-            <td class="f-group-btn-wrap">
-              <button type="submit" name="submit" class="btn f-group-btn">
-                <img class="invert" alt="send" src="/images/send.svg">
-              </button>
-            </td>
-          </tr>
-        </table>
-        <div class="f-group wrap-input validate-input msg-validate">
-                    <textarea placeholder="Введите текст" autocomplete="off" class="input scroll msg-input" rows="5" id="comment"
+    <hr>
+    <div class="force-scroll scroll conv-wrap">
+        <div class="col-md-9 m-l-15 m-r-15">
+            <div class="msg-display-wrapper" th:each="m : ${messages}">
+                <div class="msg-display-header">
+                    <div class="txt1">
+                        <a th:fragment="messageUser(${m.sender})">
+                            <span th:text="${m.sender.name}">Ivan Ivanych</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="msg-display-body">
+                    <div class="msg-l time" th:value="${#temporals.format(m.time, 'dd.MM.yyyy')}">06.05.2021</div>
+                    <div class="msg-l" th:text="${m.message}">Добрый день!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="msg-box">
+        <div class="up">
+            <form th:object="${newMessage}" method="POST"
+                  th:action="@{'/conversationHost/{hostId}/{offerId}'(offerId=${offer.getId()},hostId=${companion.id})}">
+                <table class="msg-hat">
+                    <tr>
+                        <td class="txt1 msg-head">
+                            Новое сообщение:
+                        </td>
+                        <td class="f-group-btn-wrap">
+                            <button type="submit" name="submit" class="btn f-group-btn">
+                                <img class="invert" alt="send" src="/images/send.svg">
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <div class="f-group wrap-input validate-input msg-validate">
+                    <textarea placeholder="Введите текст" autocomplete="off" class="input scroll msg-input" rows="5"
+                              id="comment"
                               th:field="*{message}"></textarea>
-          <!--                    <span class="focus-input"></span>-->
-          <div th:if="${#fields.hasErrors('message')}" style="margin-bottom: 25px"
-               class="txt1 validation-message">
-            <ul class="validation">
-              <li th:each="err : ${#fields.errors('message')}" th:text="${err}">&nbsp;</li>
-            </ul>
-          </div>
+                    <div th:if="${#fields.hasErrors('message')}" style="margin-bottom: 25px"
+                         class="txt1 validation-message">
+                        <ul class="validation">
+                            <li th:each="err : ${#fields.errors('message')}" th:text="${err}">&nbsp;</li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
         </div>
-
-      </form>
     </div>
-  </div>
 </div>
 <br/>
 <div th:insert="blocks/hat :: hat"></div>
 <div th:insert="blocks/menu :: menu"></div>
 </body>
-
-
 </html>

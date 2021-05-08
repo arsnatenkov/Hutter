@@ -1,19 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-
-
-
 <head th:replace="/blocks/header.html :: header('Объявление') "></head>
 
-
-
-
 <body class="scroll">
-
-<div th:utext="${offerDisplay}" class="offer-wrapper content"></div>
-
-
+<div th:utext="${offerDisplay}" class="offer-wrapper flex-h-chat"></div>
 <div class="content-flex">
     <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Conversation with</span>
         <a class="txt1 heading-chat" th:href="@{'/?host={id}'(id=${companion.id})}">
@@ -23,7 +13,6 @@
     <hr>
     <div class="force-scroll scroll">
         <div class="col-md-9 m-l-15 m-r-15">
-
             <div class="msg-display-wrapper" th:each="m : ${messages}">
                 <div class="msg-display-header">
                     <div class="txt1">
@@ -37,13 +26,10 @@
                     <div class="msg-l" th:text="${m.message}">Добрый день!</div>
                 </div>
             </div>
-
         </div>
-
     </div>
     <hr>
-    <div class="msg-box">
-        <!--    <div class="panel panel-default msg-box">-->
+    <div class="msg-box-chat">
         <div class="up">
             <form th:object="${newMessage}" method="POST"
                   th:action="@{'/conversation/{hostId}/{offerId}'(offerId=${offer.getId()},hostId=${companion.id})}">
@@ -61,9 +47,9 @@
                     </tr>
                 </table>
                 <div class="f-group wrap-input validate-input msg-validate">
-                    <textarea placeholder="Введите текст" autocomplete="off" class="input scroll msg-input" rows="5" id="comment"
+                    <textarea placeholder="Введите текст" autocomplete="off" class="input scroll msg-input" rows="5"
+                              id="comment"
                               th:field="*{message}"></textarea>
-<!--                    <span class="focus-input"></span>-->
                     <div th:if="${#fields.hasErrors('message')}" style="margin-bottom: 25px"
                          class="txt1 validation-message">
                         <ul class="validation">
@@ -71,7 +57,6 @@
                         </ul>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>

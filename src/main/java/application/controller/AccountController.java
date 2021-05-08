@@ -43,21 +43,17 @@ public class AccountController {
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
 
         StringBuilder sb = new StringBuilder();
-        sb.append("<ul>");
         for (Offer offer : offers)
             sb.append("<li class=\"offer-list\">")
                     .append(offer.linkTitle("list-norm-font", "messages"))
                     .append("&nbsp;&nbsp;").append(offer.deleteBtn()).append("</li><br/>");
-        sb.append("</ul>");
         modelAndView.addObject("hostedOffers", sb.toString());
 
         sb = new StringBuilder();
-        sb.append("<ul>");
         for (Favourite favourite : favourites)
             sb.append("<li class=\"offer-list\">").append(offerService.findById(favourite.getOfferId())
                     .linkTitle("list-norm-font", "conversation"))
                     .append("</li><br/>");
-        sb.append("</ul>");
         modelAndView.addObject("favouriteOffers", sb.toString());
 
         modelAndView.setViewName("/visitor/account");
