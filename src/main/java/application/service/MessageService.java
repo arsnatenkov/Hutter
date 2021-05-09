@@ -25,8 +25,8 @@ public class MessageService {
     private final MessageDtoToMessage messageDtoToMessage;
 
     @Transactional(readOnly = true)
-    public Collection<MessageDTO> findAllRecentMessages(Long id) {
-        Iterable<Message> all = messageRepository.findAllRecentMessages(id);
+    public Collection<MessageDTO> findAllRecentMessages(Long id, Integer offerId) {
+        Iterable<Message> all = messageRepository.findAllRecentMessages(id, offerId);
         Map<User, MessageDTO> map = new HashMap<>();
         all.forEach(m -> {
             MessageDTO messageDTO = messageToMessageDto.convert(m, id);

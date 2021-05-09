@@ -63,17 +63,14 @@ public class MessageController {
         model.addAttribute("offer", offer);
     }
 
-    @GetMapping(value = "/messages")
-    public String getMessages(Model model) {
+    @GetMapping(value = "/messages/{offerId}")
+    public String getMessages(Model model, @PathVariable("offerId") Integer offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         UserDTO userDTO = userToUserDto.convert(user);
         Collection<MessageDTO> recentMessages;
 
-        if (messagesService.findAllRecentMessages(userDTO.getId()) == null)
-            messagesService.saveMessage(new Message());
-
-        recentMessages = messagesService.findAllRecentMessages(userDTO.getId());
+        recentMessages = messagesService.findAllRecentMessages(userDTO.getId(), offerId);
         model.addAttribute("recentMessages", recentMessages);
         return "messages";
     }
@@ -90,7 +87,7 @@ public class MessageController {
 
         if (user != null) {
             if (user.getId().equals(offer.getHostId())) {
-                sb.append(offer.deleteBtn());
+                //sb.append(offer.deleteBtn());
                 sb.append(offer.guestUI(true));
                 modelAndView.addObject("myOfferDisplay", sb.toString());
                 modelAndView.setViewName("/messages");

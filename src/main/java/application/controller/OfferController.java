@@ -41,10 +41,10 @@ public class OfferController {
         StringBuilder sb = new StringBuilder();
         User user = userService.findUserByUserName(auth.getName());
 
-        if (user != null) {
-            if (user.getActive() && user.getId().equals(offer.getHostId()))
-                sb.append(offer.deleteBtn());
-        }
+//        if (user != null) {
+//            if (user.getActive() && user.getId().equals(offer.getHostId()))
+//                //sb.append(offer.deleteBtn());
+//        }
         sb.append(offer.guestUI(false));
         modelAndView.addObject("offerDisplay", sb.toString());
 
