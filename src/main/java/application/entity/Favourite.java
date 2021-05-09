@@ -17,8 +17,13 @@ public class Favourite {
     private Long id;
 
     @Column(name = "offer_id")
-    private int offerId;
+    private Integer offerId;
 
     @Column(name = "user_id")
     private Long userId;
+
+    public Favourite(Long userId, Integer offerId){
+        this.offerId = offerId;
+        this.userId = userId;
+    }
 }
