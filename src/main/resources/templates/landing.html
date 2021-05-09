@@ -86,7 +86,7 @@
                             <img class="offer-icons" src="/images/bathroom.svg" alt="bathroom">
                             <span th:text="'&nbsp;кол-во санузлов: ' + ${o.quantityToilet}"></span>
                             <br/><br/>
-                            <a href="/messages" class="login-form-btn chat">Подробнее</a>
+                            <a th:href="@{'/offer?id=' + ${o.id}}" class="login-form-btn chat">Подробнее</a>
                         </td>
                     </tr>
                 </table>
@@ -94,7 +94,6 @@
         </li>
     </ul>
 </div>
-
 
 <div class="name gradient hat">HUTTER</div>
 <div th:insert="blocks/menu :: menu"></div>

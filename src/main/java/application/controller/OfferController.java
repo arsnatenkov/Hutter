@@ -41,6 +41,7 @@ public class OfferController {
         ModelAndView modelAndView = new ModelAndView();
 
         User user = userService.findUserByUserName(auth.getName());
+        model.addAttribute("auth", user != null);
         model.addAttribute("host", user != null && user.getId().equals(offer.getHostId()));
         model.addAttribute("offerDisplay", offerService.findById(Integer.parseInt(id)));
         modelAndView.setViewName("offer");

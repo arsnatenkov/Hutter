@@ -5,25 +5,29 @@
 <body class="scroll">
 
 <div class="content-flex">
-    <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Conversation with</span>
+    <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Переписка с </span>
         <a class="txt1 heading-chat" href="#">
-            <span th:text="${companion.name}">Имя пользователя</span>
+            <span th:text="${companion.name}"></span>
         </a>
     </div>
     <hr>
     <div class="force-scroll scroll conv-wrap">
         <div class="col-md-9 m-l-15 m-r-15">
             <div class="msg-display-wrapper" th:each="m : ${messages}">
-                <div class="msg-display-header">
-                    <div class="txt1">
-                        <a th:fragment="messageUser(${m.sender})">
-                            <span th:text="${m.sender.name}"></span>
-                        </a>
+                <div class="row-maker">
+                    <div th:classappend="${m.sender.id==companion.id} ? 'left' : 'right'">
+                        <div class="msg-display-header">
+                            <div class="txt1">
+                                <a th:fragment="messageUser(${m.sender})">
+                                    <span th:text="${m.sender.name}"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="msg-display-body">
+                            <div class="msg-l time" th:text="${{m.time}}"></div>
+                            <div class="msg-l" th:text="${m.message}"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="msg-display-body">
-                    <div class="msg-l time" th:text="${{m.time}}"></div>
-                    <div class="msg-l" th:text="${m.message}">Добрый день!</div>
                 </div>
             </div>
         </div>
@@ -31,7 +35,7 @@
     <hr>
     <div class="msg-box">
         <div class="up">
-            <form th:object="${newMessage}" method="POST"
+            <form th:object="${newMessage}" method="post"
                   th:action="@{'/conversationHost/{hostId}/{offerId}'(offerId=${offer.getId()},hostId=${companion.id})}">
                 <table class="msg-hat">
                     <tr>
@@ -60,7 +64,6 @@
         </div>
     </div>
 </div>
-<br/>
 <div th:insert="blocks/hat :: hat"></div>
 <div th:insert="blocks/menu :: menu"></div>
 </body>

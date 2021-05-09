@@ -50,7 +50,7 @@ hr {
     width: 80%;
     height: 80%;
     min-height: 500px;
-    margin: 40px auto 100px;
+    margin: 70px auto 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding-top: 15px;
@@ -74,7 +74,6 @@ hr {
 .msg-display-body {
     border-radius: 10px;
     padding: 5px 15px;
-    width: 45%;
     background: rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
 }
@@ -163,7 +162,7 @@ a.offer {
 }
 
 .chat-btn {
-    margin: auto auto 70px;
+    margin: auto auto 0;
     height: 70px;
     width: 20%;
 }
@@ -198,4 +197,18 @@ a.offer {
 .panel-default {
     width: 80%;
     margin: auto;
+}
+
+.row-maker{
+    width: 100%;
+}
+
+.left {
+    width: 45%;
+    margin: auto auto auto 0;
+}
+
+.right {
+    width: 45%;
+    margin: auto 0 auto auto;
 }

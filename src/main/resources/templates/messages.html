@@ -2,29 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/blocks/header.html :: header('Переписки')"></head>
 
-<body th:with="sessionUser=${session.user}">
+<body class="scroll" th:with="sessionUser=${session.user}">
 <div class="container">
     <h2 th:text="#{messages.messages}">Переписки</h2>
     <hr>
     <div class="panel panel-default" th:each="m : ${recentMessages}">
-        <div class="panel-heading">
-            <div class="card">
-                <a class="txt1 " th:fragment="messageUser(${m.sender})">
-                    <span th:text="${m.sender.name}">Ivan Ivanych</span>
-                </a>
-                <span class="txt1"> пишет к </span>
-                <a class="txt1" th:fragment="messageUser(${m.receiver})">
-                    <span th:text="${m.receiver.name}">Ivan Ivanych</span>
-                </a>
-                <span class="txt1">:</span>
+        <a th:href="@{'/conversationHost/' + ${m.companionId} + '/' + ${m.offerId}}">
+            <div class="panel-heading">
+                <div class="card">
+                    <span class="txt1 " th:fragment="messageUser(${m.sender})">
+                        <span th:text="${m.sender.name}"></span>
+                    </span>
+                    <span class="txt1"> пишет к </span>
+                    <span class="txt1" th:fragment="messageUser(${m.receiver})">
+                        <span th:text="${m.receiver.name}"></span>
+                    </span>
+                    <span class="txt1">:</span>
+                </div>
             </div>
-        </div>
-        <div class="panel-body">
-            <a th:href="@{'/conversationHost/' + ${m.companionId} + '/' + ${m.offerId}}"
-               th:text="${m.message}">Привет!</a>
-        </div>
+            <div class="panel-body">
+                <span th:text="${m.message}"></span>
+            </div>
+        </a>
     </div>
-
     <hr>
 </div>
 <div th:insert="blocks/hat :: hat"></div>

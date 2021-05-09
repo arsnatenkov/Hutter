@@ -62,6 +62,8 @@ public class MessageController {
         Collection<MessageDTO> recentMessages;
 
         recentMessages = messagesService.findAllRecentMessages(userDTO.getId(), offerId);
+        model.addAttribute("host", user != null
+                && user.getId().equals(offerService.findById(offerId).getHostId()));
         model.addAttribute("recentMessages", recentMessages);
         return "messages";
     }
@@ -79,18 +81,18 @@ public class MessageController {
 
         if (user != null) {
             if (user.getId().equals(offer.getHostId())) {
-//                sb.append(offer.deleteBtn());
-                sb.append(offer.guestUI(true));
-                modelAndView.addObject("myOfferDisplay", sb.toString());
+//                sb.append(offer.guestUI(true));
+//                modelAndView.addObject("myOfferDisplay", sb.toString());
                 modelAndView.setViewName("/messages");
             } else {
-                sb.append(offer.guestUI(true));
-                modelAndView.addObject("offerDisplay", sb.toString());
+//                sb.append(offer.guestUI(true));
+//                modelAndView.addObject("offerDisplay", sb.toString());
                 addConversationToModel(companionId, model, offer);
                 model.addAttribute("newMessage", new MessageDTO());
                 modelAndView.setViewName("/conversation");
             }
         }
+        model.addAttribute("offerDisplay", offer);
 
         return modelAndView;
     }

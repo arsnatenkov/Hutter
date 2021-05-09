@@ -3,12 +3,9 @@
 <head th:replace="/blocks/header.html :: header('Объявление') "></head>
 
 <body class="scroll">
-<!--<div th:utext="${offerDisplay}" class="offer-wrapper flex-h-chat"></div>-->
 <div th:with="o=${offer}" class="offer-wrapper flex-h-chat">
     <h2 th:text="${o.address} + ', ' + ${o.totalArea} + ' м²'"></h2>
-    <div id="save" class="btn f-group-btn save-btn">
-        <a href="/save"><img class="invert" alt="save" src="/images/save.svg"></a>
-    </div>
+    <div th:insert="blocks/buttons :: save"></div>
     <hr>
     <div class="center-div scroll">
         <div class="inner-div">
@@ -45,14 +42,12 @@
                     <br/>
                 </div>
                 <br/>
-
                 <img class="offer-icons" src="/images/document.svg" alt="document">
                 <span th:text="'&nbsp;описание: ' + ${o.description}"></span>
                 <br/><br/>
             </div>
         </div>
     </div>
-
     <br/><br/>
 </div>
 
@@ -74,7 +69,7 @@
                     </div>
                 </div>
                 <div class="msg-display-body">
-                    <div class="msg-l time" th:text="${m.time}">01.05.2021</div>
+                    <div class="msg-l time" th:text="${{m.time}}"></div>
                     <div class="msg-l" th:text="${m.message}"></div>
                 </div>
             </div>
@@ -88,7 +83,6 @@
                 <table class="msg-hat">
                     <tr>
                         <td class="txt1 msg-head">
-                            <!--                     th:text="#{conversation.new}">-->
                             Новое сообщение:
                         </td>
                         <td class="f-group-btn-wrap">
