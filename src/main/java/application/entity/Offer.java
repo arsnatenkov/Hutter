@@ -91,14 +91,15 @@ public class Offer {
         return "<a class=\"offer " + aClass + "\" id=\"" + getId() + "\" href=\"/error" + "</a>";
     }
 
-    public String deleteBtn() {
-        return
-                "<form action=\"/delete/" + getId() + "\" method=\"post\">" +
-                        "<button type=\"submit\">" +
-                        "<div class=\"btn f-group-btn offer-delete\">" +
-                        "<img class=\"invert\" alt=\"delete\" src=\"/images/delete.svg\">" +
-                        "</div></button></form>";
-    }
+//    public String deleteBtn() {
+//        return "<div class=\"btn f-group-btn offer-delete\">" +
+//                "<form action=\"/delete/" + getId() + "\" method=\"post\">" +
+//                "<button type=\"submit\">"+
+//                "<img class=\"invert\" alt=\"delete\" src=\"/images/delete.svg\">" +
+//                "</button>"+
+//                "</form>"+
+//                "</div>";
+//    }
 
     public String discussBtn() {
         return "<a href=\"/conversation/" + getHostId() + "/" + getId() + "\">" +
@@ -108,13 +109,10 @@ public class Offer {
     }
 
     public String saveBtn() {
-        return "<form th:action=\"@{/save/" + getId() + "}\" method=\"post\">" +
-                "<button type=\"submit\">" +
-                "<div id=\"save\" class=\"btn f-group-btn save-btn\">" +
-//                "<a href=\"/save\">" +
+        return "<div id=\"save\" class=\"btn f-group-btn save-btn\">" +
+                "<a href=\"/save\">" +
                 "<img class=\"invert\" alt=\"save\" src=\"/images/save.svg\">" +
-//                "</a>" +
-                "</div></button></form>";
+                "</a></div>";
     }
 
     public String longDescription() {
