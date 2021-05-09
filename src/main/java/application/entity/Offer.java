@@ -23,9 +23,7 @@ public class Offer {
     private Long totalArea;
     @Column(name = "living_space")
     private Long living;
-    @Column(name = "room_area")
-    private String roomArea;
-    @Column(name = "quantity_of_room") //TODO: roomsNumber
+    @Column(name = "quantity_of_room")
     private Integer quantityRoom;
     @Column(name = "cost")
     private Long cost;
@@ -62,7 +60,6 @@ public class Offer {
         return getId() + ":"
                 + getTotalArea() + ":"
                 + getLiving() + ":"
-                + getRoomArea() + ":"
                 + getQuantityRoom() + ":"
                 + getCost() + ":"
                 + getQuantityToilet() + ":"
@@ -128,8 +125,8 @@ public class Offer {
         res += icon("floor") + "этаж: " + (getFloor() == null ? "не указан" : getFloor()) + "<br/>";
         res += "высота здания: " + (getFloorMax() == null ? "не указана" : getFloorMax()) + "<br/><br/>";
 
-        res += icon("living-room") + "кол-во комнат: " + (getQuantityRoom() == null ? "не указано" : getQuantityRoom()) + "<br/>";
-        res += "площади комнат: " + (getRoomArea() == null ? "не указана" : (getRoomArea() + " м²")) + "<br/><br/>";
+//        res += icon("living-room") + "кол-во комнат: " + (getQuantityRoom() == null ? "не указано" : getQuantityRoom()) + "<br/>";
+//        res += "площади комнат: " + (getRoomArea() == null ? "не указана" : (getRoomArea() + " м²")) + "<br/><br/>";
 
         res += icon("bathroom") + "кол-во санузлов: " + (getQuantityToilet() == null ? "не указано" : getQuantityToilet()) + "<br/>";
         res += "типы санузлов: " + (getType() == null ? "не указана" : getType()) + "<br/><br/>";

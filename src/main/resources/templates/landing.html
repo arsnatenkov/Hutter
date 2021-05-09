@@ -57,8 +57,44 @@
 
 
 <div class="link-list">
-    <ul th:utext="${offerDescriptions}" id="panel-group"></ul>
+    <ul id="panel-group" th:each="o : ${offerDescriptions}">
+        <li>
+            <div class="link-list">
+                <table>
+                    <tr>
+                        <td class="offer-pic">
+                            <div>
+                                <img th:src="'/images/offer/offer' + ${o.id} + '.jpg'"
+                                     alt="Фото объявления"/>
+                            </div>
+                        </td>
+                        <td>
+                            <a class="offer " th:id="${o.id}" th:href="@{'/offer?id=' + ${o.id}}"
+                               th:text="${o.address}"></a><br/>
+                            <img class="offer-icons" src="/images/ruble.svg" alt="ruble">
+                            <span th:text="'&nbsp;цена: ' + ${o.cost} + ' ₽'"></span>
+                            <br/><br/>
+                            <img class="offer-icons" src="/images/plans.svg" alt="plans">
+                            <span th:text="'&nbsp;общая площадь: ' + ${o.totalArea} + ' м²'"></span>
+                            <br/><br/>
+                            <img class="offer-icons" src="/images/floor.svg" alt="floor">
+                            <span th:text="'&nbsp;этаж: ' + ${o.floor} + ' из ' + ${o.floorMax}"></span>
+                            <br/><br/>
+                            <img class="offer-icons" src="/images/living-room.svg" alt="living-room">
+                            <span th:text="'&nbsp;кол-во комнат: ' + ${o.quantityRoom}"></span>
+                            <br/><br/>
+                            <img class="offer-icons" src="/images/bathroom.svg" alt="bathroom">
+                            <span th:text="'&nbsp;кол-во санузлов: ' + ${o.quantityToilet}"></span>
+                            <br/><br/>
+                            <a href="/messages" class="login-form-btn chat">Подробнее</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </li>
+    </ul>
 </div>
+
 
 <div class="name gradient hat">HUTTER</div>
 <div th:insert="blocks/menu :: menu"></div>

@@ -41,9 +41,8 @@ public class LoginController {
         User userExists1 = userService.findUserByUserName(user.getUserName());
         User userExists2 = userService.findUserByEmail(user.getEmail());
         if (userExists1 != null || userExists2 != null) {
-            bindingResult
-                    .rejectValue("userName", "error.user",
-                            "There is already a user registered with the user name provided");
+            bindingResult.rejectValue("userName", "error.user",
+                    "There is already a user registered with the user name provided");
         }
 
         if (!bindingResult.hasErrors()) {
@@ -54,6 +53,4 @@ public class LoginController {
         modelAndView.setViewName("registration");
         return modelAndView;
     }
-
 }
-

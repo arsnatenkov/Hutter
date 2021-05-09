@@ -1,18 +1,14 @@
 package application.controller;
 
 import application.entity.Offer;
-import application.entity.User;
 import application.service.OfferService;
 import application.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
+import org.springframework.ui.Model;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,22 +22,22 @@ public class LandingController {
 
     //TODO добавить фильтры
     @GetMapping(value = "/")
-    public ModelAndView landing() {
+    public ModelAndView landing(Model model) {
         ModelAndView modelAndView = new ModelAndView();
-        List<Offer> offers = offerService.findAll();
-        StringBuilder sb = new StringBuilder();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
-        for (Offer offer : offers) {
-            if (user != null) {
-                sb.append(wrap(offer, offer.getHostId().equals(user.getId()) ?
-                        "messages" : "conversation"));
-            } else {
-                sb.append(wrap(offer, "offer"));
-            }
-        }
+//        List<Offer> offers = offerService.findAll();
+//        StringBuilder sb = new StringBuilder();
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        User user = userService.findUserByUserName(auth.getName());
+//        for (Offer offer : offers) {
+//            if (user != null) {
+//                sb.append(wrap(offer, offer.getHostId().equals(user.getId()) ? "messages" : "conversation"));
+//            } else {
+//                sb.append(wrap(offer, "offer"));
+//            }
+//        }
+//        modelAndView.addObject("offerDescriptions", sb.toString());
 
-        modelAndView.addObject("offerDescriptions", sb.toString());
+        model.addAttribute("offerDescriptions", offerService.findAll());
         modelAndView.setViewName("landing");
         return modelAndView;
     }

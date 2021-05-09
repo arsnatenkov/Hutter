@@ -4,10 +4,9 @@
 <head th:replace="/blocks/header.html :: header('Объявление') "></head>
 <body class="scroll">
 
-
 <div class="content-flex">
     <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Conversation with</span>
-        <a class="txt1 heading-chat" th:href="@{'/?host={id}'(id=${companion.id})}">
+        <a class="txt1 heading-chat" href="#">
             <span th:text="${companion.name}">Имя пользователя</span>
         </a>
     </div>
@@ -23,7 +22,10 @@
                     </div>
                 </div>
                 <div class="msg-display-body">
-                    <div class="msg-l time" th:value="${#temporals.format(m.time, 'dd.MM.yyyy')}">06.05.2021</div>
+                    <div class="msg-l time" th:text="${{m.time}}"></div>
+<!--                    <div class="msg-l time" th:text="${#dates.format(m.time, 'dd.MM.yyyy')}"></div>-->
+<!--                    <div class="msg-l time" th:text="${m.time}">01.05.2021</div>-->
+<!--                    <div class="msg-l time" th:value="${#temporals.format(m.time, 'dd.MM.yyyy')}">06.05.2021</div>-->
                     <div class="msg-l" th:text="${m.message}">Добрый день!</div>
                 </div>
             </div>
