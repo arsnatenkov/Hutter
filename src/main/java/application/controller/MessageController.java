@@ -4,6 +4,7 @@ import application.converter.UserDtoToUser;
 import application.converter.UserToUserDto;
 import application.dto.MessageDTO;
 import application.dto.UserDTO;
+import application.entity.Favourite;
 import application.entity.Message;
 import application.entity.Offer;
 import application.entity.User;
@@ -21,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -47,15 +49,17 @@ public class MessageController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         UserDTO userDTO = userToUserDto.convert(user);
-
-        if (messagesService.findConversation(userDTO.getId(), hostId, offer.getId()) == null) {
-            messagesService.saveMessage(
-                    new Message(user, userDtoToUser.convert(userService.getUserById(hostId))));
+        UserDTO companion = userService.getUserById(hostId);
+        List<MessageDTO> messages;
+        if (messagesService.findConversation(userDTO.getId(), hostId, offer.getId()) != null) {
+            messages = messagesService.findConversation(userDTO.getId(), hostId, offer.getId());
+        } else {
+            messagesService.saveMessage(new Message(user, userDtoToUser.convert(userService.getUserById(hostId))));
+            messages = messagesService.findConversation(user.getId(), hostId, offer.getId());
         }
 
-        model.addAttribute("messages",
-                messagesService.findConversation(user.getId(), hostId, offer.getId()));
-        model.addAttribute("companion", userService.getUserById(hostId));
+        model.addAttribute("messages", messages);
+        model.addAttribute("companion", companion);
         model.addAttribute("offer", offer);
     }
 
@@ -64,11 +68,13 @@ public class MessageController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         UserDTO userDTO = userToUserDto.convert(user);
+        Collection<MessageDTO> recentMessages;
 
         if (messagesService.findAllRecentMessages(userDTO.getId()) == null)
             messagesService.saveMessage(new Message());
 
-        model.addAttribute("recentMessages", messagesService.findAllRecentMessages(userDTO.getId()));
+        recentMessages = messagesService.findAllRecentMessages(userDTO.getId());
+        model.addAttribute("recentMessages", recentMessages);
         return "messages";
     }
 
@@ -76,33 +82,27 @@ public class MessageController {
     public ModelAndView getConversation(@PathVariable("companionId") Long companionId,
                                         @PathVariable("offerId") Integer offerId,
                                         Model model) {
-
         Offer offer = offerService.findById(offerId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
-        User user = userService.findUserByUserName(auth.getName());
         StringBuilder sb = new StringBuilder();
-        Boolean hosted = user != null && user.getId().equals(offer.getHostId());
+        User user = userService.findUserByUserName(auth.getName());
 
         if (user != null) {
-            if (hosted) {
-//                sb.append(offer.deleteBtn());
-//                sb.append(offer.guestUI(true));
-//                modelAndView.addObject("myOfferDisplay", sb.toString());
+            if (user.getId().equals(offer.getHostId())) {
+                sb.append(offer.deleteBtn());
+                sb.append(offer.guestUI(true));
+                modelAndView.addObject("myOfferDisplay", sb.toString());
                 modelAndView.setViewName("/messages");
             } else {
-//                sb.append(offer.guestUI(true));
-//                modelAndView.addObject("offerDisplay", sb.toString());
+                sb.append(offer.guestUI(true));
+                modelAndView.addObject("offerDisplay", sb.toString());
                 addConversationToModel(companionId, model, offer);
-                model.addAttribute("offer", offer);
                 model.addAttribute("newMessage", new MessageDTO());
                 modelAndView.setViewName("/conversation");
             }
         }
 
-//        model.addAttribute("hosted", hosted);
-//        model.addAttribute("host", "");
-//        model.addAttribute("visit", "");
         return modelAndView;
     }
 
@@ -112,7 +112,6 @@ public class MessageController {
                               @Valid @ModelAttribute("newMessage") MessageDTO messageDTO,
                               BindingResult bindingResult,
                               Model model) {
-
         if (bindingResult.hasErrors()) {
             addConversationToModel(companionId, model, offerService.findById(offerId));
             return "conversation";
@@ -126,12 +125,10 @@ public class MessageController {
     public ModelAndView getConversationHost(@PathVariable("companionId") Long companionId,
                                             @PathVariable("offerId") Integer offerId,
                                             Model model) {
-
         Offer offer = offerService.findById(offerId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.findUserByUserName(auth.getName());
-
         if (user != null) {
             addConversationToModel(companionId, model, offer);
             model.addAttribute("newMessage", new MessageDTO());
@@ -146,12 +143,10 @@ public class MessageController {
                                   @Valid @ModelAttribute("newMessage") MessageDTO messageDTO,
                                   BindingResult bindingResult,
                                   Model model) {
-
         if (bindingResult.hasErrors()) {
             addConversationToModel(companionId, model, offerService.findById(offerId));
             return "conversationHost";
         }
-
         messageDTOCustom(messageDTO, companionId, offerId);
         return "redirect:/conversationHost/" + messageDTO.getReceiver().getId() + "/" + offerId;
     }

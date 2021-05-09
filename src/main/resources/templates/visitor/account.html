@@ -42,7 +42,7 @@
         <ul th:each="h : ${hostedOffers}">
             <li class="offer-list">
                 <a class="offer list-norm-font" th:id="${h.id}"
-                   href="/conversation" th:text="${h.address}"></a>
+                   th:href="'/messages/' + ${h.id}" th:text="${h.address}"></a>
 
                 <form class="offer-delete" th:action="@{'/delete/' + ${h.id}}" method="get">
                     <div class="btn f-group-btn">
