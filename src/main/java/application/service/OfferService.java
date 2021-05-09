@@ -32,6 +32,9 @@ public class OfferService {
     public List<Offer> findByCostBetween(Long low, Long high) {
         return offerRepository.findByCostBetween(low, high);
     }
+    public List<Offer> findByQuantityRoom(Integer quantityRoom){
+        return offerRepository.findByQuantityRoom(quantityRoom);
+    }
 
     public List<Offer> findAll() {
         return offerRepository.findAll();

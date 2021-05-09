@@ -43,7 +43,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/conversation").hasAuthority("VISITOR")
                 .antMatchers("/conversationHost").hasAuthority("VISITOR")
                 .antMatchers("/create").hasAuthority("VISITOR")
-                .antMatchers("/delete").hasAuthority("VISITOR")
+                //.antMatchers("/delete").hasAuthority("VISITOR")
                 .anyRequest()
                 .authenticated()
                 .and().csrf().disable()

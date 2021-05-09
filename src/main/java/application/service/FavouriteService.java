@@ -26,4 +26,8 @@ public class FavouriteService {
     public void deleteFavourite(Favourite favourite){
         favouriteRepository.delete(favourite);
     }
+
+    public void saveFavourite(Favourite favourite){
+        favouriteRepository.save(favourite);
+    }
 }

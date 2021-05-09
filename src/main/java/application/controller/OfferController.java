@@ -1,7 +1,9 @@
 package application.controller;
 
+import application.entity.Favourite;
 import application.entity.Offer;
 import application.entity.User;
+import application.service.FavouriteService;
 import application.service.OfferService;
 import application.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,8 @@ public class OfferController {
     OfferService offerService;
     @Autowired
     UserService userService;
+    @Autowired
+    FavouriteService favouriteService;
 
 
 
@@ -81,6 +85,14 @@ public class OfferController {
 
         modelAndView.setViewName("create");
         return "redirect:/visitor/account";
+    }
+
+    @PostMapping(value = "/save/{offerId}")
+    public String saveOffer(@PathVariable("offerId") Integer offerId){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        favouriteService.saveFavourite(new Favourite(user.getId(), offerId));
+        return "redirect:/offer/" + offerId;
     }
 
 
