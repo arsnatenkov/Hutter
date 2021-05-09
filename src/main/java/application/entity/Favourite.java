@@ -22,8 +22,12 @@ public class Favourite {
     @Column(name = "user_id")
     private Long userId;
 
-    public Favourite(Long userId, Integer offerId){
+    @Column(name = "address")
+    public String address;
+
+    public Favourite(Long userId, Integer offerId, String address){
         this.offerId = offerId;
         this.userId = userId;
+        this.address = address;
     }
 }

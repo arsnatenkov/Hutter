@@ -13,13 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -36,42 +34,18 @@ public class AccountController {
     private MessageService messageService;
 
     @GetMapping(value = "/visitor/account")
-    public ModelAndView account() {
+    public ModelAndView account(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        List<Offer> offers = offerService.findByHostId(user.getId());
-        List<Favourite> favourites = favouriteService.findByUserId(user.getId());
-        StringBuilder sb;
-        if (offers.isEmpty()) {
-            modelAndView.addObject("hostedOffers",
-                    "Ваши объявления будут тут.");
-        } else {
-            sb = new StringBuilder();
-            for (Offer offer : offers)
-                sb.append("<li class=\"offer-list\">")
-                        .append(offer.linkTitle("list-norm-font", "messages"))
-                        .append("&nbsp;&nbsp;").append(offer.deleteBtn()).append("</li><br/>");
-            modelAndView.addObject("hostedOffers", sb.toString());
-        }
 
-        if (favourites.isEmpty()) {
-            modelAndView.addObject("favouriteOffers",
-                    "Избранные объявления будут тут.");
-        } else {
-            sb = new StringBuilder();
-            for (Favourite favourite : favourites)
-                sb.append("<li class=\"offer-list\">").append(offerService.findById(favourite.getOfferId())
-                        .linkTitle("list-norm-font", "conversation"))
-                        .append("</li><br/>");
-            modelAndView.addObject("favouriteOffers", sb.toString());
-        }
-
+        model.addAttribute("hostedOffers", offerService.findByHostId(user.getId()));
+        model.addAttribute("favouriteOffers", favouriteService.findByUserId(user.getId()));
         modelAndView.setViewName("/visitor/account");
         return modelAndView;
     }
 
-    @DeleteMapping(value = "/delete/{offerId}")
+    @GetMapping(value = "/delete/{offerId}")
     public String deleteOffer(@PathVariable("offerId") Integer offerId) {
         Offer offer = offerService.findById(offerId);
         List<Message> messages = messageService.findByOfferId(offer.getId());
@@ -86,5 +60,4 @@ public class AccountController {
 
         return "redirect:/visitor/account";
     }
-
 }

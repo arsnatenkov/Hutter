@@ -1,17 +1,13 @@
-/*-------------------------------------------------------------------*/
-
 .invert {
     -webkit-filter: invert(100%);
     filter: invert(100%);
 }
 
 .f-group-btn-wrap {
-    /*float: right;*/
     width: 60px;
 }
 
 .f-group-btn {
-    /*float: right;*/
     margin-top: -10px;
     margin-bottom: 10px;
     height: 40px;
@@ -21,7 +17,7 @@
 
 .f-group-btn:hover {
     background-color: rgba(0, 0, 0, 0);
-    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.5) inset;
+    box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.5) inset;
 }
 
 .f-group-btn:hover img {
@@ -39,8 +35,6 @@
 }
 
 .msg-box-chat {
-    /*position: relative;*/
-    /*top: -200px;*/
     height: 40%;
     min-height: 300px;
     margin: 0;
@@ -54,7 +48,6 @@ hr {
 
 .content-flex {
     width: 80%;
-    /*width: 680px;*/
     height: 80%;
     min-height: 500px;
     margin: 40px auto 100px;
@@ -86,15 +79,8 @@ hr {
     margin-bottom: 15px;
 }
 
-/*.f-group {*/
-/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
-/*}*/
-
 .msg-head {
     width: 150px;
-    /*margin: 20px auto auto 50px;*/
-    /*margin-left: 50px;*/
-    /*margin-bottom: 20px;*/
 }
 
 .msg-input {
@@ -126,7 +112,7 @@ a.offer {
 .msg-right {
     background: red;
     float: right;
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 .msg-hat {
@@ -139,7 +125,6 @@ a.offer {
 .msg-hat td {
     height: 50px;
     margin: auto;
-    /*     margin-right: 50px; */
     width: 20%;
     padding-left: 50px;
     padding-right: 50px;

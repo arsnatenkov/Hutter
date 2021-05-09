@@ -92,13 +92,12 @@ public class Offer {
     }
 
     public String deleteBtn() {
-        return "<div class=\"btn f-group-btn offer-delete\">" +
+        return
                 "<form action=\"/delete/" + getId() + "\" method=\"post\">" +
-                "<button type=\"submit\">"+
-                "<img class=\"invert\" alt=\"delete\" src=\"/images/delete.svg\">" +
-                "</button>"+
-                "</form>"+
-                "</div>";
+                        "<button type=\"submit\">" +
+                        "<div class=\"btn f-group-btn offer-delete\">" +
+                        "<img class=\"invert\" alt=\"delete\" src=\"/images/delete.svg\">" +
+                        "</div></button></form>";
     }
 
     public String discussBtn() {
@@ -109,10 +108,13 @@ public class Offer {
     }
 
     public String saveBtn() {
-        return "<div id=\"save\" class=\"btn f-group-btn save-btn\">" +
-                "<a href=\"/save\">" +
+        return "<form th:action=\"@{/save/" + getId() + "}\" method=\"post\">" +
+                "<button type=\"submit\">" +
+                "<div id=\"save\" class=\"btn f-group-btn save-btn\">" +
+//                "<a href=\"/save\">" +
                 "<img class=\"invert\" alt=\"save\" src=\"/images/save.svg\">" +
-                "</a></div>";
+//                "</a>" +
+                "</div></button></form>";
     }
 
     public String longDescription() {

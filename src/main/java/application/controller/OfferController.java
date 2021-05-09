@@ -32,8 +32,6 @@ public class OfferController {
     @Autowired
     FavouriteService favouriteService;
 
-
-
     @GetMapping(value = "/offer")
     public ModelAndView offer(HttpServletRequest request) {
         String id = request.getParameter("id");
@@ -87,14 +85,12 @@ public class OfferController {
         return "redirect:/visitor/account";
     }
 
-    @PostMapping(value = "/save/{offerId}")
-    public String saveOffer(@PathVariable("offerId") Integer offerId){
+    @GetMapping(value = "/save/{offerId}")
+    public String saveOffer(@PathVariable("offerId") Integer offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        favouriteService.saveFavourite(new Favourite(user.getId(), offerId));
+        favouriteService.saveFavourite(new Favourite(user.getId(), offerId,
+                offerService.findById(offerId).getAddress()));
         return "redirect:/offer/" + offerId;
     }
-
-
-
 }

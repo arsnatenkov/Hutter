@@ -39,14 +39,31 @@
     <div id="HostedOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Ваши объявления</h3>
-        <ul th:utext="${hostedOffers}">
+        <ul th:each="h : ${hostedOffers}">
+            <li class="offer-list">
+                <a class="offer list-norm-font" th:id="${h.id}"
+                   href="/conversation" th:text="${h.address}"></a>
+
+                <form class="offer-delete" th:action="@{/delete/${h.id}}" method="post">
+                    <div class="btn f-group-btn">
+                        <button type="submit">
+                            <img class="invert" alt="delete" src="/images/delete.svg">
+                        </button>
+                    </div>
+                </form>
+            </li>
         </ul>
     </div>
 
     <div id="FavouriteOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Избранные объявления</h3>
-        <ul th:utext="${favouriteOffers}">
+        <ul th:each="f : ${favouriteOffers}">
+            <li class="offer-list">
+                <a class="offer list-norm-font" th:id="${f.offerId}"
+                   href="/messages" th:text="${f.address}">
+                </a>
+            </li>
         </ul>
     </div>
 

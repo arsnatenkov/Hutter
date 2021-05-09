@@ -43,10 +43,6 @@ a {
     -moz-transition: all 0.4s;
 }
 
-/*a:visited {*/
-/*    color: #4169e1;*/
-/*}*/
-
 a:focus {
     outline: none !important;
 }
@@ -460,9 +456,6 @@ iframe {
 }
 
 .between {
-    /*position: relative;*/
-    /*right: -250px;*/
-    /*top: -86px;*/
 }
 
 #description {
@@ -474,7 +467,6 @@ iframe {
 
 .validation-message {
     color: red;
-    /*     color: #c80000; */
     text-align: right;
 }
 
@@ -486,7 +478,6 @@ iframe {
     font-size: 24px;
     margin: auto;
     text-align: center;
-    /*border-bottom: 1px black;*/
 }
 
 .heading-chat a {

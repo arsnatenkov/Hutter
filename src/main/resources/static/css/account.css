@@ -3,12 +3,9 @@ img {
     width: 30px;
 }
 
-/* Style the tab */
 .tab {
     overflow: hidden;
-    /*border: 1px solid #ccc;*/
     border-radius: 10px;
-    /*background-color: #f1f1f1;*/
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     margin: 60px;
@@ -20,7 +17,6 @@ img {
     margin: auto;
 }
 
-/* Style the buttons inside the tab */
 .tab button {
     background-color: inherit;
     float: left;
@@ -33,50 +29,25 @@ img {
     border-radius: 10px;
 }
 
-/* Change background color of buttons on hover */
 .tab button:hover {
-    /*text-decoration: underline;*/
-    /*background-color: #eee;*/
-    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.5) inset;
+    box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.5) inset;
 
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
     transition: all 0.4s;
-    /*     rgba(65, 105, 225, 0.8) */
 }
 
-/* Create an active/current tablink class */
 .tab button.active {
-    /*text-decoration: underline;*/
-    /*background-color: #eee;*/
     box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.5) inset;
-
-    /*background: #4169e1;*/
-    /*background: -webkit-linear-gradient(45deg, #4169e1, #ffc0cb);*/
-    /*background: -o-linear-gradient(45deg, #4169e1, #ffc0cb);*/
-    /*background: -moz-linear-gradient(45deg, #4169e1, #ffc0cb);*/
-    /*background: linear-gradient(45deg, #4169e1, #ffc0cb);*/
-
-    /*-webkit-box-shadow: 0 35px 0 0 #fff inset, 0 -3px 0px #fff inset;*/
-    /*-moz-box-shadow: 0 35px 0 0 #fff inset, 0 -3px 0px #fff inset;*/
-    /*box-shadow: 0 35px 0px 10px #fff inset, 0 -3px 0px #fff inset;*/
-
-    /*-webkit-transition: all 0s;*/
-    /*-o-transition: all 0s;*/
-    /*-moz-transition: all 0s;*/
-    /*transition: all 0s;*/
 }
 
-/* Style the tab content */
 .tabcontent {
     display: none;
     padding: 6px 12px;
-    /*border: 1px solid #ccc;*/
     border-top: none;
 }
 
-/* Style the close button */
 .topright {
     float: right;
     cursor: pointer;

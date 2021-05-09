@@ -2,7 +2,6 @@
     padding: 0;
     margin: 0;
     font-family: monospace;
-    /* Comic Sans MS */
 }
 
 #sidebar ul li:not(:first-child) {
@@ -10,28 +9,17 @@
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 10px;
-    /*color: white;*/
     list-style: none;
     border-radius: 10px;
 }
 
 #sidebar ul li a {
     color: #000;
-    /*padding-left: 10px;*/
     text-decoration: none;
 }
 
 #sidebar ul li:not(:first-child):hover {
-    /*background: rgba(65, 105, 225, 0.8);*/
-    /*background-color: #ddd;*/
-
-    box-shadow: 0px 0px 5px 1px rgba(50, 50, 50, 0.5) inset;
-
-    /*background: #4169e1;*/
-    /*background: -webkit-linear-gradient(45deg, #4169e1, #ffc0cb);*/
-    /*background: -o-linear-gradient(45deg, #4169e1, #ffc0cb);*/
-    /*background: -moz-linear-gradient(45deg, #4169e1, #ffc0cb);*/
-    /*background: linear-gradient(45deg, #4169e1, #ffc0cb);*/
+    box-shadow: 0 0 5px 1px rgba(50, 50, 50, 0.5) inset;
 
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
@@ -45,7 +33,6 @@
 
 #sidebar ul li:first-child {
     text-align: center;
-    /*color: white;*/
     font-size: 1.95em;
     list-style: none;
     padding: 15px 10px 10px 10px;
@@ -59,13 +46,11 @@
     width: 180px;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
-    /*border-right: 4px rgba(224, 229, 234, 0.6);*/
     border-radius: 10px;
     right: -191px;
 
-    -moz-animation: all 330ms; /*mozila*/
-    -webkit-transition: all 330ms; /*safari*/
+    -moz-animation: all 330ms;
+    -webkit-transition: all 330ms;
     transition: all 330ms;
 }
 
@@ -82,26 +67,13 @@
 }
 
 #sidebar .toggle-btn:hover {
-    /*background: rgba(50, 50, 50, 0.8);*/
-
-    /*     background: #4169e1;
-        background: -webkit-linear-gradient(45deg, #4169e1, #ffc0cb);
-        background: -o-linear-gradient(45deg, #4169e1, #ffc0cb);
-        background: -moz-linear-gradient(45deg, #4169e1, #ffc0cb);
-        background: linear-gradient(45deg, #4169e1, #ffc0cb); */
-
-    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.5) inset;
-    /*     , 0 0 0 5px rgba(0,0,0,0) inset; */
+    box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.5) inset;
 
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
     transition: all 0.4s;
 }
-
-/*#sidebar .toggle-btn:hover span {*/
-/*    background-color: rgb(255, 255, 255);*/
-/*}*/
 
 #sidebar .toggle-btn span {
     display: block;

@@ -1,18 +1,14 @@
 body {
-    /*background-image: url(/images/pattern.jpg);*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;;
     word-break: normal;
-    /*word-break: break-all;*/
-    /*filter: alpha(Opacity=50);*/
 }
 
 * {
     padding: 0;
     margin: 0;
     font-family: monospace;
-    /* Comic Sans MS */
 }
 
 a {
@@ -105,7 +101,6 @@ a {
     margin: 40px auto auto;
     border-radius: 10px;
     padding-bottom: 25px;
-    /*padding: 15px 15px 15px 25px;*/
 }
 
 .link-list ul li {
@@ -129,7 +124,6 @@ a {
 
 .offer-pic {
     width: auto;
-    /*height: 100%;*/
     padding: 0 10px 0 0;
 }
 
@@ -233,7 +227,6 @@ td {
 }
 
 .scroll {
-    /*overflow-y: scroll;*/
     overflow: auto;
 }
 
@@ -247,7 +240,6 @@ td {
 .scroll::-webkit-scrollbar {
     width: 10px;
     background-color: rgba(0, 0, 0, 0);
-    /*     background-color: #F5F5F5; */
 }
 
 .scroll::-webkit-scrollbar-thumb {
@@ -277,24 +269,21 @@ td {
 }
 
 .search-form td {
-    /*     height: 100%; */
-    /*     width: 100%; */
     margin: 0;
     padding-left: 5px;
     padding-right: 5px;
-    /*     padding: 0; */
 }
 
 .search-btn {
     margin: auto;
     height: 100%;
     width: 100%;
-    background: rgba(0,0,0,0);
+    background: rgba(0, 0, 0, 0);
     border: none;
     box-shadow: none;
 }
 
-.search-form-col{
+.search-form-col {
     width: 42%;
 }
 
