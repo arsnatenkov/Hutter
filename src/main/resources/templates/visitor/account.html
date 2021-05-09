@@ -1,75 +1,31 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--  <title>HUTTER - Account</title>-->
-<!--  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>-->
-
-<!--  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>-->
-<!--  <script type="text/javascript" src="./js/app.js"></script>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="container">-->
-<!--  <form th:action="@{/logout}" method="get">-->
-<!--    <button class="btn btn-md btn-danger btn-block" name="registration"-->
-<!--            type="Submit">Logout-->
-<!--    </button>-->
-<!--  </form>-->
-
-<!--  <div class="panel-group" style="margin-top:40px">-->
-<!--    <div class="panel panel-primary">-->
-<!--      <div class="panel-heading">-->
-<!--        <span th:utext="${userName}"></span>-->
-<!--      </div>-->
-<!--      <div class="panel-body">-->
-<!--        <img th:src="@{/images/offer1.jpg}" class="img-responsive center-block" width="400" height="400"-->
-<!--             alt="Beer"/>-->
-<!--      </div>-->
-<!--      <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<div th:insert="blocks/menu :: menu"></div>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html>
-<!--<head>-->
-<!--    <title>HUTTER - Account</title>-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/account.css}"/>-->
-<!--    <script type="text/javascript" src="/js/tabs.js"></script>-->
-<!--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>-->
-<!--    <script type="text/javascript" src="/js/app.js"></script>-->
-<!--</head>-->
 
 <head th:replace="/blocks/header.html :: header('Account')"></head>
 <body class="scroll">
 
 <div class="wrapper">
-    <p>Click on the x button in the top right corner to close the current tab:</p>
     <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Settings')" id="defaultOpen">
-            <img alt="settings" src="/images/user/settings.svg">&nbsp;Настройки
-        </button>
-        <button class="tablinks" onclick="openTab(event, 'HostedOffers')">
-            <img alt="hosted" src="/images/user/crown.svg">&nbsp;Ваши&nbsp;объявления
-        </button>
-        <button class="tablinks" onclick="openTab(event, 'FavouriteOffers')">
-            <img alt="starred" src="/images/user/star.svg">&nbsp;Избранное
-        </button>
-        <button class="tablinks" onclick="openTab(event, 'AddOffer')">
-            <img alt="create" src="/images/user/plus.svg">&nbsp;Создать
-        </button>
-        <button class="tablinks" onclick="openTab(event, 'Messages')">
-            <img alt="chat" src="/images/user/chat.svg">&nbsp;Сообщения
-        </button>
-        <button class="tablinks" onclick="openTab(event, 'Logout')">
-            <img alt="logout" src="/images/user/logout.svg">&nbsp;Выйти
-        </button>
+        <div class="tab-aligner">
+            <button class="tablinks" onclick="openTab(event, 'Settings')" id="defaultOpen">
+                <img alt="settings" src="/images/user/settings.svg">&nbsp;Настройки
+            </button>
+            <button class="tablinks" onclick="openTab(event, 'HostedOffers')">
+                <img alt="hosted" src="/images/user/crown.svg">&nbsp;Ваши&nbsp;объявления
+            </button>
+            <button class="tablinks" onclick="openTab(event, 'FavouriteOffers')">
+                <img alt="starred" src="/images/user/star.svg">&nbsp;Избранное
+            </button>
+            <button class="tablinks" onclick="openTab(event, 'AddOffer')">
+                <img alt="create" src="/images/user/plus.svg">&nbsp;Создать
+            </button>
+            <button class="tablinks" onclick="openTab(event, 'Messages')">
+                <img alt="chat" src="/images/user/chat.svg">&nbsp;Сообщения
+            </button>
+            <button class="tablinks" onclick="openTab(event, 'Logout')">
+                <img alt="logout" src="/images/user/logout.svg">&nbsp;Выйти
+            </button>
+        </div>
     </div>
 
     <div id="Settings" class="tabcontent">
@@ -84,8 +40,6 @@
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Ваши объявления</h3>
         <ul th:utext="${hostedOffers}">
-            <!--        <ul th:utext="${hostedOffers}" id="panel-group">-->
-            <p>Ваши объявления будут тут.</p>
         </ul>
     </div>
 
@@ -93,8 +47,6 @@
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Избранные объявления</h3>
         <ul th:utext="${favouriteOffers}">
-            <!--        <ul th:utext="${favouriteOffers}" id="panel-group">-->
-            <p>Избранные объявления будут тут.</p>
         </ul>
     </div>
 

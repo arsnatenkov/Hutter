@@ -41,20 +41,30 @@ public class AccountController {
         User user = userService.findUserByUserName(auth.getName());
         List<Offer> offers = offerService.findByHostId(user.getId());
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
+        StringBuilder sb;
+        if (offers.isEmpty()) {
+            modelAndView.addObject("hostedOffers",
+                    "Ваши объявления будут тут.");
+        } else {
+            sb = new StringBuilder();
+            for (Offer offer : offers)
+                sb.append("<li class=\"offer-list\">")
+                        .append(offer.linkTitle("list-norm-font", "messages"))
+                        .append("&nbsp;&nbsp;").append(offer.deleteBtn()).append("</li><br/>");
+            modelAndView.addObject("hostedOffers", sb.toString());
+        }
 
-        StringBuilder sb = new StringBuilder();
-        for (Offer offer : offers)
-            sb.append("<li class=\"offer-list\">")
-                    .append(offer.linkTitle("list-norm-font", "messages"))
-                    .append("&nbsp;&nbsp;").append(offer.deleteBtn()).append("</li><br/>");
-        modelAndView.addObject("hostedOffers", sb.toString());
-
-        sb = new StringBuilder();
-        for (Favourite favourite : favourites)
-            sb.append("<li class=\"offer-list\">").append(offerService.findById(favourite.getOfferId())
-                    .linkTitle("list-norm-font", "conversation"))
-                    .append("</li><br/>");
-        modelAndView.addObject("favouriteOffers", sb.toString());
+        if (favourites.isEmpty()) {
+            modelAndView.addObject("favouriteOffers",
+                    "Избранные объявления будут тут.");
+        } else {
+            sb = new StringBuilder();
+            for (Favourite favourite : favourites)
+                sb.append("<li class=\"offer-list\">").append(offerService.findById(favourite.getOfferId())
+                        .linkTitle("list-norm-font", "conversation"))
+                        .append("</li><br/>");
+            modelAndView.addObject("favouriteOffers", sb.toString());
+        }
 
         modelAndView.setViewName("/visitor/account");
         return modelAndView;
@@ -66,10 +76,10 @@ public class AccountController {
         List<Message> messages = messageService.findByOfferId(offer.getId());
         List<Favourite> favourites = favouriteService.findByOfferId(offer.getId());
         offerService.deleteOffer(offer);
-        for(Message message : messages){
+        for (Message message : messages) {
             messageService.deleteMessage(message);
         }
-        for(Favourite favourite : favourites){
+        for (Favourite favourite : favourites) {
             favouriteService.deleteFavourite(favourite);
         }
 

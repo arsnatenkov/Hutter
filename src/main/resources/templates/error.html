@@ -3,6 +3,15 @@
 <head th:replace="/blocks/header.html :: header('Ошибка')"></head>
 
 <body class="scroll">
+
+
+<div class="error-txt">
+    <h1>Ошибка</h1>
+    <p>
+        Произошла ошибка. Пожалуйста, свяжитесь с администратором
+    </p>
+</div>
+
 <form th:action="@{/}" method="get">
     <div class="container-login-form-btn m-t-17 btn-warning">
         <button name="submit" type="submit" class="login-form-btn">
@@ -10,13 +19,6 @@
         </button>
     </div>
 </form>
-
-<div>
-    <h1>Ошибка</h1>
-    <p>
-        Произошла ошибка. Пожалуйста, свяжитесь с администратором
-    </p>
-</div>
 
 <div th:insert="blocks/hat :: hat"></div>
 </body>

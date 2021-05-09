@@ -1,4 +1,12 @@
-.btn-warning{
+.btn-warning {
     width: 80%;
-    margin: 100px auto auto;
+    margin: 40px auto auto;
+    background: rgba(0, 0, 0, 0);
+}
+
+.error-txt {
+    width: 600px;
+    margin: 70px auto auto;
+    text-align: center;
+    padding-bottom: 20px;
 }
