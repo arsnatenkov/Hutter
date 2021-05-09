@@ -61,7 +61,7 @@ public class AccountController {
         return modelAndView;
     }
 
-    @DeleteMapping(value = "/delete/{offerId}")
+    @GetMapping(value = "/delete/{offerId}")
     public String deleteOffer(@PathVariable("offerId") Integer offerId) {
         Offer offer = offerService.findById(offerId);
         List<Message> messages = messageService.findByOfferId(offer.getId());

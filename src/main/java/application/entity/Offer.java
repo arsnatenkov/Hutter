@@ -93,7 +93,7 @@ public class Offer {
 
     public String deleteBtn() {
         return "<div class=\"btn f-group-btn offer-delete\">" +
-                "<form action=\"/delete/" + getId() + "\" method=\"post\">" +
+                "<form action=\"/delete/" + getId() + "\" method=\"get\">" +
                 "<button type=\"submit\">"+
                 "<img class=\"invert\" alt=\"delete\" src=\"/images/delete.svg\">" +
                 "</button>"+
