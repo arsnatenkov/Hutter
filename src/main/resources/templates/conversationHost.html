@@ -17,15 +17,12 @@
                 <div class="msg-display-header">
                     <div class="txt1">
                         <a th:fragment="messageUser(${m.sender})">
-                            <span th:text="${m.sender.name}">Ivan Ivanych</span>
+                            <span th:text="${m.sender.name}"></span>
                         </a>
                     </div>
                 </div>
                 <div class="msg-display-body">
                     <div class="msg-l time" th:text="${{m.time}}"></div>
-<!--                    <div class="msg-l time" th:text="${#dates.format(m.time, 'dd.MM.yyyy')}"></div>-->
-<!--                    <div class="msg-l time" th:text="${m.time}">01.05.2021</div>-->
-<!--                    <div class="msg-l time" th:value="${#temporals.format(m.time, 'dd.MM.yyyy')}">06.05.2021</div>-->
                     <div class="msg-l" th:text="${m.message}">Добрый день!</div>
                 </div>
             </div>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,21 +34,15 @@ public class OfferController {
     FavouriteService favouriteService;
 
     @GetMapping(value = "/offer")
-    public ModelAndView offer(HttpServletRequest request) {
+    public ModelAndView offer(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");
         Offer offer = offerService.findById(Integer.parseInt(id));
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
-        StringBuilder sb = new StringBuilder();
+
         User user = userService.findUserByUserName(auth.getName());
-
-        if (user != null) {
-            if (user.getActive() && user.getId().equals(offer.getHostId()))
-                sb.append(offer.deleteBtn());
-        }
-        sb.append(offer.guestUI(false));
-        modelAndView.addObject("offerDisplay", sb.toString());
-
+        model.addAttribute("host", user != null && user.getId().equals(offer.getHostId()));
+        model.addAttribute("offerDisplay", offerService.findById(Integer.parseInt(id)));
         modelAndView.setViewName("offer");
         return modelAndView;
     }
@@ -89,6 +84,7 @@ public class OfferController {
     public String saveOffer(@PathVariable("offerId") Integer offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+
         favouriteService.saveFavourite(new Favourite(user.getId(), offerId,
                 offerService.findById(offerId).getAddress()));
         return "redirect:/offer/" + offerId;
