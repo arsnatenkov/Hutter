@@ -1,5 +1,5 @@
 <head th:fragment="header(title)">
-    <title>HUTTER - Home page</title>
+    <title th:text="@{'HUTTER - ' + ${title}}">HUTTER</title>
     <link rel="shortcut icon" href="/images/home.svg" type="image/svg">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="https://yandex.st/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">

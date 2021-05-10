@@ -49,6 +49,7 @@ public class MessageController {
 
         model.addAttribute("messages", messages);
         model.addAttribute("companion", userService.getUserById(hostId));
+        model.addAttribute("host", offer.getHostId().equals(user.getId()));
         model.addAttribute("offer", offer);
     }
 
@@ -93,6 +94,8 @@ public class MessageController {
 //            }
 //        }
 
+        addConversationToModel(companionId, model, offer);
+        model.addAttribute("newMessage", new MessageDTO());
         modelAndView.setViewName("/conversation");
         model.addAttribute("offerDisplay", offer);
 

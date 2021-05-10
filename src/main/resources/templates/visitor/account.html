@@ -45,11 +45,11 @@
                    th:href="'/messages/' + ${h.id}" th:text="${h.address}">
                 </a>
                 <form class="offer-delete" th:action="@{'/delete/' + ${h.id}}" method="get">
-                    <div class="btn f-group-btn">
-                        <button type="submit">
+                    <button type="submit">
+                        <div class="btn f-group-btn">
                             <img class="invert" alt="delete" src="/images/delete.svg">
-                        </button>
-                    </div>
+                        </div>
+                    </button>
                 </form>
             </li>
         </ul>
@@ -64,11 +64,11 @@
                    class="offer list-norm-font" th:id="${f.offerId}" th:text="${f.address}">
                 </a>
                 <form class="offer-delete" th:action="@{'/deleteSaved/' + ${f.offerId}}" method="get">
-                    <div class="btn f-group-btn">
-                        <button type="submit">
+                    <button type="submit">
+                        <div class="btn f-group-btn">
                             <img class="invert" alt="delete" src="/images/delete.svg">
-                        </button>
-                    </div>
+                        </div>
+                    </button>
                 </form>
             </li>
         </ul>

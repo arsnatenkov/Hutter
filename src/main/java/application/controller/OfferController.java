@@ -42,9 +42,11 @@ public class OfferController {
 
         User user = userService.findUserByUserName(auth.getName());
         boolean isAuth = user != null;
-        model.addAttribute("auth", isAuth);
-        model.addAttribute("host", isAuth && user.getId().equals(offer.getHostId()));
-        model.addAttribute("guest", isAuth && !user.getId().equals(offer.getHostId()));
+        if (isAuth && user.getId().equals(offer.getHostId()))
+            model.addAttribute("host", true);
+        else
+            model.addAttribute("host", false);
+
         model.addAttribute("offerDisplay", offerService.findById(Integer.parseInt(id)));
         modelAndView.setViewName("offer");
         return modelAndView;

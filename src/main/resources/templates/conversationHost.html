@@ -4,6 +4,10 @@
 <head th:replace="/blocks/header.html :: header('Объявление') "></head>
 <body class="scroll">
 
+<div th:with="host=${host}" th:unless="${host}">
+    <div th:with="o=${offer}" th:insert="blocks/offer :: offer(o)"></div>
+</div>
+
 <div class="content-flex">
     <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Переписка с </span>
         <a class="txt1 heading-chat" href="#">
@@ -50,9 +54,9 @@
                     </tr>
                 </table>
                 <div class="f-group wrap-input validate-input msg-validate">
-                    <textarea placeholder="Введите текст" autocomplete="off" class="input scroll msg-input" rows="5"
-                              id="comment"
-                              th:field="*{message}"></textarea>
+                    <textarea placeholder="Введите текст" autocomplete="off"
+                              class="input scroll msg-input" rows="5"
+                              id="comment" th:field="*{message}"></textarea>
                     <div th:if="${#fields.hasErrors('message')}" style="margin-bottom: 25px"
                          class="txt1 validation-message">
                         <ul class="validation">
