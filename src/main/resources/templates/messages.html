@@ -17,13 +17,18 @@
                     <span class="txt1" th:fragment="messageUser(${m.receiver})">
                         <span th:text="${m.receiver.name}"></span>
                     </span>
-                    <span class="txt1">:</span>
                 </div>
             </div>
             <div class="panel-body">
                 <span th:text="${m.message}"></span>
             </div>
         </a>
+        <hr>
+    </div>
+    <div th:with="emptyList=${emptyList}" th:if="${emptyList}">
+        <div class="no-chats-wrapper">
+        <span class="txt1">Пока переписок нет</span>
+    </div>
     </div>
     <hr>
 </div>

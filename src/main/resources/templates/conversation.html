@@ -5,7 +5,9 @@
 <body class="scroll">
 <div th:with="o=${offer}" class="offer-wrapper flex-h-chat">
     <h2 th:text="${o.address} + ', ' + ${o.totalArea} + ' м²'"></h2>
-    <div th:insert="blocks/buttons :: save"></div>
+    <div id="save" class="btn f-group-btn save-btn">
+        <a th:href="@{'/save/' + ${o.id}}"><img class="invert" alt="save" src="/images/save.svg"></a>
+    </div>
     <hr>
     <div class="center-div scroll">
         <div class="inner-div">
@@ -79,7 +81,7 @@
     <div class="msg-box-chat">
         <div class="up">
             <form th:object="${newMessage}" method="post"
-                  th:action="@{'/conversation/{hostId}/{offerId}'(offerId=${offer.getId()},hostId=${companion.id})}">
+                  th:action="@{'/conversation/{hostId}/{offerId}'(offerId=${offer.id},hostId=${companion.id})}">
                 <table class="msg-hat">
                     <tr>
                         <td class="txt1 msg-head">
@@ -93,9 +95,12 @@
                     </tr>
                 </table>
                 <div class="f-group wrap-input validate-input msg-validate">
-                    <textarea placeholder="Введите текст" autocomplete="off" class="input scroll msg-input" rows="5"
+                    <textarea placeholder="Введите текст" autocomplete="off"
+                              class="input scroll msg-input" rows="5"
                               id="comment"
-                              th:field="*{message}"></textarea>
+                              th:field="*{message}">
+
+                    </textarea>
                     <div th:if="${#fields.hasErrors('message')}" style="margin-bottom: 25px"
                          class="txt1 validation-message">
                         <ul class="validation">

@@ -41,8 +41,10 @@ public class OfferController {
         ModelAndView modelAndView = new ModelAndView();
 
         User user = userService.findUserByUserName(auth.getName());
-        model.addAttribute("auth", user != null);
-        model.addAttribute("host", user != null && user.getId().equals(offer.getHostId()));
+        boolean isAuth = user != null;
+        model.addAttribute("auth", isAuth);
+        model.addAttribute("host", isAuth && user.getId().equals(offer.getHostId()));
+        model.addAttribute("guest", isAuth && !user.getId().equals(offer.getHostId()));
         model.addAttribute("offerDisplay", offerService.findById(Integer.parseInt(id)));
         modelAndView.setViewName("offer");
         return modelAndView;
@@ -88,6 +90,6 @@ public class OfferController {
 
         favouriteService.saveFavourite(new Favourite(user.getId(), offerId,
                 offerService.findById(offerId).getAddress()));
-        return "redirect:/offer/" + offerId;
+        return "redirect:/offer?id=" + offerId;
     }
 }

@@ -10,3 +10,7 @@
     text-align: center;
     padding-bottom: 20px;
 }
+
+.btn-warning:hover {
+    background: rgba(0, 0, 0, 0);
+}

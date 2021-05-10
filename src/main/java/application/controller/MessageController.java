@@ -4,7 +4,6 @@ import application.converter.UserDtoToUser;
 import application.converter.UserToUserDto;
 import application.dto.MessageDTO;
 import application.dto.UserDTO;
-import application.entity.Message;
 import application.entity.Offer;
 import application.entity.User;
 import application.service.FavouriteService;
@@ -65,6 +64,7 @@ public class MessageController {
         model.addAttribute("host", user != null
                 && user.getId().equals(offerService.findById(offerId).getHostId()));
         model.addAttribute("recentMessages", recentMessages);
+        model.addAttribute("emptyList", recentMessages.isEmpty());
         return "messages";
     }
 
@@ -79,19 +79,21 @@ public class MessageController {
         StringBuilder sb = new StringBuilder();
         User user = userService.findUserByUserName(auth.getName());
 
-        if (user != null) {
-            if (user.getId().equals(offer.getHostId())) {
-//                sb.append(offer.guestUI(true));
-//                modelAndView.addObject("myOfferDisplay", sb.toString());
-                modelAndView.setViewName("/messages");
-            } else {
-//                sb.append(offer.guestUI(true));
-//                modelAndView.addObject("offerDisplay", sb.toString());
-                addConversationToModel(companionId, model, offer);
-                model.addAttribute("newMessage", new MessageDTO());
-                modelAndView.setViewName("/conversation");
-            }
-        }
+//        if (user != null) {
+//            if (user.getId().equals(offer.getHostId())) {
+////                sb.append(offer.guestUI(true));
+////                modelAndView.addObject("myOfferDisplay", sb.toString());
+//                modelAndView.setViewName("/messages");
+//            } else {
+////                sb.append(offer.guestUI(true));
+////                modelAndView.addObject("offerDisplay", sb.toString());
+//                addConversationToModel(companionId, model, offer);
+//                model.addAttribute("newMessage", new MessageDTO());
+//                modelAndView.setViewName("/conversation");
+//            }
+//        }
+
+        modelAndView.setViewName("/conversation");
         model.addAttribute("offerDisplay", offer);
 
         return modelAndView;

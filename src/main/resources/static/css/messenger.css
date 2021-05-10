@@ -212,3 +212,8 @@ a.offer {
     width: 45%;
     margin: auto 0 auto auto;
 }
+
+.no-chats-wrapper{
+    width: 70%;
+    margin: auto;
+}
