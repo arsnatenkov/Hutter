@@ -30,4 +30,6 @@ public class Favourite {
         this.userId = userId;
         this.address = address;
     }
+
+
 }
