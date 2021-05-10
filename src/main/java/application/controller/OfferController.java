@@ -82,14 +82,41 @@ public class OfferController {
         modelAndView.setViewName("create");
         return "redirect:/visitor/account";
     }
+    @GetMapping(value = "/deleteSaved/{offerId}")
+    public String deleteSavedOffer(@PathVariable("offerId") Integer offerId){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+        List<Favourite> favourites = favouriteService.findByUserId(user.getId());
+        for(Favourite favourite1 : favourites){
+            if(favourite1.getOfferId().equals(offerId)){
+                favouriteService.deleteFavourite(favourite1);
+            }
+        }
+        return "redirect:/visitor/account";
+    }
 
     @GetMapping(value = "/save/{offerId}")
     public String saveOffer(@PathVariable("offerId") Integer offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-
-        favouriteService.saveFavourite(new Favourite(user.getId(), offerId,
-                offerService.findById(offerId).getAddress()));
+        Favourite favourite = new Favourite(user.getId(), offerId, offerService.findById(offerId).getAddress());
+        List<Favourite> favourites = favouriteService.findByUserId(user.getId());
+        int checker = 0;
+        for(Favourite favourite1 : favourites){
+            if(equals(favourite1, favourite)){
+                checker++;
+            }
+        }
+        if(checker == 0){
+            favouriteService.saveFavourite(favourite);
+        }
         return "redirect:/offer?id=" + offerId;
+    }
+
+    public boolean equals(Favourite obj1, Favourite obj2) {
+        if(obj1.getUserId().equals(obj2.getUserId()) && obj1.getOfferId().equals(obj2.getOfferId())){
+            return true;
+        }
+        return false;
     }
 }
