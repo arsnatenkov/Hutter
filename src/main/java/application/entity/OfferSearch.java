@@ -17,21 +17,30 @@ public class OfferSearch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "no_rooms")
-    private Boolean noRooms;
-    @Column(name = "rooms1")
-    private Boolean rooms1;
-    @Column(name = "rooms2")
-    private Boolean rooms2;
-    @Column(name = "rooms3")
-    private Boolean rooms3;
-    @Column(name = "many_rooms")
-    private Boolean manyRooms;
+//    @Column(name = "no_rooms")
+//    private String noRooms;
+//    @Column(name = "rooms1")
+//    private String rooms1;
+//    @Column(name = "rooms2")
+//    private String rooms2;
+//    @Column(name = "rooms3")
+//    private String rooms3;
+//    @Column(name = "many_rooms")
+//    private String manyRooms;
+
+    @Column(name = "rooms")
+    private String rooms = "";
 
     @Column(name = "lower_cost_bound")
-    private Long lowerCostBound;
+    private Long lowerCostBound = Long.parseLong("0");
     @Column(name = "higher_cost_bound")
-    private Long higherCostBound;
+    private Long higherCostBound = Long.parseLong("1");
+
+    public OfferSearch(String rooms, Long lowerCostBound, Long higherCostBound) {
+        this.rooms = rooms;
+        this.lowerCostBound = lowerCostBound;
+        this.higherCostBound = higherCostBound;
+    }
 
 //    public OfferSearch(Boolean noRooms, Boolean rooms1, Boolean rooms2, Boolean rooms3,
 //                       Boolean manyRooms, Long lowerCostBound, Long higherCostBound) {

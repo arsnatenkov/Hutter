@@ -10,11 +10,16 @@
                                 Количество комнат:
                             </span>
                             <div class="rooms-num-panel">
-                                <input th:field="*{noRooms}" type="checkbox" name="0">Студия
-                                <input th:field="*{room1}" type="checkbox" name="1">1
-                                <input th:field="*{room2}" type="checkbox" name="2">2
-                                <input th:field="*{room3}" type="checkbox" name="3">3
-                                <input th:field="*{manyRooms}" type="checkbox" name="4">4+
+                                <span class="txt1">Студия</span>
+                                <input th:value="0" th:field="*{rooms}" type="checkbox" name="0"/><br/>
+                                <span class="txt1">1</span>
+                                <input th:value="1" th:field="*{rooms}" type="checkbox" name="1"/>
+                                <span class="txt1">2</span>
+                                <input th:value="2" th:field="*{rooms}" type="checkbox" name="2"/>
+                                <span class="txt1">3</span>
+                                <input th:value="3" th:field="*{rooms}" type="checkbox" name="3"/>
+                                <span class="txt1">4+</span>
+                                <input th:value="4" th:field="*{rooms}" type="checkbox" name="4"/>
                             </div>
                         </div>
                     </td>
