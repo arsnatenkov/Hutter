@@ -28,11 +28,13 @@ public class MessageService {
     public Collection<MessageDTO> findAllRecentMessages(Long id, Integer offerId) {
         Iterable<Message> all = messageRepository.findAllRecentMessages(id, offerId);
         Map<User, MessageDTO> map = new HashMap<>();
+
         all.forEach(m -> {
             MessageDTO messageDTO = messageToMessageDto.convert(m, id);
             User user = m.getSender().getId().equals(id) ? m.getReceiver() : m.getSender();
             map.put(user, messageDTO);
         });
+
         return map.values();
     }
 
@@ -40,7 +42,8 @@ public class MessageService {
     public List<MessageDTO> findConversation(Long userId, Long companionId, Integer offerId) {
         List<Message> all = messageRepository.findConversation(userId, companionId, offerId);
         List<MessageDTO> messages = new LinkedList<>();
-        if(all != null){
+
+        if (all != null) {
             all.forEach(m -> messages.add(messageToMessageDto.convert(m, userId)));
         }
 
@@ -50,10 +53,9 @@ public class MessageService {
     @Transactional(readOnly = true)
     public MessageDTO getRecentMessage(Long id) {
         Message message = messageRepository.findFirstBySenderIdOrReceiverIdOrderByIdDesc(id, id);
-        MessageDTO messageDTO = messageToMessageDto.convert(message, id);
-        return messageDTO;
-    }
 
+        return messageToMessageDto.convert(message, id);
+    }
 
     @Transactional
     public void postMessage(MessageDTO messageDTO) {
@@ -61,15 +63,11 @@ public class MessageService {
         messageRepository.save(message);
     }
 
-    public List<Message> findByOfferId(Integer offerId){
+    public List<Message> findByOfferId(Integer offerId) {
         return messageRepository.findByOfferId(offerId);
     }
 
-    public void saveMessage(Message message){
-        messageRepository.save(message);
-    }
-
-    public void deleteMessage(Message message){
+    public void deleteMessage(Message message) {
         messageRepository.delete(message);
     }
 }

@@ -1,7 +1,6 @@
 package application.service;
 
 import application.entity.Favourite;
-import application.entity.Offer;
 import application.repository.FavouriteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

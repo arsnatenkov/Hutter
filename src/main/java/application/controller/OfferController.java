@@ -15,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,12 +40,8 @@ public class OfferController {
         ModelAndView modelAndView = new ModelAndView();
 
         User user = userService.findUserByUserName(auth.getName());
-        boolean isAuth = user != null;
-        if (isAuth && user.getId().equals(offer.getHostId()))
-            model.addAttribute("host", true);
-        else
-            model.addAttribute("host", false);
 
+        model.addAttribute("host", user != null && user.getId().equals(offer.getHostId()));
         model.addAttribute("offerDisplay", offerService.findById(Integer.parseInt(id)));
         modelAndView.setViewName("offer");
         return modelAndView;
@@ -55,8 +50,7 @@ public class OfferController {
     @GetMapping(value = "/create")
     public ModelAndView addOffer() {
         ModelAndView modelAndView = new ModelAndView();
-        Offer offer = new Offer();
-        modelAndView.addObject("offer", offer);
+        modelAndView.addObject("offer", new Offer());
         modelAndView.setViewName("create");
         return modelAndView;
     }
@@ -84,13 +78,15 @@ public class OfferController {
         modelAndView.setViewName("create");
         return "redirect:/visitor/account";
     }
+
     @GetMapping(value = "/deleteSaved/{offerId}")
-    public String deleteSavedOffer(@PathVariable("offerId") Integer offerId){
+    public String deleteSavedOffer(@PathVariable("offerId") Integer offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
-        for(Favourite favourite1 : favourites){
-            if(favourite1.getOfferId().equals(offerId)){
+
+        for (Favourite favourite1 : favourites) {
+            if (favourite1.getOfferId().equals(offerId)) {
                 favouriteService.deleteFavourite(favourite1);
             }
         }
@@ -103,22 +99,21 @@ public class OfferController {
         User user = userService.findUserByUserName(auth.getName());
         Favourite favourite = new Favourite(user.getId(), offerId, offerService.findById(offerId).getAddress());
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
-        int checker = 0;
-        for(Favourite favourite1 : favourites){
-            if(equals(favourite1, favourite)){
-                checker++;
+
+        boolean checker = false;
+        for (Favourite f : favourites) {
+            if (equals(f, favourite)) {
+                checker = true;
+                break;
             }
         }
-        if(checker == 0){
+        if (!checker) {
             favouriteService.saveFavourite(favourite);
         }
         return "redirect:/offer?id=" + offerId;
     }
 
-    public boolean equals(Favourite obj1, Favourite obj2) {
-        if(obj1.getUserId().equals(obj2.getUserId()) && obj1.getOfferId().equals(obj2.getOfferId())){
-            return true;
-        }
-        return false;
+    public boolean equals(Favourite a, Favourite b) {
+        return a.getUserId().equals(b.getUserId()) && a.getOfferId().equals(b.getOfferId());
     }
 }

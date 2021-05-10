@@ -12,56 +12,56 @@
 			    Введите адрес
 		    </span>
         </div>
-            <input required autocomplete="off" class="input" type="text" th:field="*{address}">
+        <input required autocomplete="off" class="input" type="text" th:field="*{address}">
 
         <div class="p-t-31 p-b-9">
 		    <span class="txt1">
 			    Материал строения
 		    </span>
         </div>
-            <input autocomplete="off" class="input" type="text" th:field="*{material}">
+        <input autocomplete="off" class="input" type="text" th:field="*{material}">
 
         <div class="p-t-31 p-b-9">
 		    <span class="txt1">
 			    Общая площать помещений (м²)
 		    </span>
         </div>
-            <input required autocomplete="off" class="input" type="text" th:field="*{totalArea}">
+        <input required autocomplete="off" class="input" type="text" th:field="*{totalArea}">
 
         <div class="p-t-31 p-b-9">
 		    <span class="txt1">
 			    Жилая площадь (м²)
 		    </span>
         </div>
-            <input autocomplete="off" class="input" type="text" th:field="*{living}">
+        <input autocomplete="off" class="input" type="text" th:field="*{living}">
 
         <div class="p-t-31 p-b-9">
 		    <span class="txt1">
 			    Количество комнат
 		    </span>
         </div>
-            <input required autocomplete="off" class="input" type="text" th:field="*{quantityRoom}">
+        <input required autocomplete="off" class="input" type="text" th:field="*{quantityRoom}">
 
         <div class="p-t-31 p-b-9">
 		    <span class="txt1">
 			    Площади комнат (м²)
 		    </span>
         </div>
-            <input autocomplete="off" class="input" type="text" th:field="*{roomsSpaces}">
+        <input autocomplete="off" class="input" type="text" th:field="*{roomsSpaces}">
 
         <div class="p-t-31 p-b-9">
 		    <span class="txt1">
 			    Количество санузлов
 		    </span>
         </div>
-            <input required autocomplete="off" class="input" type="text" th:field="*{quantityToilet}">
+        <input required autocomplete="off" class="input" type="text" th:field="*{quantityToilet}">
 
         <div class="p-t-31 p-b-9">
 		    <span class="txt1">
 			    Типы санузлов
 		    </span>
         </div>
-            <input autocomplete="off" class="input" type="text" th:field="*{type}">
+        <input autocomplete="off" class="input" type="text" th:field="*{type}">
 
         <div class="p-t-31 p-b-9 check-wrap">
             <span class="txt1">Наличие парковки</span>&nbsp;&nbsp;
@@ -73,27 +73,27 @@
 			    Тип парковки
 		    </span>
         </div>
-            <input autocomplete="off" class="input" type="text" th:field="*{parkingType}">
+        <input autocomplete="off" class="input" type="text" th:field="*{parkingType}">
 
         <div class="p-t-31 p-b-9">
 		    <span class="txt1">
 			    Укажите стоимость (руб.)
 		    </span>
         </div>
-            <input required autocomplete="off" class="input" type="text" th:field="*{cost}">
+        <input required autocomplete="off" class="input" type="text" th:field="*{cost}">
 
         <div class="p-t-31 p-b-9">
 		    <span class="txt1">
 			    Добавьте описание
 		    </span>
         </div>
-            <textarea autocomplete="off" class="input scroll" th:field="*{description}"></textarea>
+        <textarea autocomplete="off" class="input scroll" th:field="*{description}"></textarea>
 
         <div class="floors p-t-51 p-b-9">
-		    <span class="txt1">Этаж</span>
-                <input autocomplete="off" class="input semi1" type="text" th:field="*{floor}">
+            <span class="txt1">Этаж</span>
+            <input autocomplete="off" class="input semi1" type="text" th:field="*{floor}">
             <span class="txt1 between">из</span>
-                <input autocomplete="off" class="input semi2" type="text" th:field="*{floorMax}">
+            <input autocomplete="off" class="input semi2" type="text" th:field="*{floorMax}">
         </div>
         <h2><span class="txt1" th:utext="${successMessage}"></span></h2>
         <div class="container-login-form-btn m-t-17">
@@ -102,7 +102,7 @@
                 Опубликовать
             </button>
             <div th:if="${param.error}">
-                <p style="color: #FF1C19;">Введены некорректные данные!</p>
+                <p class="invalid-data">Введены некорректные данные!</p>
             </div>
         </div>
     </form>

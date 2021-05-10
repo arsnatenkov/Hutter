@@ -25,14 +25,15 @@ public class OfferService {
         return offerRepository.findById(id);
     }
 
-    public List<Offer> findByHostId(Long hostId){
+    public List<Offer> findByHostId(Long hostId) {
         return offerRepository.findByHostId(hostId);
     }
 
     public List<Offer> findByCostBetween(Long low, Long high) {
         return offerRepository.findByCostBetween(low, high);
     }
-    public List<Offer> findByQuantityRoom(Integer quantityRoom){
+
+    public List<Offer> findByQuantityRoom(Integer quantityRoom) {
         return offerRepository.findByQuantityRoom(quantityRoom);
     }
 
@@ -44,7 +45,7 @@ public class OfferService {
         return offerRepository.save(offer);
     }
 
-    public void deleteOffer(Offer offer){
+    public void deleteOffer(Offer offer) {
         offerRepository.delete(offer);
     }
 }

@@ -54,6 +54,7 @@ public class AccountController {
         for (Message message : messages) {
             messageService.deleteMessage(message);
         }
+
         for (Favourite favourite : favourites) {
             favouriteService.deleteFavourite(favourite);
         }

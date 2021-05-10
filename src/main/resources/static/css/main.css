@@ -318,3 +318,7 @@ td {
 hr {
     width: 100%;
 }
+
+.invalid-data {
+    color: #ff1c19;
+}

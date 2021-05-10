@@ -22,8 +22,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserService userService;
-    //@Autowired
-    //private UserDtoToUser userDtoToUser;
 
     @Override
     @Transactional
@@ -46,4 +44,3 @@ public class MyUserDetailsService implements UserDetailsService {
                 user.getActive(), true, true, true, authorities);
     }
 }
-

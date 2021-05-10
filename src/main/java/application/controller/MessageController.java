@@ -37,10 +37,6 @@ public class MessageController {
     private UserService userService;
     @Autowired
     private UserToUserDto userToUserDto;
-    @Autowired
-    private FavouriteService favouriteService;
-    @Autowired
-    private UserDtoToUser userDtoToUser;
 
     private void addConversationToModel(Long hostId, Model model, Offer offer) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -77,22 +73,6 @@ public class MessageController {
         Offer offer = offerService.findById(offerId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
-        StringBuilder sb = new StringBuilder();
-        User user = userService.findUserByUserName(auth.getName());
-
-//        if (user != null) {
-//            if (user.getId().equals(offer.getHostId())) {
-////                sb.append(offer.guestUI(true));
-////                modelAndView.addObject("myOfferDisplay", sb.toString());
-//                modelAndView.setViewName("/messages");
-//            } else {
-////                sb.append(offer.guestUI(true));
-////                modelAndView.addObject("offerDisplay", sb.toString());
-//                addConversationToModel(companionId, model, offer);
-//                model.addAttribute("newMessage", new MessageDTO());
-//                modelAndView.setViewName("/conversation");
-//            }
-//        }
 
         addConversationToModel(companionId, model, offer);
         model.addAttribute("newMessage", new MessageDTO());

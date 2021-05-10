@@ -14,52 +14,11 @@
         </form>
     </div>
     <hr>
-    <div class="center-div scroll">
-        <div class="inner-div">
-            <div class="text-container">
-                <img class="offer-icons" src="/images/ruble.svg" alt="ruble">
-                <span th:text="'&nbsp;цена: ' + ${o.cost} + ' ₽'"></span>
-                <br/><br/>
-                <img class="offer-icons" src="/images/plans.svg" alt="plans">
-                <span th:text="'&nbsp;общая площадь: ' + ${o.totalArea} + ' м²'"></span>
-                <br/>
-                <span th:text="'&nbsp;жилая площадь: ' + ${o.living} + ' м²'"></span>
-                <br/><br/>
-                <img class="offer-icons" src="/images/floor.svg" alt="floor">
-                <span th:text="'&nbsp;этаж: ' + ${o.floor} + ' из ' + ${o.floorMax}"></span>
-                <br/><br/>
-                <img class="offer-icons" src="/images/living-room.svg" alt="living-room">
-                <span th:text="'&nbsp;кол-во комнат: ' + ${o.quantityRoom}"></span>
-                <br/>
-                <span th:text="'&nbsp;площади комнат: ' + ${o.roomsSpaces} + ' м²'"></span>
-                <br/><br/>
-                <img class="offer-icons" src="/images/bathroom.svg" alt="bathroom">
-                <span th:text="'&nbsp;кол-во санузлов: ' + ${o.quantityToilet}"></span>
-                <br/>
-                <span th:text="'&nbsp;типы санузлов: ' + ${o.quantityToilet}"></span>
-                <br/><br/>
-                <img class="offer-icons" src="/images/brick.svg" alt="brick">
-                <span th:text="'&nbsp;строительные материалы: ' + ${o.material}"></span>
-                <br/><br/>
-                <img class="offer-icons" src="/images/parking.svg" alt="parking">
-                <span th:text="'&nbsp;парковка: ' + ${o.hasParking}"></span>
-                <br/>
-                <div th:if="${o.hasParking}">
-                    <span th:text="'&nbsp;тип парковки: ' + ${o.parkingType}"></span>
-                    <br/>
-                </div>
-                <br/>
-                <img class="offer-icons" src="/images/document.svg" alt="document">
-                <span th:text="'&nbsp;описание: ' + ${o.description}"></span>
-                <br/><br/>
-            </div>
-        </div>
-    </div>
+    <div th:with="offer=${offerDisplay}" th:insert="/blocks/params :: params(offer)"></div>
     <br/>
     <hr>
     <div th:with="host=${host}" th:unless="${host}">
         <a th:href="@{'/conversation/' + ${o.hostId} + '/' + ${o.id}}">
-            <!--                    <div th:insert="/blocks/buttons.html :: chat"></div>-->
             <div class="chat-btn">
                 <div class="btn f-group-btn inner-chat-btn">
                     <img class="invert" alt="chat" src="/images/chat.svg">
