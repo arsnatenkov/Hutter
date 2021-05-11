@@ -10,7 +10,7 @@
 <!--    <div th:with="offer=${offerSearch}" th:insert="/blocks/forms :: search(offer)"></div>-->
     <div class="offer-search">
         <form th:object="${offerSearch}" th:action="@{/search}"
-              method="post" class="search-form">
+              method="get" class="search-form">
             <table>
                 <tr>
                     <td class="search-form-col">
@@ -20,15 +20,15 @@
                             </span>
                             <div class="rooms-num-panel">
                                 <span class="txt1">Студия</span>
-                                <input th:value="0" th:field="*{rooms}" type="checkbox" name="0"/><br/>
+                                <input th:value="0" th:field="*{noRooms}" type="checkbox" /><br/>
                                 <span class="txt1">1</span>
-                                <input th:value="1" th:field="*{rooms}" type="checkbox" name="1"/>
+                                <input th:value="1" th:field="*{rooms1}" type="checkbox" />
                                 <span class="txt1">2</span>
-                                <input th:value="2" th:field="*{rooms}" type="checkbox" name="2"/>
+                                <input th:value="2" th:field="*{rooms2}" type="checkbox" />
                                 <span class="txt1">3</span>
-                                <input th:value="3" th:field="*{rooms}" type="checkbox" name="3"/>
+                                <input th:value="3" th:field="*{rooms3}" type="checkbox" />
                                 <span class="txt1">4+</span>
-                                <input th:value="4" th:field="*{rooms}" type="checkbox" name="4"/>
+                                <input th:value="4" th:field="*{manyRooms}" type="checkbox" />
                             </div>
                         </div>
                     </td>

@@ -1,12 +1,10 @@
 package application.controller;
 
-import application.converter.UserDtoToUser;
 import application.converter.UserToUserDto;
 import application.dto.MessageDTO;
 import application.dto.UserDTO;
 import application.entity.Offer;
 import application.entity.User;
-import application.service.FavouriteService;
 import application.service.MessageService;
 import application.service.OfferService;
 import application.service.UserService;
@@ -64,39 +62,6 @@ public class MessageController {
         model.addAttribute("emptyList", recentMessages.isEmpty());
         return "messages";
     }
-
-//    @GetMapping(value = "/conversation/{companionId}/{offerId}")
-//    public ModelAndView getConversation(@PathVariable("companionId") Long companionId,
-//                                        @PathVariable("offerId") Integer offerId,
-//                                        Model model) {
-//
-//        Offer offer = offerService.findById(offerId);
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        ModelAndView modelAndView = new ModelAndView();
-//
-//        addConversationToModel(companionId, model, offer);
-//        model.addAttribute("newMessage", new MessageDTO());
-//        modelAndView.setViewName("/conversation");
-//        model.addAttribute("offerDisplay", offer);
-//
-//        return modelAndView;
-//    }
-//
-//    @PostMapping(value = "/conversation/{companionId}/{offerId}")
-//    public String postMessage(@PathVariable("companionId") Long companionId,
-//                              @PathVariable("offerId") Integer offerId,
-//                              @Valid @ModelAttribute("newMessage") MessageDTO messageDTO,
-//                              BindingResult bindingResult,
-//                              Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//            addConversationToModel(companionId, model, offerService.findById(offerId));
-//            return "conversation";
-//        }
-//
-//        messageDTOCustom(messageDTO, companionId, offerId);
-//        return "redirect:/conversation/" + messageDTO.getReceiver().getId() + "/" + offerId;
-//    }
 
     @GetMapping(value = "/conversationHost/{companionId}/{offerId}")
     public ModelAndView getConversationHost(@PathVariable("companionId") Long companionId,
