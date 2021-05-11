@@ -69,7 +69,7 @@ public class LandingController {
             offers.addAll(offerService.findByQuantityRoomMoreFour());
         }
 
-        if(offers.isEmpty()){
+        if(!offers.isEmpty()){
             for (Offer offer : offers) {
                 if(offer.getCost() < lowerCost || offer.getCost() > higherCost){
                     offers.remove(offer);
@@ -79,7 +79,8 @@ public class LandingController {
             offers.addAll(offerService.findByCostBetween(lowerCost, higherCost));
         }
 
-        if(noRooms == null && roomsOne == null && roomsTwo == null && roomsThree == null && roomsMore == null && lowerCostBound.isEmpty() && higherCostBound.isEmpty()){
+        if(noRooms == null && roomsOne == null && roomsTwo == null && roomsThree == null && roomsMore == null
+                && lowerCostBound.isEmpty() && higherCostBound.isEmpty()){
             offers.addAll(offerService.findAll());
         }
 
