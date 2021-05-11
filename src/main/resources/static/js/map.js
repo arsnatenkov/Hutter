@@ -15,21 +15,19 @@ function init() {
             center: [55.754096, 37.649238],
             zoom: 16,
             behaviors: ['drag'],
-            controls: ['zoomControl', 'searchControl'], //, 'fullscreenControl'
+            controls: ['zoomControl', 'searchControl'],
         }),
-        counter = 0,
         clusterer = new ymaps.Clusterer({
             preset: 'islands#grayClusterIcons',
             groupByCoordinates: false,
             clusterDisableClickZoom: true,
-            clusterHideIconOnBalloonOpen: false, // прячем иконку при открытии баллуна
+            clusterHideIconOnBalloonOpen: false,
             geoObjectHideIconOnBalloonOpen: false,
             clusterBalloonContentLayout: customBalloonContentLayout,
         }),
         addresses = [],
         ids = [],
-        spaces = [],
-        geoObjects = [];
+        spaces = [];
 
     /**
      * Кластеризатор расширяет коллекцию, что позволяет использовать один обработчик
@@ -37,19 +35,16 @@ function init() {
      * Будем менять цвет иконок и кластеров при наведении.
      */
     clusterer.events
-        // Можно слушать сразу несколько событий, указывая их имена в массиве.
         .add(['mouseenter', 'mouseleave'], function (e) {
             var target = e.get('target'),
                 type = e.get('type');
             if (typeof target.getGeoObjects != 'undefined') {
-                // Событие произошло на кластере.
                 if (type === 'mouseenter') {
                     target.options.set('preset', 'islands#blackClusterIcons');
                 } else {
                     target.options.set('preset', 'islands#grayClusterIcons');
                 }
             } else {
-                // Событие произошло на геообъекте.
                 if (type === 'mouseenter') {
                     target.options.set('preset', 'islands#blackCircleDotIcon');
                 } else {
@@ -73,8 +68,6 @@ function init() {
             BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
                 '<div class="balloon-content">' +
                 '<a href="/offer?id={{ properties.offerId }}">{{properties.name}}</a><br />' +
-                // '<i id="count"></i> ' +
-                // '<button id="counter-button"> [+1] </button>' +
                 '</div>', {
                     build: function () {
                         BalloonContentLayout.superclass.build.call(this);
@@ -95,84 +88,76 @@ function init() {
                         }
                     }
                 });
-
-            MyBalloonLayout = ymaps.templateLayoutFactory.createClass(
-                '<div class="popover top">' +
-                '<a class="close" href="#">&times;</a>' +
-                '<div class="arrow"></div>' +
-                '<div class="popover-inner">' +
-                '$[[options.contentLayout observeSize minWidth=235 maxWidth=235 maxHeight=350]]' +
-                '</div>' +
-                '</div>', {
-                    build: function () {
-                        this.constructor.superclass.build.call(this);
-                        this._$element = $('.popover', this.getParentElement());
-                        this.applyElementOffset();
-                        this._$element.find('.close')
-                            .on('click', $.proxy(this.onCloseClick, this));
-                    },
-                    clear: function () {
-                        this._$element.find('.close')
-                            .off('click');
-                        this.constructor.superclass.clear.call(this);
-                    },
-                    onSublayoutSizeChange: function () {
-                        MyBalloonLayout.superclass.onSublayoutSizeChange.apply(this, arguments);
-                        if (!this._isElement(this._$element)) {
-                            return;
-                        }
-                        this.applyElementOffset();
-                        this.events.fire('shapechange');
-                    },
-                    applyElementOffset: function () {
-                        // this._$element.css({
-                        //     left: -(this._$element[0].offsetWidth / 2),
-                        //     top: -(this._$element[0].offsetHeight + this._$element.find('.arrow')[0].offsetHeight)
-                        // });
-                    },
-                    onCloseClick: function (e) {
-                        e.preventDefault();
-                        this.events.fire('userclose');
-                    },
-                    getShape: function () {
-                        if (!this._isElement(this._$element)) {
-                            return MyBalloonLayout.superclass.getShape.call(this);
-                        }
-                        var position = this._$element.position();
-                        return new ymaps.shape.Rectangle(new ymaps.geometry.pixel.Rectangle([
-                            [position.left, position.top], [
-                                position.left + this._$element[0].offsetWidth,
-                                position.top + this._$element[0].offsetHeight + this._$element.find('.arrow')[0].offsetHeight
-                            ]
-                        ]));
-                    },
-                    _isElement: function (element) {
-                        return element && element[0] && element.find('.arrow')[0];
-                    }
-                });
+            //
+            // MyBalloonLayout = ymaps.templateLayoutFactory.createClass(
+            //     '<div class="popover top">' +
+            //     '<a class="close" href="#">&times;</a>' +
+            //     '<div class="arrow"></div>' +
+            //     '<div class="popover-inner">' +
+            //     '$[[options.contentLayout observeSize minWidth=235 maxWidth=235 maxHeight=350]]' +
+            //     '</div>' +
+            //     '</div>', {
+            //         build: function () {
+            //             this.constructor.superclass.build.call(this);
+            //             this._$element = $('.popover', this.getParentElement());
+            //             this.applyElementOffset();
+            //             this._$element.find('.close')
+            //                 .on('click', $.proxy(this.onCloseClick, this));
+            //         },
+            //         clear: function () {
+            //             this._$element.find('.close')
+            //                 .off('click');
+            //             this.constructor.superclass.clear.call(this);
+            //         },
+            //         onSublayoutSizeChange: function () {
+            //             MyBalloonLayout.superclass.onSublayoutSizeChange.apply(this, arguments);
+            //             if (!this._isElement(this._$element)) {
+            //                 return;
+            //             }
+            //             this.applyElementOffset();
+            //             this.events.fire('shapechange');
+            //         },
+            //         applyElementOffset: function () {
+            //             // this._$element.css({
+            //             //     left: -(this._$element[0].offsetWidth / 2),
+            //             //     top: -(this._$element[0].offsetHeight + this._$element.find('.arrow')[0].offsetHeight)
+            //             // });
+            //         },
+            //         onCloseClick: function (e) {
+            //             e.preventDefault();
+            //             this.events.fire('userclose');
+            //         },
+            //         getShape: function () {
+            //             if (!this._isElement(this._$element)) {
+            //                 return MyBalloonLayout.superclass.getShape.call(this);
+            //             }
+            //             var position = this._$element.position();
+            //             return new ymaps.shape.Rectangle(new ymaps.geometry.pixel.Rectangle([
+            //                 [position.left, position.top], [
+            //                     position.left + this._$element[0].offsetWidth,
+            //                     position.top + this._$element[0].offsetHeight + this._$element.find('.arrow')[0].offsetHeight
+            //                 ]
+            //             ]));
+            //         },
+            //         _isElement: function (element) {
+            //             return element && element[0] && element.find('.arrow')[0];
+            //         }
+            //     });
 
             var placemark = new ymaps.Placemark(coord, {
                 name: addresses[j],
-                // balloonContent: addresses[j],
-                // clusterCaption: spaces[j],
                 balloonContentHeader: spaces[j],
                 balloonContentBody: addresses[j],
                 placemarkId: j,
                 offerId: ids[j],
             }, {
-                // iconLayout: 'default#image',
-                // iconImageSize: [20, 20],
-                // iconImageHref: "/images/search.svg",
                 preset: 'islands#grayCircleDotIcon',
                 balloonPanelMaxMapArea: 0,
                 hideIconOnBalloonOpen: false,
                 balloonOffset: [0, -10],
-                // balloonLayout: MyBalloonLayout,
                 balloonContentLayout: BalloonContentLayout,
-
             });
 
-            // myMap.geoObjects.add(placemark);
             clusterer.add(placemark);
         });
     }
@@ -182,7 +167,6 @@ function init() {
         clusterDisableClickZoom: true
     });
 
-    // clusterer.add(geoObjects);
     myMap.geoObjects.add(clusterer);
 
     myMap.setBounds(clusterer.getBounds(), {

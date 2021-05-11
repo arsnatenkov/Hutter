@@ -7,77 +7,27 @@
     <div id="map"></div>
 </div>
 <div class="offer-search-wrap">
-<!--    <div th:with="offer=${offerSearch}" th:insert="/blocks/forms :: search(offer)"></div>-->
-    <div class="offer-search">
-        <form th:object="${offerSearch}" th:action="@{/search}"
-              method="get" class="search-form">
-            <table>
-                <tr>
-                    <td class="search-form-col">
-                        <div class="rooms-selector">
-                            <span class="txt1">
-                                Количество комнат:
-                            </span>
-                            <div class="rooms-num-panel">
-                                <span class="txt1">Студия</span>
-                                <input th:value="0" th:field="*{noRooms}" type="checkbox" /><br/>
-                                <span class="txt1">1</span>
-                                <input th:value="1" th:field="*{rooms1}" type="checkbox" />
-                                <span class="txt1">2</span>
-                                <input th:value="2" th:field="*{rooms2}" type="checkbox" />
-                                <span class="txt1">3</span>
-                                <input th:value="3" th:field="*{rooms3}" type="checkbox" />
-                                <span class="txt1">4+</span>
-                                <input th:value="4" th:field="*{manyRooms}" type="checkbox" />
-                            </div>
-                        </div>
-                    </td>
-                    <td class="search-form-col">
-                        <div class="cost-selector">
-                            <span class="txt1">
-                                Стоимость:
-                            </span>
-                            <div class="cost-borders">
-                                <input th:field="*{lowerCostBound}" placeholder="от"
-                                       autocomplete="off" class="input" type="text" name="low">
-                                <input th:field="*{higherCostBound}" placeholder="до"
-                                       autocomplete="off" class="input" type="text" name="high">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="container-login-form-btn m-t-17">
-                            <button name="submit" type="submit" class="search-btn">
-                                <div class="btn f-group-btn">
-                                    <img class="invert" src="/images/search.svg" alt="search">
-                                </div>
-                            </button>
-                            <div class="wide txt1 validation-message" th:if="${param.error}">
-                                Введены неверные данные.
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
+    <div th:with="offer=${offerSearch}" th:insert="/blocks/forms :: search(offer)"></div>
 </div>
 
 <div class="link-list">
     <ul id="panel-group" th:each="o : ${offerDescriptions}">
+        <!--    <ul id="panel-group" th:each="o : ${offerDescriptions}">-->
         <li>
             <div class="link-list">
                 <table>
                     <tr>
                         <td class="offer-pic">
                             <div>
-                                <img th:src="'/images/offer/offer' + ${o.id} + '.jpg'"
+                                <img th:src="'/images/offer/' + ${o.id % 12} + '.jpg'"
                                      alt="Фото объявления"/>
                             </div>
                         </td>
                         <td>
                             <a class="offer " th:id="${o.id}" th:href="@{'/offer?id=' + ${o.id}}"
-                               th:text="${o.address}"></a><br/>
+                               th:text="${o.address}"></a>
+                            <embed class="space" hidden="true" th:text="${o.totalArea}">
+                            <br/>
                             <img class="offer-icons" src="/images/ruble.svg" alt="ruble">
                             <span th:text="'&nbsp;цена: ' + ${o.cost} + ' ₽'"></span>
                             <br/><br/>

@@ -22,7 +22,6 @@ public class LandingController {
     @Autowired
     private OfferService offerService;
 
-
     @GetMapping(value = "/")
     public ModelAndView landing(Model model) {
         ModelAndView modelAndView = new ModelAndView();
@@ -44,12 +43,11 @@ public class LandingController {
         String roomsMore = request.getParameter("manyRooms");
         String lowerCostBound = request.getParameter("lowerCostBound");
         String higherCostBound = request.getParameter("higherCostBound");
-        long lowerCost = 0L;
-        long higherCost = Long.MAX_VALUE;
-        if(!lowerCostBound.isEmpty()){
+        long lowerCost = 0L, higherCost = Long.MAX_VALUE;
+        if (!lowerCostBound.isEmpty()) {
             lowerCost = Long.parseLong(lowerCostBound);
         }
-        if(!higherCostBound.isEmpty()){
+        if (!higherCostBound.isEmpty()) {
             higherCost = Long.parseLong(higherCostBound);
         }
 
@@ -69,23 +67,32 @@ public class LandingController {
             offers.addAll(offerService.findByQuantityRoomMoreFour());
         }
 
-        if(!offers.isEmpty()){
+        if (!offers.isEmpty()) {
             for (Offer offer : offers) {
-                if(offer.getCost() < lowerCost || offer.getCost() > higherCost){
+                if (offer.getCost() < lowerCost || offer.getCost() > higherCost) {
                     offers.remove(offer);
                 }
             }
-        }else{
+        } else {
             offers.addAll(offerService.findByCostBetween(lowerCost, higherCost));
         }
 
-        if(noRooms == null && roomsOne == null && roomsTwo == null && roomsThree == null && roomsMore == null
-                && lowerCostBound.isEmpty() && higherCostBound.isEmpty()){
+        if (noRooms == null && roomsOne == null && roomsTwo == null && roomsThree == null &&
+                roomsMore == null && lowerCostBound.isEmpty() && higherCostBound.isEmpty()) {
             offers.addAll(offerService.findAll());
         }
 
         modelAndView.addObject("offerSearch", new OfferSearch());
+        List<List<Offer>> multipleLists = new ArrayList<>();
+        for (int i = 0; i < (int) offers.size() / 10; i += 10) {
+            multipleLists.add(new ArrayList<>());
+            for (int j = 0; j < 10; ++j) {
+                multipleLists.get(i).add(offers.get(i + j));
+            }
+        }
+
         model.addAttribute("offerDescriptions", offers);
+        model.addAttribute("multipleOfferLists", multipleLists);
         modelAndView.setViewName("landing");
         return modelAndView;
     }
