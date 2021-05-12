@@ -7,9 +7,9 @@
 <div class="wrapper">
     <div class="tab">
         <div class="tab-aligner">
-            <button class="tablinks" onclick="openTab(event, 'Settings')" id="defaultOpen">
-                <img alt="settings" src="/images/user/settings.svg">&nbsp;Настройки
-            </button>
+<!--            <button class="tablinks" onclick="openTab(event, 'Settings')" id="defaultOpen">-->
+<!--                <img alt="settings" src="/images/user/settings.svg">&nbsp;Настройки-->
+<!--            </button>-->
             <button class="tablinks" onclick="openTab(event, 'HostedOffers')">
                 <img alt="hosted" src="/images/user/crown.svg">&nbsp;Ваши&nbsp;объявления
             </button>
@@ -19,9 +19,9 @@
             <button class="tablinks" onclick="openTab(event, 'AddOffer')">
                 <img alt="create" src="/images/user/plus.svg">&nbsp;Создать
             </button>
-            <button class="tablinks" onclick="openTab(event, 'Messages')">
-                <img alt="chat" src="/images/user/chat.svg">&nbsp;Сообщения
-            </button>
+<!--            <button class="tablinks" onclick="openTab(event, 'Messages')">-->
+<!--                <img alt="chat" src="/images/user/chat.svg">&nbsp;Сообщения-->
+<!--            </button>-->
             <button class="tablinks" onclick="openTab(event, 'Logout')">
                 <img alt="logout" src="/images/user/logout.svg">&nbsp;Выйти
             </button>
@@ -39,8 +39,8 @@
     <div id="HostedOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Ваши объявления</h3>
-        <ul th:each="h : ${hostedOffers}">
-            <li class="offer-list">
+        <ul>
+            <li class="offer-list" th:each="h : ${hostedOffers}">
                 <a class="offer list-norm-font" th:id="${h.id}"
                    th:href="'/messages/' + ${h.id}" th:text="${h.address}">
                 </a>
@@ -58,8 +58,8 @@
     <div id="FavouriteOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Избранные объявления</h3>
-        <ul th:each="f : ${favouriteOffers}">
-            <li class="offer-list">
+        <ul>
+            <li class="offer-list" th:each="f : ${favouriteOffers}">
                 <a th:href="@{'/offer?id=' + ${f.offerId}}"
                    class="offer list-norm-font" th:id="${f.offerId}" th:text="${f.address}">
                 </a>

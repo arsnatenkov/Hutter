@@ -10,6 +10,7 @@
 .f-group-btn {
     margin-top: -10px;
     margin-bottom: 10px;
+    margin-right: 0;
     height: 40px;
     background: #333333;
     box-shadow: none;
@@ -155,6 +156,7 @@ a.offer {
 
 .list-norm-font {
     font-size: 14px;
+    width: 80%;
 }
 
 .conv-wrap {

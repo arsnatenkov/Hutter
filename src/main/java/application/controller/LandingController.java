@@ -4,8 +4,11 @@ import application.entity.Offer;
 import application.entity.OfferSearch;
 import application.entity.OffersTab;
 import application.service.OfferService;
+import groovy.lang.Tuple2;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.internal.util.stereotypes.Immutable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,16 +24,10 @@ public class LandingController {
 
     @Autowired
     private OfferService offerService;
+    private Tuple2<List<Offer>, List<Integer>> preprocess(List<Offer> offers, String page){
 
-    private ModelAndView pageDisplay(Model model, String page) {
-        List<Offer> offers = offerService.findAll();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("offerSearch", new OfferSearch());
-        model.addAttribute("offerDescriptions", offerService.findAll());
-
-        modelAndView.addObject("offerSearch", new OfferSearch());
-        ArrayList<Integer> tabsLen = new ArrayList<>();
-        ArrayList<ArrayList<Offer>> lst = new ArrayList<>();
+        List<Integer> tabsLen = new ArrayList<>();
+        List<List<Offer>> lst = new ArrayList<>();
         for (int i = 0; i < offers.size() / 15; ++i) {
             ArrayList<Offer> tabList = new ArrayList<>();
             for (int j = 0; j < 15; ++j) {
@@ -50,32 +47,31 @@ public class LandingController {
             lst.add(tabList);
             tabsLen.add(tabsLen.size());
         }
-
-        if (page.isBlank()) {
-            model.addAttribute("offersTab", new OffersTab(lst).getList());
-        } else {
-            model.addAttribute("offersTab",
-                    new OffersTab(lst).getList(Integer.parseInt(page)));
+        if(offers.isEmpty()){
+            return new Tuple2<>(new ArrayList<>(), tabsLen);
         }
+        return new Tuple2<>(lst.get(Integer.parseInt(page)), tabsLen);
+    }
+    @GetMapping(value = "/")
+    public ModelAndView landing(Model model, HttpServletRequest request) {
 
-        model.addAttribute("tabsLen", tabsLen);
+        String page = request.getParameter("page");
+        if(page == null){
+            page = "0";
+        }
+        List<Offer> offers = offerService.findAll();
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.addObject("offerSearch", new OfferSearch());
+        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, page);
+        model.addAttribute("offersTab", tuple.getFirst());
+        model.addAttribute("tabsLen", tuple.getSecond());
         modelAndView.setViewName("landing");
         return modelAndView;
     }
 
-    @GetMapping(value = "/")
-    public ModelAndView landing(Model model) {
-        return pageDisplay(model, "");
-    }
-
-    @GetMapping(value = "/page")
-    public ModelAndView landing(Model model, HttpServletRequest request) {
-        String page = request.getParameter("page");
-        return pageDisplay(model, page);
-    }
-
     @GetMapping(value = "/search")
-    public ModelAndView registration(HttpServletRequest request, Model model) { // like common landing
+    public ModelAndView search(HttpServletRequest request, Model model) { // like common landing
         ModelAndView modelAndView = new ModelAndView();
         List<Offer> offers = new ArrayList<>();
         String noRooms = request.getParameter("noRooms");
@@ -123,8 +119,10 @@ public class LandingController {
                 roomsMore == null && lowerCostBound.isEmpty() && higherCostBound.isEmpty()) {
             offers.addAll(offerService.findAll());
         }
-
-        model.addAttribute("offerDescriptions", offers);
+        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, "0");
+        model.addAttribute("offersTab", tuple.getFirst());
+        model.addAttribute("tabsLen", tuple.getSecond());
+        modelAndView.addObject("offerSearch", new OfferSearch());
         modelAndView.setViewName("landing");
         return modelAndView;
     }

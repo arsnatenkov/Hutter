@@ -52,6 +52,7 @@ function init() {
         addresses[q] = document.getElementsByClassName("offer")[q].innerHTML;
         ids[q] = document.getElementsByClassName("offer")[q].getAttribute("id");
         spaces[q] = document.getElementsByClassName("space")[q].getAttribute("id");
+        spaces[q] = spaces[q].replace('общая площать: ', '');
     }
 
     for (var i = 0, len = addresses.length; i < len; ++i) {
