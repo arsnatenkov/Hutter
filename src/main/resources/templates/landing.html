@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head th:replace="/blocks/header.html :: header('Домашняя страница')"></head>
 
 <body class="scroll">
@@ -11,10 +11,9 @@
 </div>
 
 <div class="link-list">
-    <ul id="panel-group" th:each="o : ${offerDescriptions}">
-        <!--    <ul id="panel-group" th:each="o : ${offerDescriptions}">-->
+    <ul id="panel-group" th:each="o : ${offersTab}">
         <li>
-            <div class="link-list">
+            <div class="link-list-item">
                 <table>
                     <tr>
                         <td class="offer-pic">
@@ -25,14 +24,13 @@
                         </td>
                         <td>
                             <a class="offer " th:id="${o.id}" th:href="@{'/offer?id=' + ${o.id}}"
-                               th:text="${o.address}"></a>
-                            <embed class="space" hidden="true" th:text="${o.totalArea}">
-                            <br/>
+                               th:text="${o.address}"></a><br/>
                             <img class="offer-icons" src="/images/ruble.svg" alt="ruble">
                             <span th:text="'&nbsp;цена: ' + ${o.cost} + ' ₽'"></span>
                             <br/><br/>
                             <img class="offer-icons" src="/images/plans.svg" alt="plans">
-                            <span th:text="'&nbsp;общая площадь: ' + ${o.totalArea} + ' м²'"></span>
+                            <span th:id="${o.totalArea} + ' м²'" class="space"
+                                  th:text="'&nbsp;общая площадь: ' + ${o.totalArea} + ' м²'"></span>
                             <br/><br/>
                             <img class="offer-icons" src="/images/floor.svg" alt="floor">
                             <span th:text="'&nbsp;этаж: ' + ${o.floor} + ' из ' + ${o.floorMax}"></span>
@@ -52,7 +50,13 @@
     </ul>
 </div>
 
-<div class="name gradient hat">HUTTER</div>
+<div class="landing-tabs">
+    <div th:each="tab : ${tabsLen}">
+        <a th:text="${tab + 1}" th:href="@{'/?page=' + ${tab}}"></a>
+    </div>
+</div>
+<br/>
+<div th:insert="blocks/hat :: hat"></div>
 <div th:insert="blocks/menu :: menu"></div>
 </body>
 </html>

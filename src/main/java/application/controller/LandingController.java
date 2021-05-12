@@ -2,7 +2,7 @@ package application.controller;
 
 import application.entity.Offer;
 import application.entity.OfferSearch;
-import application.service.OfferSearchService;
+import application.entity.OffersTab;
 import application.service.OfferService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,56 @@ public class LandingController {
     @Autowired
     private OfferService offerService;
 
-    @GetMapping(value = "/")
-    public ModelAndView landing(Model model) {
+    private ModelAndView pageDisplay(Model model, String page) {
+        List<Offer> offers = offerService.findAll();
         ModelAndView modelAndView = new ModelAndView();
-
         modelAndView.addObject("offerSearch", new OfferSearch());
         model.addAttribute("offerDescriptions", offerService.findAll());
+
+        modelAndView.addObject("offerSearch", new OfferSearch());
+        ArrayList<Integer> tabsLen = new ArrayList<>();
+        ArrayList<ArrayList<Offer>> lst = new ArrayList<>();
+        for (int i = 0; i < offers.size() / 15; ++i) {
+            ArrayList<Offer> tabList = new ArrayList<>();
+            for (int j = 0; j < 15; ++j) {
+                tabList.add(offers.get(j + i * 15));
+            }
+            lst.add(tabList);
+            tabsLen.add(i);
+        }
+
+        if (offers.size() % 15 != 0) {
+            ArrayList<Offer> tabList = new ArrayList<>();
+            for (int j = offers.size() - 15; j < offers.size(); ++j) {
+                if (j >= 0) {
+                    tabList.add(offers.get(j));
+                }
+            }
+            lst.add(tabList);
+            tabsLen.add(tabsLen.size());
+        }
+
+        if (page.isBlank()) {
+            model.addAttribute("offersTab", new OffersTab(lst).getList());
+        } else {
+            model.addAttribute("offersTab",
+                    new OffersTab(lst).getList(Integer.parseInt(page)));
+        }
+
+        model.addAttribute("tabsLen", tabsLen);
         modelAndView.setViewName("landing");
         return modelAndView;
+    }
+
+    @GetMapping(value = "/")
+    public ModelAndView landing(Model model) {
+        return pageDisplay(model, "");
+    }
+
+    @GetMapping(value = "/page")
+    public ModelAndView landing(Model model, HttpServletRequest request) {
+        String page = request.getParameter("page");
+        return pageDisplay(model, page);
     }
 
     @GetMapping(value = "/search")
@@ -82,17 +124,7 @@ public class LandingController {
             offers.addAll(offerService.findAll());
         }
 
-        modelAndView.addObject("offerSearch", new OfferSearch());
-        List<List<Offer>> multipleLists = new ArrayList<>();
-        for (int i = 0; i < (int) offers.size() / 10; i += 10) {
-            multipleLists.add(new ArrayList<>());
-            for (int j = 0; j < 10; ++j) {
-                multipleLists.get(i).add(offers.get(i + j));
-            }
-        }
-
         model.addAttribute("offerDescriptions", offers);
-        model.addAttribute("multipleOfferLists", multipleLists);
         modelAndView.setViewName("landing");
         return modelAndView;
     }

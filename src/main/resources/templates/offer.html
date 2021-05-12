@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head th:replace="/blocks/header.html :: header('Объявление')"></head>
 <body class="scroll">
 <div th:with="o=${offerDisplay}" class="offer-wrapper flex-h">
@@ -38,6 +38,11 @@
     </div>
 </div>
 
+<div class="offer-images">
+        <img alt="Фото объявления" th:with="o=${offerDisplay}"
+             th:src="'/images/offer/' + ${o.id % 12} + '.jpg'"/>
+</div>
+<br/><br/>
 <div th:insert="blocks/hat :: hat"></div>
 <div th:insert="blocks/menu :: menu"></div>
 </body>

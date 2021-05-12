@@ -61,8 +61,7 @@ public class OfferController {
         List<Offer> offerExists = offerService.findByAddress(offer.getAddress());
 
         if (offerExists != null && offerExists.contains(offer)) {
-            bindingResult
-                    .rejectValue("address", "error.offer",
+            bindingResult.rejectValue("address", "error.offer",
                             "There is already an offer registered with same offer address provided");
         }
 
@@ -85,9 +84,9 @@ public class OfferController {
         User user = userService.findUserByUserName(auth.getName());
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
 
-        for (Favourite favourite1 : favourites) {
-            if (favourite1.getOfferId().equals(offerId)) {
-                favouriteService.deleteFavourite(favourite1);
+        for (Favourite favourite : favourites) {
+            if (favourite.getOfferId().equals(offerId)) {
+                favouriteService.deleteFavourite(favourite);
             }
         }
         return "redirect:/visitor/account";
@@ -97,7 +96,8 @@ public class OfferController {
     public String saveOffer(@PathVariable("offerId") Integer offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        Favourite favourite = new Favourite(user.getId(), offerId, offerService.findById(offerId).getAddress());
+        Favourite favourite =
+                new Favourite(user.getId(), offerId, offerService.findById(offerId).getAddress());
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
 
         boolean checker = false;
