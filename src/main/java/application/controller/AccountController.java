@@ -52,13 +52,12 @@ public class AccountController {
         List<Message> messages = messageService.findByOfferId(offer.get().getId());
         List<Favourite> favourites = favouriteService.findByOfferId(offer.get().getId());
         offerService.deleteOffer(offer.get());
-        for (Message message : messages) {
-            messageService.deleteMessage(message);
-        }
 
-        for (Favourite favourite : favourites) {
+        for (Message message : messages)
+            messageService.deleteMessage(message);
+
+        for (Favourite favourite : favourites)
             favouriteService.deleteFavourite(favourite);
-        }
 
         return "redirect:/visitor/account";
     }

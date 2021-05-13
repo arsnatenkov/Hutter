@@ -38,15 +38,11 @@ public class OfferService {
         return offerRepository.findAll();
     }
 
-    public Offer saveOffer(Offer offer) {
-        return offerRepository.save(offer);
+    public void saveOffer(Offer offer) {
+        offerRepository.save(offer);
     }
 
     public void deleteOffer(Offer offer) {
         offerRepository.delete(offer);
-    }
-
-    public List<Offer> findByQuantityRoomMoreFour(){
-        return offerRepository.findByQuantityRoomMoreFour();
     }
 }

@@ -13,9 +13,8 @@ public class MessageToMessageDto {
     private UserToUserDto userToUserDto;
 
     public MessageDTO convert(Message message, Long id) {
-        if(message == null) {
-            return null;
-        }
+        if (message == null) return null;
+
         return MessageDTO.builder()
                 .time(message.getTime())
                 .offerId(message.getOfferId())

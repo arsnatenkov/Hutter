@@ -79,3 +79,8 @@ img {
     margin-right: 10%;
     float: right;
 }
+
+.tablinks{
+    width: 200px;
+    margin: auto;
+}

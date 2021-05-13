@@ -1,6 +1,7 @@
 package application.repository;
 
 import application.entity.Offer;
+import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -10,11 +11,13 @@ import java.util.Optional;
 
 @Repository
 public interface OfferRepository extends JpaRepository<Offer, Long> {
+    @NonNull
     List<Offer> findAll();
 
     List<Offer> findByAddress(String address);
 
-    Optional<Offer> findById(Long publicId);
+    @NonNull
+    Optional<Offer> findById(@NonNull Long publicId);
 
     List<Offer> findByHostId(Long hostId);
 

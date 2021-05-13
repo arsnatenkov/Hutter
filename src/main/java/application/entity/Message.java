@@ -47,5 +47,4 @@ public class Message {
         time = LocalDateTime.now();
         message = sender.getName() + "joined";
     }
-
 }

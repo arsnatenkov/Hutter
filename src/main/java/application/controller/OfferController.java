@@ -39,11 +39,10 @@ public class OfferController {
         Optional<Offer> offer = offerService.findById(Long.parseLong(id));
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
-
         User user = userService.findUserByUserName(auth.getName());
 
         model.addAttribute("host", user != null && user.getId().equals(offer.get().getHostId()));
-        model.addAttribute("offerDisplay", offerService.findById(Long.parseLong(id)));
+        model.addAttribute("offerDisplay", offerService.findById(Long.parseLong(id)).get());
         modelAndView.setViewName("offer");
         return modelAndView;
     }
@@ -60,10 +59,10 @@ public class OfferController {
     public String createNewOffer(@Valid Offer offer, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         List<Offer> offerExists = offerService.findByAddress(offer.getAddress());
+        String message = "There is already an offer registered with same offer address provided";
 
         if (offerExists != null && offerExists.contains(offer)) {
-            bindingResult.rejectValue("address", "error.offer",
-                            "There is already an offer registered with same offer address provided");
+            bindingResult.rejectValue("address", "error.offer", message);
         }
 
         if (!bindingResult.hasErrors()) {
@@ -85,10 +84,9 @@ public class OfferController {
         User user = userService.findUserByUserName(auth.getName());
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
 
-        for (Favourite favourite : favourites) {
-            if (favourite.getOfferId().equals(offerId)) {
-                favouriteService.deleteFavourite(favourite);
-            }
+        for (Favourite f : favourites) {
+            if (f.getOfferId().equals(offerId))
+                favouriteService.deleteFavourite(f);
         }
         return "redirect:/visitor/account";
     }
@@ -97,20 +95,16 @@ public class OfferController {
     public String saveOffer(@PathVariable("offerId") Long offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        Favourite favourite =
-                new Favourite(user.getId(), offerId, offerService.findById(offerId).get().getAddress());
+        String address = offerService.findById(offerId).get().getAddress();
+        Favourite favourite = new Favourite(user.getId(), offerId, address);
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
 
         boolean checker = false;
-        for (Favourite f : favourites) {
-            if (equals(f, favourite)) {
-                checker = true;
-                break;
-            }
-        }
-        if (!checker) {
-            favouriteService.saveFavourite(favourite);
-        }
+        for (Favourite f : favourites)
+            if (!checker && equals(f, favourite)) checker = true;
+
+        if (!checker) favouriteService.saveFavourite(favourite);
+
         return "redirect:/offer?id=" + offerId;
     }
 

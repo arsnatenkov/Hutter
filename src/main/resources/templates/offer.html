@@ -38,10 +38,8 @@
     </div>
 </div>
 
-<div class="offer-images">
-        <img alt="Фото объявления" th:with="o=${offerDisplay}"
-             th:src="'/images/offer/' + ${o.id % 12} + '.jpg'"/>
-</div>
+<div th:with="offer=${offerDisplay}" th:insert="blocks/gallery :: gallery(offer)"></div>
+
 <br/><br/>
 <div th:insert="blocks/hat :: hat"></div>
 <div th:insert="blocks/menu :: menu"></div>

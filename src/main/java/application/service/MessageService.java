@@ -50,13 +50,6 @@ public class MessageService {
         return messages;
     }
 
-    @Transactional(readOnly = true)
-    public MessageDTO getRecentMessage(Long id) {
-        Message message = messageRepository.findFirstBySenderIdOrReceiverIdOrderByIdDesc(id, id);
-
-        return messageToMessageDto.convert(message, id);
-    }
-
     @Transactional
     public void postMessage(MessageDTO messageDTO) {
         Message message = messageDtoToMessage.convert(messageDTO);

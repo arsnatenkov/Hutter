@@ -8,6 +8,8 @@
     <div th:with="o=${offer}" th:insert="blocks/offer :: offer(o)"></div>
 </div>
 
+<div th:with="o=${offer}" th:insert="blocks/gallery :: gallery(o)"></div>
+
 <div class="content-flex">
     <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Переписка с </span>
         <a class="txt1 heading-chat" href="#">
@@ -16,7 +18,7 @@
     </div>
     <hr>
     <div class="force-scroll scroll conv-wrap">
-        <div class="col-md-9 m-l-15 m-r-15">
+        <div>
             <div class="msg-display-wrapper" th:each="m : ${messages}">
                 <div class="row-maker">
                     <div th:classappend="${m.sender.id==companion.id} ? 'left' : 'right'">

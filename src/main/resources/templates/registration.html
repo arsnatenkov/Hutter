@@ -3,12 +3,12 @@
 
 <head th:replace="/blocks/header.html :: header('Регистрация')"></head>
 <body class="scroll">
-<div class="wrap-login p-l-110 p-r-110 p-t-62 p-b-33 m-b-30">
+<div class="wrap-login">
     <p class="name gradient">HUTTER</p>
 
     <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}"
           method="post" role="form" class="login-form validate-form flex-sb flex-w">
-        <div class="wide p-t-31 p-b-9">
+        <div class="wide">
             <span class="txt1">Имя пользователя</span>
             <label th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"
                    class="txt1 validation-message"></label>
@@ -16,7 +16,7 @@
 
         <input autocomplete="off" class="input" type="text" th:field="*{userName}">
 
-        <div class="wide p-t-13 p-b-9">
+        <div class="wide">
             <span class="txt1">Эл. почта</span>
             <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
                    class="txt1 validation-message"></label>
@@ -30,14 +30,14 @@
         </div>
         <input autocomplete="off" type="text" th:field="*{name}" class="input">
 
-        <div class="wide p-t-13 p-b-9">
+        <div class="wide">
             <span class="txt1">Фамилия</span>
             <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
                    class="txt1 validation-message"></label>
         </div>
         <input autocomplete="off" type="text" th:field="*{lastName}" class="input">
 
-        <div class="wide p-t-13 p-b-9">
+        <div class="wide">
             <span class="txt1">Пароль</span>
             <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
                    class="txt1 validation-message"></label>
@@ -46,11 +46,11 @@
 
         <h2><span class="txt1" th:utext="${successMessage}"></span></h2>
 
-        <div class="container-login-form-btn m-t-17">
+        <div class="container-login-form-btn">
             <button type="submit" class="login-form-btn">Зарегистрироваться</button>
         </div>
 
-        <div class="w-full text-center p-t-55">
+        <div class="w-full text-center">
             <span class="txt2">Уже есть аккаунт?</span>
             <a th:href="@{/login}" class="txt2 bo1">Войти</a>
         </div>

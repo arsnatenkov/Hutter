@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -50,7 +49,6 @@ public class Offer {
     private Integer floor;
     @Column(name = "floor_max")
     private Integer floorMax;
-
 
     // общая площадь, жилая площадь, площадь кухни, площади комнат,
     // кол-во комнат, стоимость, сан. узлы, типы сан. узлов, материал здания,

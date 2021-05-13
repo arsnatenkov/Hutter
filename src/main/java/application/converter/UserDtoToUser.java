@@ -20,8 +20,9 @@ public class UserDtoToUser {
                 .name(userDTO.getName())
                 .lastName(userDTO.getLastName());
 
-        if (userDTO.getPassword() != null)
-            builder.password(passwordEncoder.encode(userDTO.getPassword()));
+        String password = userDTO.getPassword();
+
+        if (password != null) builder.password(passwordEncoder.encode(password));
 
         return builder.build();
     }

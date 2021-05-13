@@ -18,9 +18,9 @@ import java.util.HashSet;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private UserToUserDto userToUserDto;
 
@@ -37,32 +37,27 @@ public class UserService {
         return userRepository.findByEmailOrUserName(email, userName);
     }
 
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
     public User findUserByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
 
-    public User saveUser(User user) {
+    public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(true);
         Role userRole = roleRepository.findByRole("VISITOR");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Transactional(readOnly = true)
     public User getUser(Long id) {
-        return userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException(String.format("User with id = %s is not found", id)));
+        String message = "User with id = " + id + " is not found";
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(message));
     }
 
     @Transactional(readOnly = true)
     public UserDTO getUserById(Long id) {
-        User user = getUser(id);
-        return userToUserDto.convert(user);
+        return userToUserDto.convert(getUser(id));
     }
 
 }

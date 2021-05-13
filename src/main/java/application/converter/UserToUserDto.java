@@ -8,8 +8,7 @@ import org.springframework.stereotype.Component;
 public class UserToUserDto {
 
     public UserDTO convert(User user) {
-        if (user == null)
-            return null;
+        if (user == null) return null;
 
         return UserDTO.builder()
                 .id(user.getId())

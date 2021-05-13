@@ -40,12 +40,13 @@ public class MessageController {
     private void addConversationToModel(Long hostId, Model model, Optional<Offer> offer) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        List<MessageDTO> messages = messagesService.findConversation(user.getId(), hostId, offer.get().getId());
+        List<MessageDTO> messages =
+                messagesService.findConversation(user.getId(), hostId, offer.get().getId());
 
         model.addAttribute("messages", messages);
         model.addAttribute("companion", userService.getUserById(hostId));
         model.addAttribute("host", offer.get().getHostId().equals(user.getId()));
-        model.addAttribute("offer", offer);
+        model.addAttribute("offer", offer.get());
     }
 
     @GetMapping(value = "/messages/{offerId}")
@@ -65,7 +66,7 @@ public class MessageController {
     }
 
     @GetMapping(value = "/conversation/{companionId}/{offerId}")
-    public ModelAndView getConversationHost(@PathVariable("companionId") Long companionId,
+    public ModelAndView getConversation(@PathVariable("companionId") Long companionId,
                                             @PathVariable("offerId") Long offerId,
                                             Model model) {
 
@@ -73,6 +74,7 @@ public class MessageController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.findUserByUserName(auth.getName());
+
         if (user != null) {
             addConversationToModel(companionId, model, offer);
             model.addAttribute("newMessage", new MessageDTO());
@@ -82,7 +84,7 @@ public class MessageController {
     }
 
     @PostMapping(value = "/conversation/{companionId}/{offerId}")
-    public String postMessageHost(@PathVariable("companionId") Long companionId,
+    public String postMessage(@PathVariable("companionId") Long companionId,
                                   @PathVariable("offerId") Long offerId,
                                   @Valid @ModelAttribute("newMessage") MessageDTO messageDTO,
                                   BindingResult bindingResult,

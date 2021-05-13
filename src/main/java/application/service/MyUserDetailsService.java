@@ -1,7 +1,5 @@
 package application.service;
 
-import application.converter.UserDtoToUser;
-import application.dto.UserDTO;
 import application.entity.Role;
 import application.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,15 +29,19 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
     private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
-        Set<GrantedAuthority> roles = new HashSet<>();
-        for (Role role : userRoles) {
+        List<GrantedAuthority> roles = new ArrayList<>();
+
+        for (Role role : userRoles)
             roles.add(new SimpleGrantedAuthority(role.getRole()));
-        }
+
         return new ArrayList<>(roles);
     }
 
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
-                user.getActive(), true, true, true, authorities);
+        String userName = user.getUserName(), pwd = user.getPassword();
+
+        return new org.springframework.security.core.userdetails
+                .User(userName, pwd, user.getActive(),
+                true, true, true, authorities);
     }
 }

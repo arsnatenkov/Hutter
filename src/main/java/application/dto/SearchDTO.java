@@ -1,8 +1,6 @@
-package application.entity;
+package application.dto;
 
 import lombok.*;
-
-import javax.persistence.*;
 
 @Data
 @Getter
@@ -10,7 +8,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OfferSearch {
+public class SearchDTO {
     private Long id;
     private String noRooms;
     private String rooms1;

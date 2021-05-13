@@ -1,7 +1,7 @@
 package application.controller;
 
 import application.entity.Offer;
-import application.entity.OfferSearch;
+import application.dto.SearchDTO;
 import application.service.OfferService;
 import groovy.lang.Tuple2;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.lang.Math.min;
+
 @Controller
 @RequiredArgsConstructor
 public class LandingController {
@@ -23,44 +25,38 @@ public class LandingController {
     @Autowired
     private OfferService offerService;
 
-    private Tuple2<List<Offer>, List<Integer>> preprocess(List<Offer> offers, String page) {
+    private List<Offer> getTab(List<Offer> offers, int page) {
+        List<Offer> tab = new ArrayList<>();
 
+        for (int i = page * 15; i < min(page * 15 + 15, offers.size()); ++i)
+            tab.add(offers.get(i));
+
+        return tab;
+    }
+
+    private Tuple2<List<Offer>, List<Integer>> preprocess(List<Offer> offers, int page) {
         List<Integer> tabsLen = new ArrayList<>();
-        List<List<Offer>> lst = new ArrayList<>();
-        for (int i = 0; i < offers.size() / 15; ++i) {
-            ArrayList<Offer> tabList = new ArrayList<>();
-            for (int j = 0; j < 15; ++j) {
-                tabList.add(offers.get(j + i * 15));
-            }
-            lst.add(tabList);
-            tabsLen.add(i);
-        }
+        int maxLen = offers.size() / 15 + (offers.size() % 15 == 0 ? 0 : 1);
 
-        if (offers.size() % 15 != 0) {
-            ArrayList<Offer> tabList = new ArrayList<>();
-            for (int j = offers.size() - 15; j < offers.size(); ++j) {
-                if (j >= 0) {
-                    tabList.add(offers.get(j));
-                }
-            }
-            lst.add(tabList);
-            tabsLen.add(tabsLen.size());
-        }
-        if (offers.isEmpty()) {
-            return new Tuple2<>(new ArrayList<>(), tabsLen);
-        }
-        return new Tuple2<>(lst.get(Integer.parseInt(page)), tabsLen);
+        for (int i = 0; i < maxLen; ++i)
+            tabsLen.add(i);
+
+        if (page >= maxLen)
+            return new Tuple2<>(getTab(offers, 0), tabsLen);
+
+        return new Tuple2<>(getTab(offers, page), tabsLen);
     }
 
     @GetMapping(value = "/")
     public ModelAndView landing(Model model, HttpServletRequest request) {
-
-        String page = request.getParameter("page");
+        String param = request.getParameter("page");
+        int page = param == null ? 0 : Integer.parseInt(param);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("offerSearch", new OfferSearch());
+        modelAndView.addObject("offerSearch", new SearchDTO());
 
-        Tuple2<List<Offer>, List<Integer>> tuple =
-                preprocess(offerService.findAll(), page == null ? "0" : page);
+        List<Offer> offers = offerService.findAll();
+        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, page);
+
         model.addAttribute("offersTab", tuple.getFirst());
         model.addAttribute("tabsLen", tuple.getSecond());
 
@@ -69,75 +65,41 @@ public class LandingController {
     }
 
     @GetMapping(value = "/search")
-    public ModelAndView search(HttpServletRequest request, Model model) { // like common landing
+    public ModelAndView search(HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         List<Offer> offers = new ArrayList<>();
-//        String[] rooms = new String[5];
-        List<String> rooms = new ArrayList<>(5);
-        int i = 0;
-        rooms.set(i++, request.getParameter("noRooms"));
-        rooms.set(i++, request.getParameter("rooms1"));
-        rooms.set(i++, request.getParameter("rooms2"));
-        rooms.set(i++, request.getParameter("rooms3"));
-        rooms.set(i, request.getParameter("manyRooms"));
+        List<String> rooms = new ArrayList<>();
+        rooms.add(request.getParameter("noRooms"));
+        rooms.add(request.getParameter("rooms1"));
+        rooms.add(request.getParameter("rooms2"));
+        rooms.add(request.getParameter("rooms3"));
+        rooms.add(request.getParameter("manyRooms"));
 
-//        String noRooms = request.getParameter("noRooms");
-//        String roomsOne = request.getParameter("rooms1");
-//        String roomsTwo = request.getParameter("rooms2");
-//        String roomsThree = request.getParameter("rooms3");
-//        String roomsMore = request.getParameter("manyRooms");
-        String lowerCostBound = request.getParameter("lowerCostBound");
-        String higherCostBound = request.getParameter("higherCostBound");
-        final long lowerCost = lowerCostBound.isEmpty() ? 0L : Long.parseLong(lowerCostBound);
-        final long higherCost = higherCostBound.isEmpty() ? Long.MAX_VALUE : Long.parseLong(higherCostBound);
+        String lowerBound = request.getParameter("lowerCostBound");
+        String higherBound = request.getParameter("higherCostBound");
+        final long lowerCost = lowerBound.isEmpty() ? 0L : Long.parseLong(lowerBound);
+        final long higherCost = higherBound.isEmpty() ? Long.MAX_VALUE : Long.parseLong(higherBound);
 
-        for (i = 0; i < 5; ++i) {
+        for (int i = 0; i < 5; ++i) {
             if (rooms.get(i) != null) {
                 offers.addAll(offerService.findByQuantityRoom(Integer.parseInt(rooms.get(i))));
             }
         }
-//        if (noRooms != null) {
-//            offers.addAll(offerService.findByQuantityRoom(Integer.parseInt(noRooms)));
-//        }
-//        if (roomsOne != null) {
-//            offers.addAll(offerService.findByQuantityRoom(Integer.parseInt(roomsOne)));
-//        }
-//        if (roomsTwo != null) {
-//            offers.addAll(offerService.findByQuantityRoom(Integer.parseInt(roomsTwo)));
-//        }
-//        if (roomsThree != null) {
-//            offers.addAll(offerService.findByQuantityRoom(Integer.parseInt(roomsThree)));
-//        }
-//        if (roomsMore != null) {
-//            offers.addAll(offerService.findByQuantityRoomMoreFour());
-//        }
 
         if (offers.isEmpty()) {
             offers.addAll(offerService.findByCostBetween(lowerCost, higherCost));
         } else {
             offers.removeIf(o -> o.getCost() < lowerCost || o.getCost() > higherCost);
         }
-//        if (!offers.isEmpty()) {
-//            for (Offer offer : offers) {
-//                if (offer.getCost() < lowerCost || offer.getCost() > higherCost) {
-//                    offers.remove(offer);
-//                }
-//            }
-//        } else {
-//            offers.addAll(offerService.findByCostBetween(lowerCost, higherCost));
-//        }
 
-        if (rooms.stream().allMatch(Objects::isNull) &&
-//                noRooms == null && roomsOne == null && roomsTwo == null && roomsThree == null &&
-//                roomsMore == null &&
-                lowerCostBound.isEmpty() && higherCostBound.isEmpty()) {
+        if (rooms.stream().allMatch(Objects::isNull) && lowerBound.isEmpty() && higherBound.isEmpty()) {
             offers.addAll(offerService.findAll());
         }
 
-        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, "0");
+        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, 0);
         model.addAttribute("offersTab", tuple.getFirst());
         model.addAttribute("tabsLen", tuple.getSecond());
-        modelAndView.addObject("offerSearch", new OfferSearch());
+        modelAndView.addObject("offerSearch", new SearchDTO());
         modelAndView.setViewName("landing");
         return modelAndView;
     }
