@@ -45,4 +45,8 @@ public class OfferService {
     public void deleteOffer(Offer offer) {
         offerRepository.delete(offer);
     }
+
+    public List<Offer> findByQuantityRoomMoreFour(){
+        return offerRepository.findByQuantityRoomMoreFour();
+    }
 }
