@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface OfferRepository extends JpaRepository<Offer, Long> {
@@ -14,7 +14,7 @@ public interface OfferRepository extends JpaRepository<Offer, Long> {
 
     List<Offer> findByAddress(String address);
 
-    Offer findById(Integer publicId);
+    Optional<Offer> findById(Long publicId);
 
     List<Offer> findByHostId(Long hostId);
 

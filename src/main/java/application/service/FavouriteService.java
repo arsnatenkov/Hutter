@@ -18,7 +18,7 @@ public class FavouriteService {
         return favouriteRepository.findByUserId(userId);
     }
 
-    public List<Favourite> findByOfferId(Integer offerId){
+    public List<Favourite> findByOfferId(Long offerId){
         return favouriteRepository.findByOfferId(offerId);
     }
 

@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,20 +37,20 @@ public class MessageController {
     @Autowired
     private UserToUserDto userToUserDto;
 
-    private void addConversationToModel(Long hostId, Model model, Offer offer) {
+    private void addConversationToModel(Long hostId, Model model, Optional<Offer> offer) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-        List<MessageDTO> messages = messagesService.findConversation(user.getId(), hostId, offer.getId());
+        List<MessageDTO> messages = messagesService.findConversation(user.getId(), hostId, offer.get().getId());
 
         model.addAttribute("messages", messages);
         model.addAttribute("companion", userService.getUserById(hostId));
-        model.addAttribute("host", offer.getHostId().equals(user.getId()));
+        model.addAttribute("host", offer.get().getHostId().equals(user.getId()));
         model.addAttribute("offer", offer);
     }
 
     @GetMapping(value = "/messages/{offerId}")
     public String getMessages(Model model,
-                              @PathVariable("offerId") Integer offerId) {
+                              @PathVariable("offerId") Long offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         UserDTO userDTO = userToUserDto.convert(user);
@@ -57,7 +58,7 @@ public class MessageController {
 
         recentMessages = messagesService.findAllRecentMessages(userDTO.getId(), offerId);
         model.addAttribute("host", user != null
-                && user.getId().equals(offerService.findById(offerId).getHostId()));
+                && user.getId().equals(offerService.findById(offerId).get().getHostId()));
         model.addAttribute("recentMessages", recentMessages);
         model.addAttribute("emptyList", recentMessages.isEmpty());
         return "messages";
@@ -65,10 +66,10 @@ public class MessageController {
 
     @GetMapping(value = "/conversation/{companionId}/{offerId}")
     public ModelAndView getConversationHost(@PathVariable("companionId") Long companionId,
-                                            @PathVariable("offerId") Integer offerId,
+                                            @PathVariable("offerId") Long offerId,
                                             Model model) {
 
-        Offer offer = offerService.findById(offerId);
+        Optional<Offer> offer = offerService.findById(offerId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.findUserByUserName(auth.getName());
@@ -82,7 +83,7 @@ public class MessageController {
 
     @PostMapping(value = "/conversation/{companionId}/{offerId}")
     public String postMessageHost(@PathVariable("companionId") Long companionId,
-                                  @PathVariable("offerId") Integer offerId,
+                                  @PathVariable("offerId") Long offerId,
                                   @Valid @ModelAttribute("newMessage") MessageDTO messageDTO,
                                   BindingResult bindingResult,
                                   Model model) {
@@ -95,7 +96,7 @@ public class MessageController {
         return "redirect:/conversation/" + messageDTO.getReceiver().getId() + "/" + offerId;
     }
 
-    private void messageDTOCustom(MessageDTO messageDTO, Long companionId, Integer offerId) {
+    private void messageDTOCustom(MessageDTO messageDTO, Long companionId, Long offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         UserDTO userDTO = userToUserDto.convert(user);

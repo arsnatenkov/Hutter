@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -46,11 +47,11 @@ public class AccountController {
     }
 
     @GetMapping(value = "/delete/{offerId}")
-    public String deleteOffer(@PathVariable("offerId") Integer offerId) {
-        Offer offer = offerService.findById(offerId);
-        List<Message> messages = messageService.findByOfferId(offer.getId());
-        List<Favourite> favourites = favouriteService.findByOfferId(offer.getId());
-        offerService.deleteOffer(offer);
+    public String deleteOffer(@PathVariable("offerId") Long offerId) {
+        Optional<Offer> offer = offerService.findById(offerId);
+        List<Message> messages = messageService.findByOfferId(offer.get().getId());
+        List<Favourite> favourites = favouriteService.findByOfferId(offer.get().getId());
+        offerService.deleteOffer(offer.get());
         for (Message message : messages) {
             messageService.deleteMessage(message);
         }
