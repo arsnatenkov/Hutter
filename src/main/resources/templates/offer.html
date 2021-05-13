@@ -18,7 +18,7 @@
     <br/>
     <hr>
     <div th:with="host=${host}" th:unless="${host}">
-        <a th:href="@{'/conversationHost/' + ${o.hostId} + '/' + ${o.id}}">
+        <a th:href="@{'/conversation/' + ${o.hostId} + '/' + ${o.id}}">
             <div class="chat-btn">
                 <div class="btn f-group-btn inner-chat-btn">
                     <img class="invert" alt="chat" src="/images/chat.svg">

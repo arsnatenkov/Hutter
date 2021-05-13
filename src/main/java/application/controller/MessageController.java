@@ -63,7 +63,7 @@ public class MessageController {
         return "messages";
     }
 
-    @GetMapping(value = "/conversationHost/{companionId}/{offerId}")
+    @GetMapping(value = "/conversation/{companionId}/{offerId}")
     public ModelAndView getConversationHost(@PathVariable("companionId") Long companionId,
                                             @PathVariable("offerId") Integer offerId,
                                             Model model) {
@@ -75,12 +75,12 @@ public class MessageController {
         if (user != null) {
             addConversationToModel(companionId, model, offer);
             model.addAttribute("newMessage", new MessageDTO());
-            modelAndView.setViewName("/conversationHost");
+            modelAndView.setViewName("conversation");
         }
         return modelAndView;
     }
 
-    @PostMapping(value = "/conversationHost/{companionId}/{offerId}")
+    @PostMapping(value = "/conversation/{companionId}/{offerId}")
     public String postMessageHost(@PathVariable("companionId") Long companionId,
                                   @PathVariable("offerId") Integer offerId,
                                   @Valid @ModelAttribute("newMessage") MessageDTO messageDTO,
@@ -89,10 +89,10 @@ public class MessageController {
 
         if (bindingResult.hasErrors()) {
             addConversationToModel(companionId, model, offerService.findById(offerId));
-            return "conversationHost";
+            return "conversation";
         }
         messageDTOCustom(messageDTO, companionId, offerId);
-        return "redirect:/conversationHost/" + messageDTO.getReceiver().getId() + "/" + offerId;
+        return "redirect:/conversation/" + messageDTO.getReceiver().getId() + "/" + offerId;
     }
 
     private void messageDTOCustom(MessageDTO messageDTO, Long companionId, Integer offerId) {

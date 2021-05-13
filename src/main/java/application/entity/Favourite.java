@@ -3,6 +3,7 @@ package application.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -17,12 +18,15 @@ public class Favourite {
     private Long id;
 
     @Column(name = "offer_id")
+    @NotNull
     private Integer offerId;
 
     @Column(name = "user_id")
+    @NotNull
     private Long userId;
 
     @Column(name = "address")
+    @NotNull
     public String address;
 
     public Favourite(Long userId, Integer offerId, String address){

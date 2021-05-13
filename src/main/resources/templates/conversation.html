@@ -40,7 +40,7 @@
     <div class="msg-box">
         <div class="up">
             <form th:object="${newMessage}" method="post"
-                  th:action="@{'/conversationHost/{h}/{o}'(o=${offer.getId()},h=${companion.id})}">
+                  th:action="@{'/conversation/{h}/{o}'(o=${offer.getId()},h=${companion.id})}">
                 <table class="msg-hat">
                     <tr>
                         <td class="txt1 msg-head">

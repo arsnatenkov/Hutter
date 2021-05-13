@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -35,10 +36,6 @@ public class Offer {
     private String material;
     @Column(name = "address")
     private String address;
-    @Column(name = "coordinate_X")
-    private String coordinateX;
-    @Column(name = "coordinate_Y")
-    private String coordinateY;
     @Column(name = "description")
     private String description;
     @Column(name = "host_id")
@@ -54,23 +51,6 @@ public class Offer {
     @Column(name = "floor_max")
     private Integer floorMax;
 
-
-    @Override
-    public String toString() {
-        return getId() + ":"
-                + getTotalArea() + ":"
-                + getLiving() + ":"
-                + getQuantityRoom() + ":"
-                + getCost() + ":"
-                + getQuantityToilet() + ":"
-                + getType() + ":"
-                + getMaterial() + ":"
-                + getAddress() + ":"
-                + getCoordinateX() + ":"
-                + getCoordinateY() + ":"
-                + getHostId() + ":"
-                + getDescription() + ";";
-    }
 
     // общая площадь, жилая площадь, площадь кухни, площади комнат,
     // кол-во комнат, стоимость, сан. узлы, типы сан. узлов, материал здания,

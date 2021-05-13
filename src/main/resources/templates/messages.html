@@ -7,7 +7,7 @@
     <h2 th:text="#{messages.messages}">Переписки</h2>
     <hr>
     <div class="panel panel-default" th:each="m : ${recentMessages}">
-        <a th:href="@{'/conversationHost/' + ${m.companionId} + '/' + ${m.offerId}}">
+        <a th:href="@{'/conversation/' + ${m.companionId} + '/' + ${m.offerId}}">
             <div class="panel-heading">
                 <div class="card">
                     <span class="txt1 " th:fragment="messageUser(${m.sender})">

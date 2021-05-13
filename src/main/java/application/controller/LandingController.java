@@ -2,13 +2,10 @@ package application.controller;
 
 import application.entity.Offer;
 import application.entity.OfferSearch;
-import application.entity.OffersTab;
 import application.service.OfferService;
 import groovy.lang.Tuple2;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.internal.util.stereotypes.Immutable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
