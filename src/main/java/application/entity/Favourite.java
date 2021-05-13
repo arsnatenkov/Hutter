@@ -19,7 +19,7 @@ public class Favourite {
 
     @Column(name = "offer_id")
     @NotNull
-    private Integer offerId;
+    private Long offerId;
 
     @Column(name = "user_id")
     @NotNull
@@ -29,7 +29,7 @@ public class Favourite {
     @NotNull
     public String address;
 
-    public Favourite(Long userId, Integer offerId, String address){
+    public Favourite(Long userId, Long offerId, String address){
         this.offerId = offerId;
         this.userId = userId;
         this.address = address;

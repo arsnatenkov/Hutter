@@ -21,7 +21,7 @@ public class Message {
 
     @Column(name = "offer_id")
     @NotNull
-    private Integer offerId;
+    private Long offerId;
 
     @Column(name = "time")
     @NotNull

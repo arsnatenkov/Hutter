@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,14 +36,14 @@ public class OfferController {
     @GetMapping(value = "/offer")
     public ModelAndView offer(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");
-        Offer offer = offerService.findById(Integer.parseInt(id));
+        Optional<Offer> offer = offerService.findById(Long.parseLong(id));
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
 
         User user = userService.findUserByUserName(auth.getName());
 
-        model.addAttribute("host", user != null && user.getId().equals(offer.getHostId()));
-        model.addAttribute("offerDisplay", offerService.findById(Integer.parseInt(id)));
+        model.addAttribute("host", user != null && user.getId().equals(offer.get().getHostId()));
+        model.addAttribute("offerDisplay", offerService.findById(Long.parseLong(id)));
         modelAndView.setViewName("offer");
         return modelAndView;
     }
@@ -79,7 +80,7 @@ public class OfferController {
     }
 
     @GetMapping(value = "/deleteSaved/{offerId}")
-    public String deleteSavedOffer(@PathVariable("offerId") Integer offerId) {
+    public String deleteSavedOffer(@PathVariable("offerId") Long offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
@@ -93,11 +94,11 @@ public class OfferController {
     }
 
     @GetMapping(value = "/save/{offerId}")
-    public String saveOffer(@PathVariable("offerId") Integer offerId) {
+    public String saveOffer(@PathVariable("offerId") Long offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         Favourite favourite =
-                new Favourite(user.getId(), offerId, offerService.findById(offerId).getAddress());
+                new Favourite(user.getId(), offerId, offerService.findById(offerId).get().getAddress());
         List<Favourite> favourites = favouriteService.findByUserId(user.getId());
 
         boolean checker = false;

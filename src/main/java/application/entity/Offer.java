@@ -19,7 +19,7 @@ public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "offer_id")
-    private Integer id;
+    private Long id;
     @Column(name = "total_area")
     private Long totalArea;
     @Column(name = "living_space")

@@ -25,7 +25,7 @@ public class MessageService {
     private final MessageDtoToMessage messageDtoToMessage;
 
     @Transactional(readOnly = true)
-    public Collection<MessageDTO> findAllRecentMessages(Long id, Integer offerId) {
+    public Collection<MessageDTO> findAllRecentMessages(Long id, Long offerId) {
         Iterable<Message> all = messageRepository.findAllRecentMessages(id, offerId);
         Map<User, MessageDTO> map = new HashMap<>();
 
@@ -39,7 +39,7 @@ public class MessageService {
     }
 
     @Transactional(readOnly = true)
-    public List<MessageDTO> findConversation(Long userId, Long companionId, Integer offerId) {
+    public List<MessageDTO> findConversation(Long userId, Long companionId, Long offerId) {
         List<Message> all = messageRepository.findConversation(userId, companionId, offerId);
         List<MessageDTO> messages = new LinkedList<>();
 
@@ -63,7 +63,7 @@ public class MessageService {
         messageRepository.save(message);
     }
 
-    public List<Message> findByOfferId(Integer offerId) {
+    public List<Message> findByOfferId(Long offerId) {
         return messageRepository.findByOfferId(offerId);
     }
 

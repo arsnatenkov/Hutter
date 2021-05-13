@@ -6,10 +6,7 @@ import application.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class OfferService {
@@ -21,7 +18,7 @@ public class OfferService {
         return offerRepository.findByAddress(address);
     }
 
-    public Offer findById(Integer id) {
+    public Optional<Offer> findById(Long id) {
         return offerRepository.findById(id);
     }
 
