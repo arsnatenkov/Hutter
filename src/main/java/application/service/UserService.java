@@ -33,6 +33,10 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    public User findUserByEmailOrUserName(String email, String userName) {
+        return userRepository.findByEmailOrUserName(email, userName);
+    }
+
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -48,11 +52,13 @@ public class UserService {
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         return userRepository.save(user);
     }
+
     @Transactional(readOnly = true)
     public User getUser(Long id) {
         return userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException(String.format("User with id = %s is not found", id)));
     }
+
     @Transactional(readOnly = true)
     public UserDTO getUserById(Long id) {
         User user = getUser(id);
