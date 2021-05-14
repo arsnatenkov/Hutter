@@ -24,6 +24,4 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
                                    @Param("offerId") Long offerId);
 
     List<Message> findByOfferId(Long offerId);
-
-    Message findFirstBySenderIdOrReceiverIdOrderByIdDesc(Long userId, Long theSameUserId);
 }
