@@ -47,6 +47,9 @@ public class MessageController {
         model.addAttribute("companion", userService.getUserById(hostId));
         model.addAttribute("host", offer.get().getHostId().equals(user.getId()));
         model.addAttribute("offer", offer.get());
+        model.addAttribute("address", offer.get().getAddress());
+        model.addAttribute("totalArea", offer.get().getTotalArea());
+        model.addAttribute("id", offer.get().getId());
     }
 
     @GetMapping(value = "/messages/{offerId}")

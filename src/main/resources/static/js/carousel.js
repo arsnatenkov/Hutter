@@ -1,5 +1,4 @@
 function Sim(sldrId) {
-
     let id = document.getElementById(sldrId);
     this.sldrRoot = id ? id : document.querySelector('.sim-slider')
 

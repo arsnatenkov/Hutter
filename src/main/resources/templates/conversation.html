@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="ru">
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/blocks/header.html :: header('Объявление') "></head>
+<head th:replace="/blocks/header.html :: header('Объявление, обсуждение') "></head>
 <body class="scroll">
 
-<div th:with="host=${host}" th:unless="${host}">
-    <div th:with="o=${offer}" th:insert="blocks/offer :: offer(o)"></div>
+<div th:with="o=${offer}, host=${host}, address=${address}, total=${totalArea}, id=${id}" th:unless="${host}">
+    <div th:insert="blocks/offer :: offer(o, address, total, id)"></div>
+    <div th:insert="blocks/gallery :: gallery(o)"></div>
 </div>
 
-<div th:with="o=${offer}" th:insert="blocks/gallery :: gallery(o)"></div>
-
 <div class="content-flex">
-    <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Переписка с </span>
+    <div class="txt1 heading-chat"><span th:text="#{conversation.with}">Чат с </span>
         <a class="txt1 heading-chat" href="#">
             <span th:text="${companion.name}"></span>
         </a>

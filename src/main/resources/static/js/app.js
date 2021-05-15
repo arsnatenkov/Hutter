@@ -27,10 +27,6 @@ $measurer = function () {
         }
     }
 
-    function getHeight() {
-        return curHeight;
-    }
-
     function initBlock() {
         createBlock();
         $(window).resize(callFuncs);
@@ -113,7 +109,7 @@ $measurer = function () {
 
     function GradientLetters(jContainer, conf) {
         if (jContainer.find('span.gr-text').size() === 0) {
-            var jTextNodes = jContainer.contents().filter(function () {
+            jContainer.contents().filter(function () {
                 return (this.nodeType === 3 && /\S/.test(this.nodeValue))
             }).wrap('<span class="gr-text" />');
 
