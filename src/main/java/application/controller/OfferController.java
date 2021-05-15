@@ -108,7 +108,7 @@ public class OfferController {
         return "redirect:/offer?id=" + offerId;
     }
 
-    public boolean equals(Favourite a, Favourite b) {
+    private boolean equals(Favourite a, Favourite b) {
         return a.getUserId().equals(b.getUserId()) && a.getOfferId().equals(b.getOfferId());
     }
 }

@@ -1,6 +1,5 @@
 package application.dto;
 
-import application.validation.ValidEmail;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -18,7 +17,7 @@ public class UserDTO {
     private Long id;
 
     @NotEmpty
-    @ValidEmail
+    @Email
     private String email;
 
     @Length(min = 5)

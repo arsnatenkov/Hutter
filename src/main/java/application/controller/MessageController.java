@@ -37,19 +37,16 @@ public class MessageController {
     @Autowired
     private UserToUserDto userToUserDto;
 
-    private void addConversationToModel(Long hostId, Model model, Optional<Offer> offer) {
+    private void addConversationToModel(Long hostId, Model model, Offer offer) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         List<MessageDTO> messages =
-                messagesService.findConversation(user.getId(), hostId, offer.get().getId());
+                messagesService.findConversation(user.getId(), hostId, offer.getId());
 
         model.addAttribute("messages", messages);
         model.addAttribute("companion", userService.getUserById(hostId));
-        model.addAttribute("host", offer.get().getHostId().equals(user.getId()));
-        model.addAttribute("offer", offer.get());
-        model.addAttribute("address", offer.get().getAddress());
-        model.addAttribute("totalArea", offer.get().getTotalArea());
-        model.addAttribute("id", offer.get().getId());
+        model.addAttribute("host", offer.getHostId().equals(user.getId()));
+        model.addAttribute("offer", offer);
     }
 
     @GetMapping(value = "/messages/{offerId}")
@@ -73,7 +70,8 @@ public class MessageController {
                                             @PathVariable("offerId") Long offerId,
                                             Model model) {
 
-        Optional<Offer> offer = offerService.findById(offerId);
+        Optional<Offer> offers = offerService.findById(offerId);
+        Offer offer = offers.get();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.findUserByUserName(auth.getName());
@@ -94,7 +92,8 @@ public class MessageController {
                                   Model model) {
 
         if (bindingResult.hasErrors()) {
-            addConversationToModel(companionId, model, offerService.findById(offerId));
+            Offer offer = offerService.findById(offerId).get();
+            addConversationToModel(companionId, model, offer);
             return "conversation";
         }
         messageDTOCustom(messageDTO, companionId, offerId);

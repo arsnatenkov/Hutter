@@ -1,7 +1,7 @@
 package application.controller;
 
-import application.entity.Offer;
 import application.dto.SearchDTO;
+import application.entity.Offer;
 import application.service.OfferService;
 import groovy.lang.Tuple2;
 import lombok.RequiredArgsConstructor;
@@ -80,11 +80,16 @@ public class LandingController {
         final long lowerCost = lowerBound.isEmpty() ? 0L : Long.parseLong(lowerBound);
         final long higherCost = higherBound.isEmpty() ? Long.MAX_VALUE : Long.parseLong(higherBound);
 
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 4; ++i) {
             if (rooms.get(i) != null) {
                 offers.addAll(offerService.findByQuantityRoom(Integer.parseInt(rooms.get(i))));
             }
         }
+        if(rooms.get(4) != null){
+            offers.addAll(offerService.findByQuantityRoomMoreFour());
+        }
+
+
 
         if (offers.isEmpty()) {
             offers.addAll(offerService.findByCostBetween(lowerCost, higherCost));

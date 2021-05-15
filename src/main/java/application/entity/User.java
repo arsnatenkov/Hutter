@@ -1,10 +1,10 @@
 package application.entity;
 
-import application.validation.ValidEmail;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
@@ -28,7 +28,7 @@ public class User {
     private String userName;
 
     @Column(name = "email")
-    @ValidEmail
+    @Email
     @NotEmpty(message = "*Please provide an email")
     private String email;
 
