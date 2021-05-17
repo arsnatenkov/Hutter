@@ -100,7 +100,6 @@ a {
     width: 70%;
     margin: 40px auto auto;
     border-radius: 10px;
-    padding-bottom: 25px;
 }
 
 .link-list ul li {
@@ -341,16 +340,14 @@ hr {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     width: 70%;
-    height: 40px;
     margin: 20px auto;
 }
 
-.landing-tabs div {
+.landing-tabs table {
     width: 80%;
     height: 100%;
     margin: auto;
     text-align: center;
-    padding-top: 10px;
 }
 
 .rooms-num-panel input {

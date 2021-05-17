@@ -51,9 +51,13 @@
 </div>
 
 <div class="landing-tabs">
-    <div th:each="tab : ${tabsLen}">
-        <a th:text="${tab + 1}" th:href="@{'/?page=' + ${tab}}"></a>
-    </div>
+    <table>
+        <tr>
+            <td th:each="tab : ${tabsLen}">
+                <a th:text="${tab + 1}" th:href="@{'/?page=' + ${tab}}"></a>
+            </td>
+        </tr>
+    </table>
 </div>
 <br/>
 <div th:insert="blocks/hat :: hat"></div>

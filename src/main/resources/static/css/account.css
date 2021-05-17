@@ -48,6 +48,11 @@ img {
     border-top: none;
 }
 
+.tabcontent td {
+    height: 60px;
+    padding: 0;
+}
+
 .topright {
     float: right;
     cursor: pointer;
@@ -74,13 +79,14 @@ img {
 }
 
 .offer-delete {
-    position: relative;
-    top: -15px;
-    margin-right: 10%;
-    float: right;
+    margin: auto;
 }
 
-.tablinks{
+.tablinks {
     width: 200px;
     margin: auto;
+}
+
+.left-td {
+    width: 80%;
 }

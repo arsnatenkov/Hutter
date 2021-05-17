@@ -27,16 +27,24 @@
         <h3>Ваши объявления</h3>
         <ul>
             <li class="offer-list" th:each="h : ${hostedOffers}">
-                <a class="offer list-norm-font" th:id="${h.id}"
-                   th:href="'/messages/' + ${h.id}" th:text="${h.address}">
-                </a>
-                <form class="offer-delete" th:action="@{'/delete/' + ${h.id}}" method="get">
-                    <button type="submit">
-                        <div class="btn f-group-btn">
-                            <img class="invert" alt="delete" src="/images/delete.svg">
-                        </div>
-                    </button>
-                </form>
+                <table>
+                    <tr>
+                        <td class="left-td">
+                            <a class="offer list-norm-font" th:id="${h.id}"
+                               th:href="'/messages/' + ${h.id}" th:text="${h.address}">
+                            </a>
+                        </td>
+                        <td>
+                            <form class="offer-delete" th:action="@{'/delete/' + ${h.id}}" method="get">
+                                <button type="submit">
+                                    <div class="btn f-group-btn">
+                                        <img class="invert" alt="delete" src="/images/delete.svg">
+                                    </div>
+                                </button>
+                            </form>
+                        </td>
+                    <tr/>
+                </table>
             </li>
         </ul>
     </div>
@@ -46,16 +54,25 @@
         <h3>Избранные объявления</h3>
         <ul>
             <li class="offer-list" th:each="f : ${favouriteOffers}">
-                <a th:href="@{'/offer?id=' + ${f.offerId}}"
-                   class="offer list-norm-font" th:id="${f.offerId}" th:text="${f.address}">
-                </a>
-                <form class="offer-delete" th:action="@{'/deleteSaved/' + ${f.offerId}}" method="get">
-                    <button type="submit">
-                        <div class="btn f-group-btn">
-                            <img class="invert" alt="delete" src="/images/delete.svg">
-                        </div>
-                    </button>
-                </form>
+                <table>
+                    <tr>
+                        <td class="left-td">
+                            <a th:href="@{'/offer?id=' + ${f.offerId}}"
+                               class="offer list-norm-font" th:id="${f.offerId}" th:text="${f.address}">
+                            </a>
+                        </td>
+                        <td>
+                            <form class="offer-delete"
+                                  th:action="@{'/deleteSaved/' + ${f.offerId}}" method="get">
+                                <button type="submit">
+                                    <div class="btn f-group-btn">
+                                        <img class="invert" alt="delete" src="/images/delete.svg">
+                                    </div>
+                                </button>
+                            </form>
+                        </td>
+                    <tr/>
+                </table>
             </li>
         </ul>
     </div>
