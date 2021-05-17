@@ -27,20 +27,20 @@ public class MessageService {
     @Transactional(readOnly = true)
     public Collection<MessageDTO> findAllRecentMessages(Long id, Long offerId) {
         Iterable<Message> all = messageRepository.findAllRecentMessages(id, offerId);
-        Map<User, MessageDTO> map = new HashMap<>();
+        Map<Long, MessageDTO> map = new HashMap<>();
 
         all.forEach(m -> {
             MessageDTO messageDTO = messageToMessageDto.convert(m, id);
             User user = m.getSender().getId().equals(id) ? m.getReceiver() : m.getSender();
-            map.put(user, messageDTO);
+            map.put(offerId, messageDTO);
         });
 
         return map.values();
     }
 
     @Transactional(readOnly = true)
-    public List<MessageDTO> findConversation(Long userId, Long companionId, Long offerId) {
-        List<Message> all = messageRepository.findConversation(userId, companionId, offerId);
+    public List<MessageDTO> findConversation(Long userId, Long offerId) {
+        List<Message> all = messageRepository.findConversation(offerId);
         List<MessageDTO> messages = new LinkedList<>();
 
         if (all != null) {
