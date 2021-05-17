@@ -201,21 +201,21 @@ a.offer {
     margin: auto;
 }
 
-.row-maker{
+.row-maker {
     width: 100%;
 }
 
 .left {
     width: 45%;
-    margin: auto auto auto 0;
+    margin: auto auto auto 10px;
 }
 
 .right {
     width: 45%;
-    margin: auto 0 auto auto;
+    margin: auto 10px auto auto;
 }
 
-.no-chats-wrapper{
+.no-chats-wrapper {
     width: 70%;
     margin: auto;
 }

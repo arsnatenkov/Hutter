@@ -4,13 +4,13 @@
 
 <body class="scroll" th:with="sessionUser=${session.user}">
 <div class="container" th:with="address=${address}">
-    <h2 th:text="#{messages.messages}">Переписки</h2>
+    <h2 th:text="'Переписки по: ' + ${address}"></h2>
     <hr>
     <div class="panel panel-default" th:each="m : ${recentMessages}">
         <a th:href="@{'/conversation/' + ${m.companionId} + '/' + ${m.offerId}}">
             <div class="panel-heading">
                 <div class="card">
-                    <span class="txt1" th:text="'Переписка по: ' +${address}"> </span>
+                    <span class="txt1" th:text="${m.sender.name}"> </span>
                 </div>
             </div>
             <div class="panel-body">
@@ -21,8 +21,8 @@
     </div>
     <div th:with="emptyList=${emptyList}" th:if="${emptyList}">
         <div class="no-chats-wrapper">
-        <span class="txt1">Пока переписок нет</span>
-    </div>
+            <span class="txt1">Пока переписок нет</span>
+        </div>
     </div>
     <hr>
 </div>
