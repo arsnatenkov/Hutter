@@ -41,11 +41,10 @@ public class MessageController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         List<MessageDTO> messages =
-                messagesService.findConversation(user.getId(), offer.getId());
+                messagesService.findConversation(user.getId(), hostId, offer.getId());
 
         model.addAttribute("messages", messages);
         model.addAttribute("companion", userService.getUserById(hostId));
-        model.addAttribute("yourself", user);
         model.addAttribute("host", offer.getHostId().equals(user.getId()));
         model.addAttribute("offer", offer);
     }

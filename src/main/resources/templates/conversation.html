@@ -18,7 +18,7 @@
         <div>
             <div class="msg-display-wrapper" th:each="m : ${messages}">
                 <div class="row-maker">
-                    <div th:classappend="${m.sender.id==yourself.id} ? 'right' : 'left'">
+                    <div th:classappend="${m.sender.id==companion.id} ? 'left' : 'right'">
                         <div class="msg-display-header">
                             <div class="txt1">
                                 <a th:fragment="messageUser(${m.sender})">
