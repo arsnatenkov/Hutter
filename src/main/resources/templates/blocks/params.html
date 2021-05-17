@@ -1,41 +1,41 @@
 <div th:fragment="params(offer)">
-    <div th:with="o=${offer}" class="center-div scroll">
+    <div class="center-div scroll">
         <div class="inner-div">
             <div class="text-container">
                 <img class="offer-icons" src="/images/ruble.svg" alt="ruble">
-                <span th:text="'&nbsp;цена: ' + ${o.cost} + ' ₽'"></span>
+                <span th:text="@{'&nbsp;цена: ' + ${offer.cost} + ' ₽'}"></span>
                 <br/><br/>
                 <img class="offer-icons" src="/images/plans.svg" alt="plans">
-                <span th:text="'&nbsp;общая площадь: ' + ${o.totalArea} + ' м²'"></span>
+                <span th:text="'&nbsp;общая площадь: ' + ${offer.totalArea} + ' м²'"></span>
                 <br/>
-                <span th:text="'&nbsp;жилая площадь: ' + ${o.living} + ' м²'"></span>
+                <span th:text="'&nbsp;жилая площадь: ' + ${offer.living} + ' м²'"></span>
                 <br/><br/>
                 <img class="offer-icons" src="/images/floor.svg" alt="floor">
-                <span th:text="'&nbsp;этаж: ' + ${o.floor} + ' из ' + ${o.floorMax}"></span>
+                <span th:text="'&nbsp;этаж: ' + ${offer.floor} + ' из ' + ${offer.floorMax}"></span>
                 <br/><br/>
                 <img class="offer-icons" src="/images/living-room.svg" alt="living-room">
-                <span th:text="'&nbsp;кол-во комнат: ' + ${o.quantityRoom}"></span>
+                <span th:text="'&nbsp;кол-во комнат: ' + ${offer.quantityRoom}"></span>
                 <br/>
-                <span th:text="'&nbsp;площади комнат: ' + ${o.roomsSpaces} + ' м²'"></span>
+                <span th:text="'&nbsp;площади комнат: ' + ${offer.roomsSpaces} + ' м²'"></span>
                 <br/><br/>
                 <img class="offer-icons" src="/images/bathroom.svg" alt="bathroom">
-                <span th:text="'&nbsp;кол-во санузлов: ' + ${o.quantityToilet}"></span>
+                <span th:text="'&nbsp;кол-во санузлов: ' + ${offer.quantityToilet}"></span>
                 <br/>
-                <span th:text="'&nbsp;типы санузлов: ' + ${o.quantityToilet}"></span>
+                <span th:text="'&nbsp;типы санузлов: ' + ${offer.quantityToilet}"></span>
                 <br/><br/>
                 <img class="offer-icons" src="/images/brick.svg" alt="brick">
-                <span th:text="'&nbsp;строительные материалы: ' + ${o.material}"></span>
+                <span th:text="'&nbsp;строительные материалы: ' + ${offer.material}"></span>
                 <br/><br/>
                 <img class="offer-icons" src="/images/parking.svg" alt="parking">
-                <span th:text="'&nbsp;парковка: ' + ${o.hasParking}"></span>
+                <span th:text="'&nbsp;парковка: ' + ${offer.hasParking}"></span>
                 <br/>
-                <div th:if="${o.hasParking}">
-                    <span th:text="'&nbsp;тип парковки: ' + ${o.parkingType}"></span>
+                <div th:if="${offer.hasParking}">
+                    <span th:text="'&nbsp;тип парковки: ' + ${offer.parkingType}"></span>
                     <br/>
                 </div>
                 <br/>
                 <img class="offer-icons" src="/images/document.svg" alt="document">
-                <span th:text="'&nbsp;описание: ' + ${o.description}"></span>
+                <span th:text="'&nbsp;описание: ' + ${offer.description}"></span>
                 <br/><br/>
             </div>
         </div>

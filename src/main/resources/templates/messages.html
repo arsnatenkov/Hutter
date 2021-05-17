@@ -3,20 +3,14 @@
 <head th:replace="/blocks/header.html :: header('Переписки')"></head>
 
 <body class="scroll" th:with="sessionUser=${session.user}">
-<div class="container">
+<div class="container" th:with="address=${address}">
     <h2 th:text="#{messages.messages}">Переписки</h2>
     <hr>
     <div class="panel panel-default" th:each="m : ${recentMessages}">
         <a th:href="@{'/conversation/' + ${m.companionId} + '/' + ${m.offerId}}">
             <div class="panel-heading">
                 <div class="card">
-                    <span class="txt1 " th:fragment="messageUser(${m.sender})">
-                        <span th:text="${m.sender.name}"></span>
-                    </span>
-                    <span class="txt1"> пишет к </span>
-                    <span class="txt1" th:fragment="messageUser(${m.receiver})">
-                        <span th:text="${m.receiver.name}"></span>
-                    </span>
+                    <span class="txt1" th:text="'Переписка по: ' +${address}"> </span>
                 </div>
             </div>
             <div class="panel-body">

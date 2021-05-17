@@ -4,14 +4,11 @@ img {
 }
 
 .sim-slider {
-    min-height: 400px;
-    height: 50%;
+    height: 420px;
     width: 70%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     margin: 20px auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 .sim-slider {

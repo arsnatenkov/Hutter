@@ -14,7 +14,7 @@
         </form>
     </div>
     <hr>
-    <div th:with="offer=${offerDisplay}" th:insert="/blocks/params :: params(offer)"></div>
+    <div th:insert="/blocks/params :: params(${o})"></div>
     <br/>
     <hr>
     <div th:with="host=${host}" th:unless="${host}">
@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<div th:with="offer=${offerDisplay}" th:insert="blocks/gallery :: gallery(offer)"></div>
+<div th:with="offer=${offerDisplay}" th:insert="blocks/gallery :: gallery(${offer})"></div>
 
 <br/><br/>
 <div th:insert="blocks/hat :: hat"></div>

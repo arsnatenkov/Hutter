@@ -57,12 +57,13 @@ public class MessageController {
         User user = userService.findUserByUserName(auth.getName());
         UserDTO userDTO = userToUserDto.convert(user);
         Collection<MessageDTO> recentMessages;
-
+        String address = offerService.findById(offerId).get().getAddress();
         recentMessages = messagesService.findAllRecentMessages(userDTO.getId(), offerId);
         model.addAttribute("host", user != null
                 && user.getId().equals(offerService.findById(offerId).get().getHostId()));
         model.addAttribute("recentMessages", recentMessages);
         model.addAttribute("emptyList", recentMessages.isEmpty());
+        model.addAttribute("address", address);
         return "messages";
     }
 

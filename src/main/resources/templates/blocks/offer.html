@@ -1,11 +1,11 @@
-<div th:fragment="offer(offer, address, totalArea, id)">
+<div th:fragment="offer(offer)">
     <div class="offer-wrapper flex-h-chat">
-        <h2 th:text="${address} + ', ' + ${totalArea} + ' м²'"></h2>
+        <h2 th:text="${offer.address} + ', ' + ${offer.totalArea} + ' м²'"></h2>
         <div id="save" class="btn f-group-btn save-btn">
-            <a th:href="@{'/save/' + ${id}}"><img class="invert" alt="save" src="/images/save.svg"></a>
+            <a th:href="@{'/save/' + ${offer.id}}"><img class="invert" alt="save" src="/images/save.svg"></a>
         </div>
         <hr>
-        <div th:insert="/blocks/params :: params(offer)"></div>
+        <div th:insert="/blocks/params :: params(${offer})"></div>
         <br/><br/>
     </div>
 </div>

@@ -1,24 +1,24 @@
 <div th:fragment="gallery(offer)">
-    <div th:with="o=${offer}" class="sim-slider">
+    <div class="sim-slider">
         <ul class="sim-slider-list">
             <li class="sim-slider-element">
                 <div class="offer-images">
-                    <img alt="Фото объявления" th:src="'/images/offer/' + ${o.id % 12} + '.jpg'"/>
+                    <img alt="Фото объявления" th:src="'/images/offer/' + ${offer.id % 12} + '.jpg'"/>
                 </div>
             </li>
             <li class="sim-slider-element">
                 <div class="offer-images">
-                    <img alt="Фото объявления" th:src="'/images/offer/' + ${(o.id + 1) % 12} + '.jpg'"/>
+                    <img alt="Фото объявления" th:src="'/images/offer/' + ${(offer.id + 1) % 12} + '.jpg'"/>
                 </div>
             </li>
             <li class="sim-slider-element">
                 <div class="offer-images">
-                    <img alt="Фото объявления" th:src="'/images/offer/' + ${(o.id + 2) % 12} + '.jpg'"/>
+                    <img alt="Фото объявления" th:src="'/images/offer/' + ${(offer.id + 2) % 12} + '.jpg'"/>
                 </div>
             </li>
             <li class="sim-slider-element">
                 <div class="offer-images">
-                    <img alt="Фото объявления" th:src="'/images/offer/' + ${(o.id + 3) % 12} + '.jpg'"/>
+                    <img alt="Фото объявления" th:src="'/images/offer/' + ${(offer.id + 3) % 12} + '.jpg'"/>
                 </div>
             </li>
         </ul>
