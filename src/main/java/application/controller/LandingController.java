@@ -91,7 +91,7 @@ public class LandingController {
 
 
 
-        if (offers.isEmpty()) {
+        if (offers.isEmpty() && lowerCost != 0L && higherCost != Long.MAX_VALUE) {
             offers.addAll(offerService.findByCostBetween(lowerCost, higherCost));
         } else {
             offers.removeIf(o -> o.getCost() < lowerCost || o.getCost() > higherCost);
