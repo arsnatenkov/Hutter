@@ -43,7 +43,7 @@ public class AccountController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
-
+        modelAndView.addObject("offerSearch", new SearchDTO());
         model.addAttribute("hostedOffers", offerService.findByHostId(user.getId()));
         model.addAttribute("favouriteOffers", favouriteService.findByUserId(user.getId()));
         modelAndView.setViewName("/visitor/account");
@@ -120,7 +120,7 @@ public class AccountController {
 
         model.addAttribute("favouriteOffers", finish);
         modelAndView.addObject("offerSearch", new SearchDTO());
-        modelAndView.setViewName("landing");
+        modelAndView.setViewName("/visitor/account");
         return modelAndView;
     }
 }
