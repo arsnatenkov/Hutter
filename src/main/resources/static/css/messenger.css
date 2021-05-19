@@ -228,4 +228,7 @@ a.offer {
 .add-user-form input {
     height: 40px;
     margin: auto;
+    border: none;
+    box-shadow: none;
+    border-radius: 10px;
 }
