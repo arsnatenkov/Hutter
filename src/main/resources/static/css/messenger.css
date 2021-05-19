@@ -219,3 +219,13 @@ a.offer {
     width: 70%;
     margin: auto;
 }
+
+.add-user-form {
+    float: right;
+    margin: auto 10px auto auto;
+}
+
+.add-user-form input {
+    height: 40px;
+    margin: auto;
+}

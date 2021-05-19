@@ -6,12 +6,23 @@
 
 <div th:with="o=${offer}, host=${host}" th:unless="${host}">
     <div th:insert="blocks/offer :: offer(${o})"></div>
-<!--    <div th:insert="blocks/gallery :: gallery(${o})"></div>-->
+    <!--    <div th:insert="blocks/gallery :: gallery(${o})"></div>-->
 
 </div>
 
 <div class="content-flex">
-    <div class="txt1 heading-chat"><span th:text="#{conversation.with}">ПЕРЕПИСКА</span>
+    <div class="txt1 heading-chat">
+        <span th:text="#{conversation.with}">ПЕРЕПИСКА</span>
+        <div>
+                <form th:object="${userAdd}" th:action="@{/add}" class="add-user-form">
+                    <input th:field="*{userName}" class="add-user-input" type="text"/>
+<!--            <form class="add-user-form">-->
+<!--                <input class="add-user-input" type="text"/>-->
+                <button type="submit" name="submit" class="btn f-group-btn add-user-btn">
+                    <img class="invert" alt="add" src="/images/add-user.svg">
+                </button>
+            </form>
+        </div>
     </div>
     <hr>
     <div class="force-scroll scroll conv-wrap">
