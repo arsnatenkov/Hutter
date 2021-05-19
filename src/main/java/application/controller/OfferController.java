@@ -1,11 +1,13 @@
 package application.controller;
 
+import application.dto.SearchDTO;
 import application.entity.Favourite;
 import application.entity.Offer;
 import application.entity.User;
 import application.service.FavouriteService;
 import application.service.OfferService;
 import application.service.UserService;
+import groovy.lang.Tuple2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,7 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
