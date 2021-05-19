@@ -79,7 +79,8 @@ img {
 }
 
 .offer-delete {
-    margin: auto;
+    float: right;
+    margin: auto 30px auto auto;
 }
 
 .tablinks {
