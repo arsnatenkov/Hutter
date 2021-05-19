@@ -86,7 +86,8 @@ public class AccountController {
         for (int i = 0; i < 4; ++i) {
             if (rooms.get(i) != null) {
                 for(Favourite favourite : favourites){
-                    if(offerService.findById(favourite.getOfferId()).get().getQuantityRoom() == Integer.parseInt(rooms.get(i))){
+                    if(offerService.findById(favourite.getOfferId()).get().getQuantityRoom() ==
+                            Integer.parseInt(rooms.get(i))){
                         finish.add(favourite);
                     }
                 }
@@ -94,7 +95,8 @@ public class AccountController {
         }
         if(rooms.get(4) != null){
             for(Favourite favourite : favourites){
-                if(offerService.findById(favourite.getOfferId()).get().getQuantityRoom() == Integer.parseInt(rooms.get(4))){
+                if(offerService.findById(favourite.getOfferId()).get().getQuantityRoom() ==
+                        Integer.parseInt(rooms.get(4))){
                     finish.add(favourite);
                 }
             }
@@ -102,12 +104,14 @@ public class AccountController {
 
         if (finish.isEmpty() && lowerCost != 0L && higherCost != Long.MAX_VALUE) {
             for(Favourite favourite : favourites){
-                if(offerService.findById(favourite.getOfferId()).get().getCost() > lowerCost && offerService.findById(favourite.getOfferId()).get().getCost() < higherCost){
+                if(offerService.findById(favourite.getOfferId()).get().getCost() > lowerCost &&
+                        offerService.findById(favourite.getOfferId()).get().getCost() < higherCost){
                     finish.add(favourite);
                 }
             }
         } else {
-            finish.removeIf(o -> offerService.findById(o.getOfferId()).get().getCost() < lowerCost || offerService.findById(o.getOfferId()).get().getCost() > higherCost);
+            finish.removeIf(o -> offerService.findById(o.getOfferId()).get().getCost() <
+                    lowerCost || offerService.findById(o.getOfferId()).get().getCost() > higherCost);
         }
 
         if (rooms.stream().allMatch(Objects::isNull) && lowerBound.isEmpty() && higherBound.isEmpty()) {
