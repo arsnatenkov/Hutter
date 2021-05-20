@@ -5,6 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Класс-сущность для избранных объявлений
+ */
 @Getter
 @Setter
 @Builder

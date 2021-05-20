@@ -7,7 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+/**
+ * Класс-репозиторий для работы с таблицей Сообщений
+ */
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> findByOfferId(@Param("offerId") Long offerId);

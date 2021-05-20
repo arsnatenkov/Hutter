@@ -6,12 +6,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Класс конвертации сообщения во внутреннюю структуру
+ */
 @Component
 @RequiredArgsConstructor
 public class MessageToMessageDto {
     @Autowired
     private UserToUserDto userToUserDto;
 
+    /**
+     * Метод конвертации
+     * @param message Сообщение
+     * @return Внутренняя структура
+     */
     public MessageDTO convert(Message message) {
         if (message == null) return null;
 

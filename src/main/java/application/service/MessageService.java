@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+/**
+ * Сервис для репозитория Сообщений
+ */
 @Service
 @RequiredArgsConstructor
 public class MessageService {

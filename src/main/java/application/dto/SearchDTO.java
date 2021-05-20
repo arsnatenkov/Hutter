@@ -2,6 +2,9 @@ package application.dto;
 
 import lombok.*;
 
+/**
+ * Класс-внутренняя структура для поиска объявлений
+ */
 @Data
 @Getter
 @Setter

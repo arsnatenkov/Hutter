@@ -36,6 +36,12 @@ public class OfferController {
     @Autowired
     MessageService messageService;
 
+    /**
+     * Метод для перехода на страницу
+     * @param request Параметры запроса
+     * @param model Модель страницы
+     * @return Модель страницы
+     */
     @GetMapping(value = "/offer")
     public ModelAndView offer(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");
@@ -54,6 +60,10 @@ public class OfferController {
         return modelAndView;
     }
 
+    /**
+     * Метод перехода на страницу
+     * @return Модель страницы
+     */
     @GetMapping(value = "/create")
     public ModelAndView addOffer() {
         ModelAndView modelAndView = new ModelAndView();
@@ -62,6 +72,12 @@ public class OfferController {
         return modelAndView;
     }
 
+    /**
+     * Метод добавления объявления
+     * @param offer Объявление
+     * @param bindingResult Получение ошибок для последующего вывода
+     * @return Ссылка перехода
+     */
     @PostMapping(value = "/create")
     public String createNewOffer(@Valid Offer offer, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();

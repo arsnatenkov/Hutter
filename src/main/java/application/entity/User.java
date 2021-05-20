@@ -8,6 +8,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
+/**
+ * Класс-сущность для пользователя
+ */
 @Data
 @Getter
 @Setter

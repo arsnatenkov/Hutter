@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.HashSet;
 
+/**
+ * Сервис для репозитория Пользователь
+ */
 @Service
 public class UserService {
 

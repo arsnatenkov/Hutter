@@ -19,6 +19,10 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Метод перехода на страницу аутентификации
+     * @return Модель страницы
+     */
     @GetMapping(value = "/login")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
@@ -26,6 +30,10 @@ public class LoginController {
         return modelAndView;
     }
 
+    /**
+     * Метод перехода на страницу регистрации
+     * @return Модель перехода
+     */
     @GetMapping(value = "/registration")
     public ModelAndView registration() {
         ModelAndView modelAndView = new ModelAndView();
@@ -35,6 +43,12 @@ public class LoginController {
         return modelAndView;
     }
 
+    /**
+     * Метод для регистрации пользователя и добавления данных в БД
+     * @param user Пользователь
+     * @param bindingResult Получение ошибок для последующего вывода
+     * @return Модель страницыы
+     */
     @PostMapping(value = "/registration")
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();

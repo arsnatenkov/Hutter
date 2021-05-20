@@ -25,6 +25,12 @@ public class LandingController {
     @Autowired
     private OfferService offerService;
 
+    /**
+     * Метод для возврата 15 объявлений размещенных на текущей странице
+     * @param offers Список объявлений
+     * @param page Текущая страница
+     * @return Спосиок объявлений
+     */
     private List<Offer> getTab(List<Offer> offers, int page) {
         List<Offer> tab = new ArrayList<>();
 
@@ -34,6 +40,12 @@ public class LandingController {
         return tab;
     }
 
+    /**
+     * Метод для разбиения списка объявлений на странице
+     * @param offers Список объявлений
+     * @param page Номер страницы
+     * @return Список объявлений, список страниц
+     */
     private Tuple2<List<Offer>, List<Integer>> preprocess(List<Offer> offers, int page) {
         List<Integer> tabsLen = new ArrayList<>();
         int maxLen = offers.size() / 15 + (offers.size() % 15 == 0 ? 0 : 1);
@@ -47,6 +59,12 @@ public class LandingController {
         return new Tuple2<>(getTab(offers, page), tabsLen);
     }
 
+    /**
+     * Метод перехода на главную страницу
+     * @param model Модель страницы
+     * @param request Параметры запроса
+     * @return Модель страницы
+     */
     @GetMapping(value = "/")
     public ModelAndView landing(Model model, HttpServletRequest request) {
         String param = request.getParameter("page");
@@ -64,6 +82,12 @@ public class LandingController {
         return modelAndView;
     }
 
+    /**
+     * Метод поиска объявлений на главной странице
+     * @param request Параметры запроса
+     * @param model Модель страницы
+     * @return Модель страницы
+     */
     @GetMapping(value = "/search")
     public ModelAndView search(HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();

@@ -14,12 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Класс для работы с доступом пользователя
+ */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserService userService;
 
+    /**
+     * Метод загрузки пользователя по никнэйму
+     * @param userName Никнейм
+     * @return Класс деталей пользователя
+     */
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userName) {
@@ -28,6 +36,11 @@ public class MyUserDetailsService implements UserDetailsService {
         return buildUserForAuthentication(user, authorities);
     }
 
+    /**
+     * Метод получений роли пользователя
+     * @param userRoles Множество ролей
+     * @return Лист доступа
+     */
     private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
         List<GrantedAuthority> roles = new ArrayList<>();
 
@@ -37,6 +50,12 @@ public class MyUserDetailsService implements UserDetailsService {
         return new ArrayList<>(roles);
     }
 
+    /**
+     * Метод сборки пользователя для аутентификации
+     * @param user Пользователь
+     * @param authorities Лист доступа
+     * @return Класс деталей пользователя
+     */
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
         String userName = user.getUserName(), pwd = user.getPassword();
 

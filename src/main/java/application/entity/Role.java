@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Класс-сущность для ролей
+ */
 @Data
 @Builder
 @AllArgsConstructor

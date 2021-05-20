@@ -6,6 +6,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+/**
+ * Класс-сущность для отправленных сообщений
+ */
 @Getter
 @Setter
 @Builder

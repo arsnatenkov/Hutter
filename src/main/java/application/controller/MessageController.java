@@ -42,17 +42,13 @@ public class MessageController {
     @Autowired
     private UserToUserDto userToUserDto;
 
-    //    private void addConversationToModel(Long hostId, Model model, Offer offer) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userService.findUserByUserName(auth.getName());
-//        List<MessageDTO> messages =
-//                messagesService.findConversation(user.getId(), hostId, offer.getId());
-//
-//        model.addAttribute("messages", messages);
-//        model.addAttribute("companion", userService.getUserById(hostId));
-//        model.addAttribute("host", offer.getHostId().equals(user.getId()));
-//        model.addAttribute("offer", offer);
-//    }
+
+    /**
+     * Метод добавление диалога на страницу
+     * @param roomId Id комнаты
+     * @param model Модель страницы
+     * @param offer Объявление
+     */
     private void addConversationToModel(Long roomId, Model model, Offer offer) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
@@ -65,6 +61,12 @@ public class MessageController {
         model.addAttribute("offer", offer);
     }
 
+    /**
+     * Метод перехода на страницу сообщений по определенному объявлению
+     * @param model Модель страницы
+     * @param offerId Id объявления
+     * @return Ссылка перехода на страницу
+     */
     @GetMapping(value = "/messages/{offerId}")
     public String getMessages(Model model,
                               @PathVariable("offerId") Long offerId) {
@@ -82,6 +84,13 @@ public class MessageController {
         return "messages";
     }
 
+    /**
+     * Метод перехода на страницу чата
+     * @param roomId Id комнаты
+     * @param offerId Id объявления
+     * @param model Модель страницы
+     * @return Модель страницы
+     */
     @GetMapping(value = "/conversation/{roomId}/{offerId}")
     public ModelAndView getConversation(@PathVariable("roomId") Long roomId,
                                         @PathVariable("offerId") Long offerId,
@@ -103,6 +112,15 @@ public class MessageController {
 
     }
 
+    /**
+     * Метод для отправки сообщений
+     * @param offerId Id объявления
+     * @param roomId Id комнаты
+     * @param messageDTO Класс обрабоки сообщений
+     * @param bindingResult Получение ошибок для последующего вывода
+     * @param model Модель страницы
+     * @return Ссылка перехода на страницу
+     */
     @PostMapping(value = "/conversation/{roomId}/{offerId}")
     public String postMessage(@PathVariable("offerId") Long offerId,
                               @PathVariable("roomId") Long roomId,
@@ -119,6 +137,12 @@ public class MessageController {
         return "redirect:/conversation/" + roomId + "/" + offerId;
     }
 
+    /**
+     * Метод перевода сообщений во внутреннюю структуру
+     * @param messageDTO Класс обрабоки сообщений
+     * @param roomId Id комнаты
+     * @param offerId Id объявления
+     */
     private void messageDTOCustom(MessageDTO messageDTO, Long roomId, Long offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
@@ -130,6 +154,13 @@ public class MessageController {
         messagesService.postMessage(messageDTO);
     }
 
+    /**
+     * Метод для добавления пользователя в чат
+     * @param roomId Id комнаты
+     * @param request Параметры запроса
+     * @param model Модель страницы
+     * @return Модель страницы
+     */
     @GetMapping(value = "/addUser/{roomId}")
     public ModelAndView addUserInConversation(@PathVariable("roomId") Long roomId, HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();
@@ -146,6 +177,13 @@ public class MessageController {
         return modelAndView;
     }
 
+    /**
+     * Метод для удаления пользователя из чат
+     * @param roomId Id комнаты
+     * @param request Параметры запроса
+     * @param model Модель страницы
+     * @return Модель страницы
+     */
     @GetMapping(value = "/deleteUser/{roomId}")
     public ModelAndView deleteUserFromConversation(@PathVariable("roomId") Long roomId, HttpServletRequest request, Model model){
         ModelAndView modelAndView = new ModelAndView();

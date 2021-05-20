@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * Сервис для репозитория Объявлений
+ */
 @Service
 public class OfferService {
 

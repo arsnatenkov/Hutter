@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Класс-репозиторий для работы с таблицей Объявлений
+ */
 @Repository
 public interface OfferRepository extends JpaRepository<Offer, Long> {
     @NonNull

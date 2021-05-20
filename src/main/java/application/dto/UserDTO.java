@@ -6,6 +6,9 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
+/**
+ * Класс-внутренняя структура для пользователя
+ */
 @Getter
 @Setter
 @ToString

@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * Класс-сущность для объявлений
+ */
 @Data
 @Builder
 @AllArgsConstructor

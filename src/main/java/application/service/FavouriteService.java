@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Сервис для репозитория Избранных
+ */
 @Service
 @RequiredArgsConstructor
 public class FavouriteService {

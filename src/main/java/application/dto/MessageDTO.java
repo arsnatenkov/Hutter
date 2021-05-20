@@ -6,6 +6,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+/**
+ * Класс-внутренняя структура для сообщений
+ */
 @Getter
 @Setter
 @Builder

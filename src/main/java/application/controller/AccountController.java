@@ -38,6 +38,11 @@ public class AccountController {
     @Autowired
     private MessageService messageService;
 
+    /**
+     * Метод для перехода на страницу аккаунта
+     * @param model модель страницы
+     * @return Модель страницы
+     */
     @GetMapping(value = "/visitor/account")
     public ModelAndView account(Model model) {
         ModelAndView modelAndView = new ModelAndView();
@@ -50,6 +55,11 @@ public class AccountController {
         return modelAndView;
     }
 
+    /**
+     * Метод для удаления объявления из избранных
+     * @param offerId Id объявления
+     * @return ссылка перехода
+     */
     @GetMapping(value = "/delete/{offerId}")
     public String deleteOffer(@PathVariable("offerId") Long offerId) {
         Optional<Offer> offer = offerService.findById(offerId);
@@ -66,6 +76,12 @@ public class AccountController {
         return "redirect:/visitor/account";
     }
 
+    /**
+     * Метод для поиска объявлений в избранных
+     * @param request параметры запроса
+     * @param model модель страницы
+     * @return модель страницы
+     */
     @GetMapping(value = "/searchFavourite")
     public ModelAndView search(HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();
