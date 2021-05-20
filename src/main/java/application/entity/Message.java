@@ -36,15 +36,8 @@ public class Message {
     @NotNull
     private User sender;
 
-    @ManyToOne
-    @JoinColumn(name = "receiver")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "room_id")
     @NotNull
-    private User receiver;
-
-    public Message(User sender, User receiver){
-        this.sender = sender;
-        this.receiver = receiver;
-        time = LocalDateTime.now();
-        message = sender.getName() + "joined";
-    }
+    private Long roomId;
 }

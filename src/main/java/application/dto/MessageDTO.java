@@ -19,6 +19,5 @@ public class MessageDTO {
     @Size(min = 2, max = 3000)
     private String message;
     private UserDTO sender;
-    private UserDTO receiver;
-    private Long companionId;
+    private Long roomId;
 }

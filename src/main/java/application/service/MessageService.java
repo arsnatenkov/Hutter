@@ -25,30 +25,43 @@ public class MessageService {
     private final MessageDtoToMessage messageDtoToMessage;
 
     @Transactional(readOnly = true)
-    public Collection<MessageDTO> findAllRecentMessages(Long id, Long offerId) {
-        Iterable<Message> all = messageRepository.findAllRecentMessages(id, offerId);
-        Map<User, MessageDTO> map = new HashMap<>();
+    public Collection<MessageDTO> findAllRecentMessages(Long offerId) {
+        Iterable<Message> all = messageRepository.findByOfferId(offerId);
+
+        Map<Long, MessageDTO> map = new HashMap<>();
 
         all.forEach(m -> {
-            MessageDTO messageDTO = messageToMessageDto.convert(m, id);
-            User user = m.getSender().getId().equals(id) ? m.getReceiver() : m.getSender();
-            map.put(user, messageDTO);
+            MessageDTO messageDTO = messageToMessageDto.convert(m);
+            map.put(m.getRoomId(), messageDTO);
         });
 
         return map.values();
     }
 
-    @Transactional(readOnly = true)
-    public List<MessageDTO> findConversation(Long userId, Long companionId, Long offerId) {
-        List<Message> all = messageRepository.findConversation(userId, companionId, offerId);
+    @Transactional
+    public List<MessageDTO> findMessageByRoomId(Long roomId){
+        List<Message> all = messageRepository.findMessageByRoomId(roomId);
         List<MessageDTO> messages = new LinkedList<>();
-
         if (all != null) {
-            all.forEach(m -> messages.add(messageToMessageDto.convert(m, userId)));
+            all.forEach(m -> messages.add(messageToMessageDto.convert(m)));
         }
 
         return messages;
     }
+
+//    @Transactional
+//    public Long newRoom (Long userId, Long offerId){
+//        List<Message> all = messageRepository.findConversation(userId, offerId);
+//        List<Message> room = messageRepository.findAll();
+//        if(all.isEmpty()){
+//            if(room.isEmpty()){
+//                return 0L;
+//            }
+//            return room.get(room.size() - 1).getRoomId() + 1;
+//        }
+//        return all.get(0).getRoomId();
+//
+//    }
 
     @Transactional
     public void postMessage(MessageDTO messageDTO) {
@@ -62,5 +75,23 @@ public class MessageService {
 
     public void deleteMessage(Message message) {
         messageRepository.delete(message);
+    }
+
+    public Long findRoom(Long offerId, Long userId){
+        List<Message> messages = messageRepository.findRoom(offerId, userId);
+        List<Message> room = messageRepository.findAll();
+        if(messages.isEmpty()){
+            if(room.isEmpty()){
+                return 0L;
+            }
+            return room.get(room.size() - 1).getRoomId() + 1;
+        }
+        return messages.get(0).getRoomId();
+    }
+
+    public void findMessageByUserIdAndOfferId(Long userId, Long offerId, Long roomId){
+        List<Message> messages = messageRepository.findMessageByUserIdAndOfferId(userId, offerId);
+        messages.forEach(m -> new Message(m.getId(), m.getOfferId(), m.getTime(), m.getMessage(), m.getSender(), m.getRoomId()));
+        messages.forEach(m -> m.setRoomId(roomId));
     }
 }

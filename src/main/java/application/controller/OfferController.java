@@ -4,6 +4,7 @@ import application.entity.Favourite;
 import application.entity.Offer;
 import application.entity.User;
 import application.service.FavouriteService;
+import application.service.MessageService;
 import application.service.OfferService;
 import application.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,8 @@ public class OfferController {
     UserService userService;
     @Autowired
     FavouriteService favouriteService;
+    @Autowired
+    MessageService messageService;
 
     @GetMapping(value = "/offer")
     public ModelAndView offer(HttpServletRequest request, Model model) {
@@ -43,6 +46,10 @@ public class OfferController {
 
         model.addAttribute("host", user != null && user.getId().equals(offer.get().getHostId()));
         model.addAttribute("offerDisplay", offerService.findById(Long.parseLong(id)).get());
+        model.addAttribute("isAuth", userService.findUserByUserName(auth.getName()) != null);
+        if(user != null){
+            model.addAttribute("room", messageService.findRoom(Long.parseLong(id), user.getId()));
+        }
         modelAndView.setViewName("offer");
         return modelAndView;
     }

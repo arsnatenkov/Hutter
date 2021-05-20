@@ -14,11 +14,11 @@
     <div class="txt1 heading-chat">
         <span th:text="#{conversation.with}">ПЕРЕПИСКА</span>
         <div>
-                <form th:object="${userAdd}" th:action="@{/add}" class="add-user-form">
+            <form th:with="o=${offer}, room=${room}" th:object="${userAdd}" th:action="@{'/add/' + ${room}}" class="add-user-form">
                     <input th:field="*{userName}" class="add-user-input" type="text"/>
-<!--            <form class="add-user-form">-->
+<!--            <form th:with="o=${offer}" class="add-user-form">-->
 <!--                <input class="add-user-input" type="text"/>-->
-                <button type="submit" name="submit" class="btn f-group-btn add-user-btn">
+                <button th:value="${o.id}" type="submit" name="offerId" class="btn f-group-btn add-user-btn">
                     <img class="invert" alt="add" src="/images/add-user.svg">
                 </button>
             </form>
@@ -26,10 +26,10 @@
     </div>
     <hr>
     <div class="force-scroll scroll conv-wrap">
-        <div>
+        <div th:with="currentUser=${currentUser}">
             <div class="msg-display-wrapper" th:each="m : ${messages}">
                 <div class="row-maker">
-                    <div th:classappend="${m.sender.id==companion.id} ? 'left' : 'right'">
+                    <div th:classappend="${m.sender.id==currentUser.id} ? 'right' : 'left'">
                         <div class="msg-display-header">
                             <div class="txt1">
                                 <a th:fragment="messageUser(${m.sender})">
@@ -49,8 +49,8 @@
     <hr>
     <div class="msg-box">
         <div class="up">
-            <form th:object="${newMessage}" method="post"
-                  th:action="@{'/conversation/{h}/{o}'(o=${offer.getId()},h=${companion.id})}">
+            <form th:with="room=${room}" th:object="${newMessage}" method="post"
+                  th:action="@{'/conversation/{r}/{o}'(r=${room},o=${offer.getId()})}">
                 <table class="msg-hat">
                     <tr>
                         <td class="txt1 msg-head">
