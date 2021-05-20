@@ -130,7 +130,7 @@ public class MessageController {
         messagesService.postMessage(messageDTO);
     }
 
-    @GetMapping(value = "/add/{roomId}")
+    @GetMapping(value = "/addUser/{roomId}")
     public ModelAndView addUserInConversation(@PathVariable("roomId") Long roomId, HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         String userName = request.getParameter("userName");
@@ -140,12 +140,13 @@ public class MessageController {
         messagesService.findMessageByUserIdAndOfferId(user.getId(), offerId, roomId);
         addConversationToModel(roomId, model, offer);
         modelAndView.addObject("userAdd", new AddDTO());
+        modelAndView.addObject("userDel", new AddDTO());
         model.addAttribute("newMessage", new MessageDTO());
         modelAndView.setViewName("conversation");
         return modelAndView;
     }
 
-    @GetMapping(value = "/delete/{roomId}")
+    @GetMapping(value = "/deleteUser/{roomId}")
     public ModelAndView deleteUserFromConversation(@PathVariable("roomId") Long roomId, HttpServletRequest request, Model model){
         ModelAndView modelAndView = new ModelAndView();
         String userName = request.getParameter("userName");
@@ -154,6 +155,7 @@ public class MessageController {
         User user = userService.findUserByUserName(userName);
         messagesService.deleteMessageByUserIdAndOfferId(user.getId(), offerId, roomId);
         addConversationToModel(roomId, model, offer);
+        modelAndView.addObject("userAdd", new AddDTO());
         modelAndView.addObject("userDel", new AddDTO());
         model.addAttribute("newMessage", new MessageDTO());
         modelAndView.setViewName("conversation");
