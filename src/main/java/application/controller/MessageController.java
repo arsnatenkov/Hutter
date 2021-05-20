@@ -119,42 +119,6 @@ public class MessageController {
         return "redirect:/conversation/" + roomId + "/" + offerId;
     }
 
-//    @GetMapping(value = "/conversation/{companionId}/{offerId}")
-//    public ModelAndView getConversation(@PathVariable("companionId") Long companionId,
-//                                            @PathVariable("offerId") Long offerId,
-//                                            Model model) {
-//
-//        Optional<Offer> offers = offerService.findById(offerId);
-//        Offer offer = offers.get();
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        ModelAndView modelAndView = new ModelAndView();
-//        User user = userService.findUserByUserName(auth.getName());
-//
-//        if (user != null) {
-//            addConversationToModel(companionId, model, offer);
-//            model.addAttribute("newMessage", new MessageDTO());
-//            modelAndView.addObject("userAdd", new AddDTO());
-//            modelAndView.setViewName("conversation");
-//        }
-//        return modelAndView;
-//    }
-//
-//    @PostMapping(value = "/conversation/{companionId}/{offerId}")
-//    public String postMessage(@PathVariable("companionId") Long companionId,
-//                                  @PathVariable("offerId") Long offerId,
-//                                  @Valid @ModelAttribute("newMessage") MessageDTO messageDTO,
-//                                  BindingResult bindingResult,
-//                                  Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//            Offer offer = offerService.findById(offerId).get();
-//            addConversationToModel(companionId, model, offer);
-//            return "conversation";
-//        }
-//        messageDTOCustom(messageDTO, companionId, offerId);
-//        return "redirect:/conversation/" + messageDTO.getReceiver().getId() + "/" + offerId;
-//    }
-
     private void messageDTOCustom(MessageDTO messageDTO, Long roomId, Long offerId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());

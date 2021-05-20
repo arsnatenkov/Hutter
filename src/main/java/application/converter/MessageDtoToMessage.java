@@ -20,7 +20,6 @@ public class MessageDtoToMessage {
                 .time(messageDTO.getTime())
                 .message(messageDTO.getMessage())
                 .sender(userDtoToUser.convert(messageDTO.getSender()))
-                //.receiver(userDtoToUser.convert(messageDTO.getReceiver()))
                 .roomId(messageDTO.getRoomId())
                 .build();
     }

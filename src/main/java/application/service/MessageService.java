@@ -49,20 +49,6 @@ public class MessageService {
         return messages;
     }
 
-//    @Transactional
-//    public Long newRoom (Long userId, Long offerId){
-//        List<Message> all = messageRepository.findConversation(userId, offerId);
-//        List<Message> room = messageRepository.findAll();
-//        if(all.isEmpty()){
-//            if(room.isEmpty()){
-//                return 0L;
-//            }
-//            return room.get(room.size() - 1).getRoomId() + 1;
-//        }
-//        return all.get(0).getRoomId();
-//
-//    }
-
     @Transactional
     public void postMessage(MessageDTO messageDTO) {
         Message message = messageDtoToMessage.convert(messageDTO);
