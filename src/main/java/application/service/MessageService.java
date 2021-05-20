@@ -94,4 +94,9 @@ public class MessageService {
         messages.forEach(m -> new Message(m.getId(), m.getOfferId(), m.getTime(), m.getMessage(), m.getSender(), m.getRoomId()));
         messages.forEach(m -> m.setRoomId(roomId));
     }
+
+    public void deleteMessageByUserIdAndOfferId(Long userId, Long offerId, Long roomId){
+        List<Message> messages = messageRepository.findMessageByUserIdAndOfferId(userId, offerId);
+        messages.forEach(m -> messageRepository.delete(m));
+    }
 }

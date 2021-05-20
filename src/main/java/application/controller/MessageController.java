@@ -95,6 +95,7 @@ public class MessageController {
             addConversationToModel(roomId, model, offer);
             model.addAttribute("newMessage", new MessageDTO());
             modelAndView.addObject("userAdd", new AddDTO());
+            modelAndView.addObject("userDel", new AddDTO());
             modelAndView.setViewName("conversation");
         }
 
@@ -175,6 +176,21 @@ public class MessageController {
         messagesService.findMessageByUserIdAndOfferId(user.getId(), offerId, roomId);
         addConversationToModel(roomId, model, offer);
         modelAndView.addObject("userAdd", new AddDTO());
+        model.addAttribute("newMessage", new MessageDTO());
+        modelAndView.setViewName("conversation");
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/delete/{roomId}")
+    public ModelAndView deleteUserFromConversation(@PathVariable("roomId") Long roomId, HttpServletRequest request, Model model){
+        ModelAndView modelAndView = new ModelAndView();
+        String userName = request.getParameter("userName");
+        Long offerId = Long.parseLong(request.getParameter("offerId"));
+        Offer offer = offerService.findById(offerId).get();
+        User user = userService.findUserByUserName(userName);
+        messagesService.deleteMessageByUserIdAndOfferId(user.getId(), offerId, roomId);
+        addConversationToModel(roomId, model, offer);
+        modelAndView.addObject("userDel", new AddDTO());
         model.addAttribute("newMessage", new MessageDTO());
         modelAndView.setViewName("conversation");
         return modelAndView;
