@@ -52,6 +52,15 @@ public class AccountController {
         model.addAttribute("hostedOffers", offerService.findByHostId(user.getId()));
         model.addAttribute("favouriteOffers", favouriteService.findByUserId(user.getId()));
         modelAndView.setViewName("/visitor/account");
+
+//        if (userService.getUserById(user.getId()).isAdmin()) {
+//        modelAndView.addObject("offerSearch", new SearchDTO());
+//            model.addAttribute("offers", offerService.findAll());
+//            model.addAttribute("users", userService.findAll());
+//            model.addAttribute("adminUser", userService.getUserById(user.getId()).isAdmin());
+//            modelAndView.setViewName("/admin");
+//        }
+
         return modelAndView;
     }
 

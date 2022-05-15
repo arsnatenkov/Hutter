@@ -1,14 +1,19 @@
 package application.controller;
 
 import application.dto.SearchDTO;
+import application.dto.UserDTO;
 import application.entity.Offer;
 import application.service.OfferService;
+import application.service.UserService;
 import groovy.lang.Tuple2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,13 +30,17 @@ public class LandingController {
     @Autowired
     private OfferService offerService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * Метод для возврата 15 объявлений размещенных на текущей странице
      * @param offers Список объявлений
      * @param page Текущая страница
+     * @param userDTO Текущая страница
      * @return Спосиок объявлений
      */
-    private List<Offer> getTab(List<Offer> offers, int page) {
+    private List<Offer> getTab(List<Offer> offers, int page, UserDTO userDTO) {
         List<Offer> tab = new ArrayList<>();
 
         for (int i = page * 15; i < min(page * 15 + 15, offers.size()); ++i)
@@ -46,7 +55,7 @@ public class LandingController {
      * @param page Номер страницы
      * @return Список объявлений, список страниц
      */
-    private Tuple2<List<Offer>, List<Integer>> preprocess(List<Offer> offers, int page) {
+    private Tuple2<List<Offer>, List<Integer>> preprocess(List<Offer> offers, int page, UserDTO userDTO) {
         List<Integer> tabsLen = new ArrayList<>();
         int maxLen = offers.size() / 15 + (offers.size() % 15 == 0 ? 0 : 1);
 
@@ -54,9 +63,9 @@ public class LandingController {
             tabsLen.add(i);
 
         if (page >= maxLen)
-            return new Tuple2<>(getTab(offers, 0), tabsLen);
+            return new Tuple2<>(getTab(offers, 0, userDTO), tabsLen);
 
-        return new Tuple2<>(getTab(offers, page), tabsLen);
+        return new Tuple2<>(getTab(offers, page, userDTO), tabsLen);
     }
 
     /**
@@ -66,14 +75,14 @@ public class LandingController {
      * @return Модель страницы
      */
     @GetMapping(value = "/")
-    public ModelAndView landing(Model model, HttpServletRequest request) {
+    public ModelAndView landing(Model model, HttpServletRequest request, UserDTO userDTO) {
         String param = request.getParameter("page");
         int page = param == null ? 0 : Integer.parseInt(param);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("offerSearch", new SearchDTO());
 
         List<Offer> offers = offerService.findAll();
-        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, page);
+        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, page, userDTO);
 
         model.addAttribute("offersTab", tuple.getFirst());
         model.addAttribute("tabsLen", tuple.getSecond());
@@ -89,7 +98,7 @@ public class LandingController {
      * @return Модель страницы
      */
     @GetMapping(value = "/search")
-    public ModelAndView search(HttpServletRequest request, Model model) {
+    public ModelAndView search(HttpServletRequest request, Model model, UserDTO userDTO) {
         ModelAndView modelAndView = new ModelAndView();
         List<Offer> offers = new ArrayList<>();
         List<String> rooms = new ArrayList<>();
@@ -125,12 +134,12 @@ public class LandingController {
             offers.addAll(offerService.findAll());
         }
 
-        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, 0);
+        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, 0, userDTO);
         model.addAttribute("offersTab", tuple.getFirst());
         model.addAttribute("tabsLen", tuple.getSecond());
+        model.addAttribute("adminUser", userDTO.isAdmin());
         modelAndView.addObject("offerSearch", new SearchDTO());
         modelAndView.setViewName("landing");
         return modelAndView;
     }
-
 }

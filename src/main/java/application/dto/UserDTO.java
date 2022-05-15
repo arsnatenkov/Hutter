@@ -38,6 +38,8 @@ public class UserDTO {
 
     private Boolean active;
 
+    private Boolean isAdmin;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,5 +51,9 @@ public class UserDTO {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public Boolean isAdmin() {
+        return isAdmin;
     }
 }

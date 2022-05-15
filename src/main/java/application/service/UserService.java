@@ -2,6 +2,7 @@ package application.service;
 
 import application.converter.UserToUserDto;
 import application.dto.UserDTO;
+import application.entity.Offer;
 import application.entity.Role;
 import application.entity.User;
 import application.exceptions.UserNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Сервис для репозитория Пользователь
@@ -44,6 +46,10 @@ public class UserService {
         return userRepository.findByUserName(userName);
     }
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(true);
@@ -61,6 +67,10 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserDTO getUserById(Long id) {
         return userToUserDto.convert(getUser(id));
+    }
+
+    public void deleteUser(User user) {
+        userRepository.delete(user);
     }
 
 }

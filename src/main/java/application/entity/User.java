@@ -50,6 +50,9 @@ public class User {
 
     @Column(name = "active")
     private Boolean active;
+
+    @Column(name = "is_admin")
+    private Boolean False;
     
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
