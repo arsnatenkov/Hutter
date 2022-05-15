@@ -48,6 +48,12 @@ public class AccountController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
+
+        if (user.getIsAdmin()){
+            modelAndView.setViewName("redirect:/admin");
+            return modelAndView;
+        }
+
         modelAndView.addObject("offerSearch", new SearchDTO());
         model.addAttribute("hostedOffers", offerService.findByHostId(user.getId()));
         model.addAttribute("favouriteOffers", favouriteService.findByUserId(user.getId()));

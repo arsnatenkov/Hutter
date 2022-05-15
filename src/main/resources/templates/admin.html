@@ -25,6 +25,9 @@
     <div id="HostedOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Объявления</h3>
+        <div class="favourite-offer-search-wrap">
+            <div th:insert="/blocks/forms :: offerSearch"></div>
+        </div>
         <ul>
             <li class="offer-list" th:each="o : ${offers}">
                 <table>
@@ -51,73 +54,65 @@
 
     <div id="FavouriteOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
-        <h3>Пользователи</h3>
         <!--        <div class="favourite-offer-search-wrap">-->
-        <!--            <div th:insert="/blocks/forms :: searchUser"></div>-->
+        <!--            <div th:insert="/blocks/forms :: userSearch"></div>-->
         <!--        </div>-->
+        <h3>Пользователи</h3>
         <ul>
             <li class="offer-list" th:each="u : ${users}">
-                <div class="flex-h-chat-table offer-wrapper-table">
-                    <table>
-                        <tr>
-                            <td class="left-td">
-                                <a class="offer list-norm-font"
-                                   th:text="${u.userName}"></a><br/>
-                                <span th:text="'ID: ' + ${u.id}"></span><br/>
-                                <span th:text="'email: ' + ${u.email}"></span><br/>
-                                <span th:text="'name: ' + ${u.name}"></span><br/>
-                                <span th:text="'last name: ' + ${u.lastName}"></span><br/>
-                            </td>
-                            <td>
-                                <form class="offer-delete"
-                                      th:action="@{'/banUser/' + ${u.id}}" method="get">
-                                    <button type="submit">
-                                        <div class="btn f-group-btn">
-                                            <img class="invert" alt="delete" src="/images/delete-user.svg">
-                                        </div>
-                                    </button>
-                                </form>
-                            </td>
-                        <tr/>
-                    </table>
-                </div>
+                <table>
+                    <tr>
+                        <td class="left-td">
+                            <a class="offer list-norm-font"
+                               th:text="${u.userName}"></a><br/>
+                            <span th:text="'ID: ' + ${u.id}"></span><br/>
+                            <span th:text="'email: ' + ${u.email}"></span><br/>
+                            <span th:text="'name: ' + ${u.name}"></span><br/>
+                            <span th:text="'last name: ' + ${u.lastName}"></span><br/>
+                        </td>
+                        <td>
+                            <form class="offer-delete"
+                                  th:action="@{'/banUser/' + ${u.id}}" method="get">
+                                <button type="submit">
+                                    <div class="btn f-group-btn">
+                                        <img class="invert" alt="delete" src="/images/delete-user.svg">
+                                    </div>
+                                </button>
+                            </form>
+                        </td>
+                    <tr/>
+                </table>
             </li>
         </ul>
 
         <h3>Забанненные пользователи</h3>
-        <!--        <div class="favourite-offer-search-wrap">-->
-        <!--            <div th:insert="/blocks/forms :: searchUser"></div>-->
-        <!--        </div>-->
         <ul>
-            <div class="flex-h-chat-table offer-wrapper-table">
             <li class="offer-list" th:each="u : ${banned}" th:unless="${banned == null}">
-                <div class="flex-h-chat-table offer-wrapper-table">
-                    <table>
-                        <tr>
-                            <td class="left-td">
-                                <a class="offer list-norm-font"
-                                   th:text="${u.userName}"></a><br/>
-                                <span th:text="'ID: ' + ${u.id}"></span><br/>
-                                <span th:text="'email: ' + ${u.email}"></span><br/>
-                                <span th:text="'name: ' + ${u.name}"></span><br/>
-                                <span th:text="'last name: ' + ${u.lastName}"></span><br/>
-                                <!--                            <a th:href="@{'/offer?id=' + ${u.id}}"-->
-                                <!--                               class="offer list-norm-font" th:id="${u.id}" th:text="${u.userName}">-->
-                                <!--                            </a>-->
-                            </td>
-                            <td>
-                                <form class="offer-delete"
-                                      th:action="@{'/unbanUser/' + ${u.id}}" method="get">
-                                    <button type="submit">
-                                        <div class="btn f-group-btn">
-                                            <img class="invert" alt="delete" src="/images/add-user.svg">
-                                        </div>
-                                    </button>
-                                </form>
-                            </td>
-                        <tr/>
-                    </table>
-                </div>
+                <table>
+                    <tr>
+                        <td class="left-td">
+                            <a class="offer list-norm-font"
+                               th:text="${u.userName}"></a><br/>
+                            <span th:text="'ID: ' + ${u.id}"></span><br/>
+                            <span th:text="'email: ' + ${u.email}"></span><br/>
+                            <span th:text="'name: ' + ${u.name}"></span><br/>
+                            <span th:text="'last name: ' + ${u.lastName}"></span><br/>
+                            <!--                            <a th:href="@{'/offer?id=' + ${u.id}}"-->
+                            <!--                               class="offer list-norm-font" th:id="${u.id}" th:text="${u.userName}">-->
+                            <!--                            </a>-->
+                        </td>
+                        <td>
+                            <form class="offer-delete"
+                                  th:action="@{'/unbanUser/' + ${u.id}}" method="get">
+                                <button type="submit">
+                                    <div class="btn f-group-btn">
+                                        <img class="invert" alt="delete" src="/images/add-user.svg">
+                                    </div>
+                                </button>
+                            </form>
+                        </td>
+                    <tr/>
+                </table>
             </li>
         </ul>
     </div>
@@ -126,7 +121,7 @@
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Сообщения</h3>
         <!--        <div class="favourite-offer-search-wrap">-->
-        <!--            <div th:insert="/blocks/forms :: searchMsg"></div>-->
+        <!--            <div th:insert="/blocks/forms :: messageSearch"></div>-->
         <!--        </div>-->
         <ul>
             <li class="msg-display-wrapper" th:each="m : ${messages}">

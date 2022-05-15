@@ -1,5 +1,8 @@
 package application.controller;
 
+import application.dto.MSearchDTO;
+import application.dto.SearchDTO;
+import application.dto.USearchDTO;
 import application.dto.UserDTO;
 import application.entity.Favourite;
 import application.entity.Message;
@@ -10,6 +13,7 @@ import application.service.FavouriteService;
 import application.service.MessageService;
 import application.service.OfferService;
 import application.service.UserService;
+import groovy.lang.Tuple2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,7 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
+import static java.lang.Math.min;
 
 @Controller
 @RequiredArgsConstructor
@@ -52,9 +59,10 @@ public class AdminController {
      * Метод для перехода на страницу админа
      */
     @GetMapping(value = "/admin")
-    public String admin(Model model) {
+    public ModelAndView admin(Model model) {
 //        model.addAttribute("title", "Главная страница");
-
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/admin");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         boolean a = userService.findUserByUserName(auth.getName()) != null;
 
@@ -64,6 +72,9 @@ public class AdminController {
 //            return "redirect:/visitor/account";
 
         //        modelAndView.addObject("offerSearch", new SearchDTO());
+        modelAndView.addObject("offerSearch", new SearchDTO());
+        modelAndView.addObject("userSearch", new USearchDTO());
+        modelAndView.addObject("messageSearch", new MSearchDTO());
         model.addAttribute("offers", offerService.findAll());
         List<User> users = new ArrayList<>();
         List<User> banned = new ArrayList<>();
@@ -98,7 +109,7 @@ public class AdminController {
         model.addAttribute("messages", msgs);
 
 //        modelAndView.setViewName("/visitor/account");
-        return "admin";
+        return modelAndView;
     }
 
     @GetMapping(value = "/banUser/{id}")
@@ -189,4 +200,161 @@ public class AdminController {
 //        return modelAndView;
 //    }
 
+    /**
+     * Метод поиска объявлений
+     * @param request Параметры запроса
+     * @param model Модель страницы
+     * @return Модель страницы
+     */
+    @GetMapping(value = "/offerSearch")
+    public ModelAndView offerSearch(HttpServletRequest request, Model model, UserDTO userDTO) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Offer> offers = new ArrayList<>();
+        List<String> rooms = new ArrayList<>();
+        rooms.add(request.getParameter("noRooms"));
+        rooms.add(request.getParameter("rooms1"));
+        rooms.add(request.getParameter("rooms2"));
+        rooms.add(request.getParameter("rooms3"));
+        rooms.add(request.getParameter("manyRooms"));
+
+        String lowerBound = request.getParameter("lowerCostBound");
+        String higherBound = request.getParameter("higherCostBound");
+        final long lowerCost = lowerBound.isEmpty() ? 0L : Long.parseLong(lowerBound);
+        final long higherCost = higherBound.isEmpty() ? Long.MAX_VALUE : Long.parseLong(higherBound);
+
+        for (int i = 0; i < 4; ++i) {
+            if (rooms.get(i) != null) {
+                offers.addAll(offerService.findByQuantityRoom(Integer.parseInt(rooms.get(i))));
+            }
+        }
+        if(rooms.get(4) != null){
+            offers.addAll(offerService.findByQuantityRoomMoreFour());
+        }
+
+
+
+        if (offers.isEmpty() && lowerCost != 0L && higherCost != Long.MAX_VALUE) {
+            offers.addAll(offerService.findByCostBetween(lowerCost, higherCost));
+        } else {
+            offers.removeIf(o -> o.getCost() < lowerCost || o.getCost() > higherCost);
+        }
+
+        if (rooms.stream().allMatch(Objects::isNull) && lowerBound.isEmpty() && higherBound.isEmpty()) {
+            offers.addAll(offerService.findAll());
+        }
+
+        model.addAttribute("offers", offers);
+        List<User> users = new ArrayList<>();
+        List<User> banned = new ArrayList<>();
+        for (User u : userService.findAll()) {
+//            Usr usr = new Usr();
+//            usr.user = u;
+//            usr.name = new UserToUserDto().convert(u).getName();
+//            usr.lastName = new UserToUserDto().convert(u).getLastName();
+
+            if (u.getActive()) {
+                users.add(u);
+            } else {
+                banned.add(u);
+            }
+        }
+
+        model.addAttribute("users", users);
+        model.addAttribute("banned", banned.isEmpty() ? null : banned);
+
+        List<Msg> msgs = new ArrayList<>();
+        List<Message> messages = messageService.findAll();
+        for (Message m : messages) {
+            Msg i = new Msg();
+            i.message = m;
+            i.sender = "[" + m.getSender().getId().toString() + "] " + m.getSender().getName();
+            msgs.add(i);
+        }
+
+//        model.addAttribute("messages", messages);
+//        model.addAttribute("senders", senders);
+
+        model.addAttribute("messages", msgs);
+
+        modelAndView.addObject("offerSearch", new SearchDTO());
+        modelAndView.addObject("userSearch", new SearchDTO());
+        modelAndView.addObject("messageSearch", new SearchDTO());
+        modelAndView.setViewName("/admin");
+        return modelAndView;
+    }
+//
+//    @GetMapping(value = "/userSearch")
+//    public ModelAndView userSearch(HttpServletRequest request, Model model, UserDTO userDTO) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        List<User> users = userService.findAll();
+//        List<String> rooms = new ArrayList<>();
+//        rooms.add(request.getParameter("active"));
+//        String email = request.getParameter("email");
+//        String userName = request.getParameter("userName");
+//        String name = request.getParameter("name");
+//        String lastName = request.getParameter("lastName");
+//        final long lowerCost = lowerBound.isEmpty() ? 0L : Long.parseLong(lowerBound);
+//        final long higherCost = higherBound.isEmpty() ? Long.MAX_VALUE : Long.parseLong(higherBound);
+//        List<User> us = new ArrayList<>();
+//        for (User u : users){
+//            if (u.getIsAdmin() == rooms[0])
+//        }
+//        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, 0, userDTO);
+//        model.addAttribute("offersTab", tuple.getFirst());
+//        model.addAttribute("tabsLen", tuple.getSecond());
+//        model.addAttribute("adminUser", userDTO.isAdmin());
+//        modelAndView.addObject("offerSearch", new SearchDTO());
+//        modelAndView.addObject("userSearch", new SearchDTO());
+//        modelAndView.addObject("messageSearch", new SearchDTO());
+//        modelAndView.setViewName("/admin");
+//        return modelAndView;
+//    }
+//
+//    @GetMapping(value = "/messageSearch")
+//    public ModelAndView messageSearch(HttpServletRequest request, Model model, UserDTO userDTO) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        List<Offer> offers = new ArrayList<>();
+//        List<String> rooms = new ArrayList<>();
+//        rooms.add(request.getParameter("noRooms"));
+//        rooms.add(request.getParameter("rooms1"));
+//        rooms.add(request.getParameter("rooms2"));
+//        rooms.add(request.getParameter("rooms3"));
+//        rooms.add(request.getParameter("manyRooms"));
+//
+//        String lowerBound = request.getParameter("lowerCostBound");
+//        String higherBound = request.getParameter("higherCostBound");
+//        final long lowerCost = lowerBound.isEmpty() ? 0L : Long.parseLong(lowerBound);
+//        final long higherCost = higherBound.isEmpty() ? Long.MAX_VALUE : Long.parseLong(higherBound);
+//
+//        for (int i = 0; i < 4; ++i) {
+//            if (rooms.get(i) != null) {
+//                offers.addAll(offerService.findByQuantityRoom(Integer.parseInt(rooms.get(i))));
+//            }
+//        }
+//        if(rooms.get(4) != null){
+//            offers.addAll(offerService.findByQuantityRoomMoreFour());
+//        }
+//
+//
+//
+//        if (offers.isEmpty() && lowerCost != 0L && higherCost != Long.MAX_VALUE) {
+//            offers.addAll(offerService.findByCostBetween(lowerCost, higherCost));
+//        } else {
+//            offers.removeIf(o -> o.getCost() < lowerCost || o.getCost() > higherCost);
+//        }
+//
+//        if (rooms.stream().allMatch(Objects::isNull) && lowerBound.isEmpty() && higherBound.isEmpty()) {
+//            offers.addAll(offerService.findAll());
+//        }
+//
+//        Tuple2<List<Offer>, List<Integer>> tuple = preprocess(offers, 0, userDTO);
+//        model.addAttribute("offersTab", tuple.getFirst());
+//        model.addAttribute("tabsLen", tuple.getSecond());
+//        model.addAttribute("adminUser", userDTO.isAdmin());
+//        modelAndView.addObject("offerSearch", new SearchDTO());
+//        modelAndView.addObject("userSearch", new SearchDTO());
+//        modelAndView.addObject("messageSearch", new SearchDTO());
+//        modelAndView.setViewName("/admin");
+//        return modelAndView;
+//    }
 }
