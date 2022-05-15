@@ -9,9 +9,17 @@
             <li class="name gradient">HUTTER</li>
             <li><a th:href="@{/}"><img class="menu-icons" src="/images/billboard.svg" alt="billboard">
                 <br/>Объявления</a></li>
-            <li><a th:href="@{/visitor/account}">
-                <img class="menu-icons" src="/images/user.svg" alt="account">
-                <br/>Аккаунт</a></li>
+            <li>
+<!--                <a th:if="${adminUser}" th:href="@{/admin}">-->
+<!--                    <img class="menu-icons" src="/images/user.svg" alt="account">-->
+<!--                    <br/>Аккаунт админа</a>-->
+<!--                <a th:unless="${adminUser}" th:href="@{/visitor/account}">-->
+<!--                    <img class="menu-icons" src="/images/user.svg" alt="account">-->
+<!--                    <br/>Аккаунт</a>-->
+                <a th:href="@{/visitor/account}">
+                    <img class="menu-icons" src="/images/user.svg" alt="account">
+                    <br/>Аккаунт</a>
+            </li>
         </ul>
     </div>
 </div>

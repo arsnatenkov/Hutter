@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head th:replace="/blocks/header.html :: header('Аккаунт админа')"></head>
+<body class="scroll">
+
+<div class="wrapper">
+    <div class="tab">
+        <div class="tab-aligner">
+            <button class="tablinks" onclick="openTab(event, 'HostedOffers')">
+                <img alt="hosted" src="/images/user/crown.svg">&nbsp;Ваши&nbsp;объявления
+            </button>
+            <button class="tablinks" onclick="openTab(event, 'FavouriteOffers')">
+                <img alt="starred" src="/images/user/star.svg">&nbsp;Избранное
+            </button>
+        </div>
+    </div>
+
+    <div id="HostedOffers" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
+        <h3>Объявления</h3>
+        <ul>
+            <li class="offer-list" th:each="o : ${offers}">
+                <table>
+                    <tr>
+                        <td class="left-td">
+                            <a class="offer list-norm-font" th:id="${o.id}"
+                               th:href="'/messages/' + ${o.id}" th:text="${o.address}">
+                            </a>
+                        </td>
+                        <td>
+                            <form class="offer-delete" th:action="@{'/deleteOffer/' + ${o.id}}" method="get">
+                                <button type="submit">
+                                    <div class="btn f-group-btn">
+                                        <img class="invert" alt="delete" src="/images/delete.svg">
+                                    </div>
+                                </button>
+                            </form>
+                        </td>
+                    <tr/>
+                </table>
+            </li>
+        </ul>
+    </div>
+
+    <div id="FavouriteOffers" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
+        <h3>Пользователи</h3>
+<!--        <div class="favourite-offer-search-wrap">-->
+<!--            <div th:insert="/blocks/forms :: searchFavourite"></div>-->
+<!--        </div>-->
+        <ul>
+            <li class="offer-list" th:each="u : ${users}">
+                <table>
+                    <tr>
+                        <td class="left-td">
+                            <p class="offer list-norm-font"
+                               th:text="${u.id} + ', ' + ${u.userName} + ', ' + ${u.name}"></p>
+<!--                            <a th:href="@{'/offer?id=' + ${u.id}}"-->
+<!--                               class="offer list-norm-font" th:id="${u.id}" th:text="${u.userName}">-->
+<!--                            </a>-->
+                        </td>
+                        <td>
+                            <form class="offer-delete"
+                                  th:action="@{'/deleteUser/' + ${u.id}}" method="get">
+                                <button type="submit">
+                                    <div class="btn f-group-btn">
+                                        <img class="invert" alt="delete" src="/images/delete.svg">
+                                    </div>
+                                </button>
+                            </form>
+                        </td>
+                    <tr/>
+                </table>
+            </li>
+        </ul>
+    </div>
+
+    <div id="AddOffer" class="tabcontent">
+<!--        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>-->
+<!--        <h3>Перейти на страницу создания объявления?</h3>-->
+<!--        <div class="container-login-form-btn m-t-17 logout-wrapper">-->
+<!--            <a th:href="@{/create}" class="login-form-btn logout" type="submit">Перейти</a>-->
+<!--        </div>-->
+    </div>
+
+    <div id="Logout" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
+        <h3>Вы действительно хотите выйти из аккаунта?</h3>
+        <form class="logout-wrapper" th:action="@{/logout}" method="get">
+            <div class="container-login-form-btn m-t-17">
+                <button class="login-form-btn logout" name="registration" type="submit">Выйти</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:insert="blocks/hat :: hat"></div>
+<div th:insert="blocks/menu :: menu"></div>
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Hello!</title>-->
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <p th:text="'Hello, ' + ${title} + '!'"></p>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+
+<!--<head th:replace="/blocks/header.html :: header('Аккаунт')"></head>-->
+<!--<body class="scroll">-->
+
+<!--<div class="wrapper">-->
+<!--    <div class="tab">-->
+<!--        <div class="tab-aligner">-->
+<!--            <button class="tablinks" onclick="openTab(event, 'HostedOffers')">-->
+<!--                <img alt="hosted" src="/images/user/crown.svg">&nbsp;Ваши&nbsp;объявления-->
+<!--            </button>-->
+<!--            <button class="tablinks" onclick="openTab(event, 'FavouriteOffers')">-->
+<!--                <img alt="starred" src="/images/user/star.svg">&nbsp;Избранное-->
+<!--            </button>-->
+<!--            <button class="tablinks" onclick="openTab(event, 'AddOffer')">-->
+<!--                <img alt="create" src="/images/user/plus.svg">&nbsp;Создать-->
+<!--            </button>-->
+<!--            <button class="tablinks" onclick="openTab(event, 'Logout')">-->
+<!--                <img alt="logout" src="/images/user/logout.svg">&nbsp;Выйти-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div id="Offers" class="tabcontent">-->
+<!--        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>-->
+<!--        <h3>Ваши объявления</h3>-->
+<!--        <ul>-->
+<!--            <li class="offer-list" th:each="h : ${offers}">-->
+<!--                <table>-->
+<!--                    <tr>-->
+<!--                        <td class="left-td">-->
+<!--                            <a class="offer list-norm-font" th:id="${h.id}"-->
+<!--                               th:href="'/messages/' + ${h.id}" th:text="${h.address}">-->
+<!--                            </a>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <form class="offer-delete" th:action="@{'/delete/' + ${h.id}}" method="get">-->
+<!--                                <button type="submit">-->
+<!--                                    <div class="btn f-group-btn">-->
+<!--                                        <img class="invert" alt="delete" src="/images/delete.svg">-->
+<!--                                    </div>-->
+<!--                                </button>-->
+<!--                            </form>-->
+<!--                        </td>-->
+<!--                    <tr/>-->
+<!--                </table>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+<!--    <div id="Users" class="tabcontent">-->
+<!--        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>-->
+<!--        <h3>Избранные объявления</h3>-->
+<!--        <div class="favourite-offer-search-wrap">-->
+<!--            <div th:insert="/blocks/forms :: searchFavourite"></div>-->
+<!--        </div>-->
+<!--        <ul>-->
+<!--            <li class="offer-list" th:each="f : ${users}">-->
+<!--                <table>-->
+<!--                    <tr>-->
+<!--                        <td class="left-td">-->
+<!--                            <a th:href="@{'/offer?id=' + ${f.userId}}"-->
+<!--                               class="offer list-norm-font" th:id="${f.userId}" th:text="${f.name}">-->
+<!--                            </a>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <form class="offer-delete"-->
+<!--                                  th:action="@{'/deleteSaved/' + ${f.userId}}" method="get">-->
+<!--                                <button type="submit">-->
+<!--                                    <div class="btn f-group-btn">-->
+<!--                                        <img class="invert" alt="delete" src="/images/delete.svg">-->
+<!--                                    </div>-->
+<!--                                </button>-->
+<!--                            </form>-->
+<!--                        </td>-->
+<!--                    <tr/>-->
+<!--                </table>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+<!--&lt;!&ndash;    <div id="AddOffer" class="tabcontent">&ndash;&gt;-->
+<!--&lt;!&ndash;        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>&ndash;&gt;-->
+<!--&lt;!&ndash;        <h3>Перейти на страницу создания объявления?</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="container-login-form-btn m-t-17 logout-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;            <a th:href="@{/create}" class="login-form-btn logout" type="submit">Перейти</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--    <div id="Logout" class="tabcontent">-->
+<!--        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>-->
+<!--        <h3>Вы действительно хотите выйти из аккаунта?</h3>-->
+<!--        <form class="logout-wrapper" th:action="@{/logout}" method="get">-->
+<!--            <div class="container-login-form-btn m-t-17">-->
+<!--                <button class="login-form-btn logout" name="registration" type="submit">Выйти</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div th:insert="blocks/hat :: hat"></div>-->
+<!--<div th:insert="blocks/menu :: menu"></div>-->
+<!--</body>-->
+<!--</html>-->
