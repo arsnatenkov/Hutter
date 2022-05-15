@@ -85,3 +85,20 @@ span.sim-dot {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.offer-wrapper-table {
+    margin: 40px auto auto;
+    font-size: 1.3em;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.flex-h-chat-table {
+    padding-top: 20px;
+    height: 300px;
+    min-height: 200px;
+    width: 70%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding-bottom: 0;
+}

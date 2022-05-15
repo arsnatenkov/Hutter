@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head th:replace="/blocks/header.html :: header('Пользователь')"></head>
+<body class="scroll">
+<div th:with="u=${user}" class="offer-wrapper flex-h">
+    <h2 th:text="${u.userName}'"></h2>
+    <div class="offer-wrapper flex-h-chat">
+        <h2 th:text="${u.name} + ' ' + ${u.lastName} + ' м²'"></h2>
+        <hr>
+        <div class="center-div scroll">
+            <div class="inner-div">
+                <div class="text-container">
+                    <span th:text="@{'ID: ' + ${u.id} + ' ₽'}"></span>
+                    <br/><br/>
+                    <span th:text="'email: ' + ${u.email} + ' м²'"></span>
+                    <br/><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/><br/>
+</div>
+<br/><br/>
+<div th:insert="blocks/hat :: hat"></div>
+<div th:insert="blocks/menu :: menu"></div>
+</body>
+</html>

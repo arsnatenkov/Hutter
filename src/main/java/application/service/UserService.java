@@ -58,6 +58,16 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void banUser(User user) {
+        user.setActive(false);
+        userRepository.save(user);
+    }
+
+    public void unbanUser(User user) {
+        user.setActive(true);
+        userRepository.save(user);
+    }
+
     @Transactional(readOnly = true)
     public User getUser(Long id) {
         String message = "User with id = " + id + " is not found";

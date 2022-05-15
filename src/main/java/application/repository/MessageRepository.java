@@ -1,6 +1,8 @@
 package application.repository;
 
 import application.entity.Message;
+import application.entity.Offer;
+import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,6 +14,7 @@ import java.util.List;
  */
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
+
     List<Message> findByOfferId(@Param("offerId") Long offerId);
 
     List<Message> findMessageByRoomId(Long roomId);
@@ -20,6 +23,9 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> findMessageByUserIdAndOfferId(@Param("userId")Long userId,@Param("offerId") Long offerId);
 
     @Query(value = "SELECT m FROM Message m WHERE m.id > 0 ORDER BY m.roomId")
+    List<Message> _findAll();
+
+    @NonNull
     List<Message> findAll();
 
     @Query(value = "SELECT m FROM Message m WHERE ((m.sender.id = :userId AND m.offerId = :offerId))")

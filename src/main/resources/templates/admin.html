@@ -8,10 +8,16 @@
     <div class="tab">
         <div class="tab-aligner">
             <button class="tablinks" onclick="openTab(event, 'HostedOffers')">
-                <img alt="hosted" src="/images/user/crown.svg">&nbsp;Ваши&nbsp;объявления
+                <img alt="hosted" src="/images/plans.svg">&nbsp;Объявления
             </button>
             <button class="tablinks" onclick="openTab(event, 'FavouriteOffers')">
-                <img alt="starred" src="/images/user/star.svg">&nbsp;Избранное
+                <img alt="starred" src="/images/user.svg">&nbsp;Пользователи
+            </button>
+            <button class="tablinks" onclick="openTab(event, 'AddOffer')">
+                <img alt="create" src="/images/chat.svg">&nbsp;Сообщения
+            </button>
+            <button class="tablinks" onclick="openTab(event, 'Logout')">
+                <img alt="logout" src="/images/user/logout.svg">&nbsp;Выйти
             </button>
         </div>
     </div>
@@ -25,7 +31,7 @@
                     <tr>
                         <td class="left-td">
                             <a class="offer list-norm-font" th:id="${o.id}"
-                               th:href="'/messages/' + ${o.id}" th:text="${o.address}">
+                               th:href="'/offer/?id=' + ${o.id}" th:text="${o.address}">
                             </a>
                         </td>
                         <td>
@@ -46,23 +52,109 @@
     <div id="FavouriteOffers" class="tabcontent">
         <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
         <h3>Пользователи</h3>
-<!--        <div class="favourite-offer-search-wrap">-->
-<!--            <div th:insert="/blocks/forms :: searchFavourite"></div>-->
-<!--        </div>-->
+        <!--        <div class="favourite-offer-search-wrap">-->
+        <!--            <div th:insert="/blocks/forms :: searchUser"></div>-->
+        <!--        </div>-->
         <ul>
             <li class="offer-list" th:each="u : ${users}">
+                <div class="flex-h-chat-table offer-wrapper-table">
+                    <table>
+                        <tr>
+                            <td class="left-td">
+                                <a class="offer list-norm-font"
+                                   th:text="${u.userName}"></a><br/>
+                                <span th:text="'ID: ' + ${u.id}"></span><br/>
+                                <span th:text="'email: ' + ${u.email}"></span><br/>
+                                <span th:text="'name: ' + ${u.name}"></span><br/>
+                                <span th:text="'last name: ' + ${u.lastName}"></span><br/>
+                            </td>
+                            <td>
+                                <form class="offer-delete"
+                                      th:action="@{'/banUser/' + ${u.id}}" method="get">
+                                    <button type="submit">
+                                        <div class="btn f-group-btn">
+                                            <img class="invert" alt="delete" src="/images/delete-user.svg">
+                                        </div>
+                                    </button>
+                                </form>
+                            </td>
+                        <tr/>
+                    </table>
+                </div>
+            </li>
+        </ul>
+
+        <h3>Забанненные пользователи</h3>
+        <!--        <div class="favourite-offer-search-wrap">-->
+        <!--            <div th:insert="/blocks/forms :: searchUser"></div>-->
+        <!--        </div>-->
+        <ul>
+            <div class="flex-h-chat-table offer-wrapper-table">
+            <li class="offer-list" th:each="u : ${banned}" th:unless="${banned == null}">
+                <div class="flex-h-chat-table offer-wrapper-table">
+                    <table>
+                        <tr>
+                            <td class="left-td">
+                                <a class="offer list-norm-font"
+                                   th:text="${u.userName}"></a><br/>
+                                <span th:text="'ID: ' + ${u.id}"></span><br/>
+                                <span th:text="'email: ' + ${u.email}"></span><br/>
+                                <span th:text="'name: ' + ${u.name}"></span><br/>
+                                <span th:text="'last name: ' + ${u.lastName}"></span><br/>
+                                <!--                            <a th:href="@{'/offer?id=' + ${u.id}}"-->
+                                <!--                               class="offer list-norm-font" th:id="${u.id}" th:text="${u.userName}">-->
+                                <!--                            </a>-->
+                            </td>
+                            <td>
+                                <form class="offer-delete"
+                                      th:action="@{'/unbanUser/' + ${u.id}}" method="get">
+                                    <button type="submit">
+                                        <div class="btn f-group-btn">
+                                            <img class="invert" alt="delete" src="/images/add-user.svg">
+                                        </div>
+                                    </button>
+                                </form>
+                            </td>
+                        <tr/>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div id="AddOffer" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>
+        <h3>Сообщения</h3>
+        <!--        <div class="favourite-offer-search-wrap">-->
+        <!--            <div th:insert="/blocks/forms :: searchMsg"></div>-->
+        <!--        </div>-->
+        <ul>
+            <li class="msg-display-wrapper" th:each="m : ${messages}">
                 <table>
                     <tr>
                         <td class="left-td">
-                            <p class="offer list-norm-font"
-                               th:text="${u.id} + ', ' + ${u.userName} + ', ' + ${u.name}"></p>
-<!--                            <a th:href="@{'/offer?id=' + ${u.id}}"-->
-<!--                               class="offer list-norm-font" th:id="${u.id}" th:text="${u.userName}">-->
-<!--                            </a>-->
+                            <div class="row-maker">
+                                <div class="msg-display-header">
+                                    <div class="txt1">
+                                        <p class="offer list-norm-font" th:text="'id ' + ${m.message.id} +
+                                    ', sender ' + ${m.sender} + ',  room ' + ${m.message.roomId} +
+                                    ', offer ' + ${m.message.offerId}"></p>
+                                    </div>
+                                </div>
+                                <div class="msg-display-body">
+                                    <div class="msg-l time" th:text="${{m.message.time}}"></div>
+                                    <div class="msg-l" th:text="${m.message.message}"></div>
+                                </div>
+                            </div>
+                            <!--                            <p class="offer list-norm-font"-->
+                            <!--                               th:text="${m.sender} + ': ' + ${m.message.message}"></p>-->
+                            <!--                            <a th:href="@{'/offer?id=' + ${u.id}}"-->
+                            <!--                               class="offer list-norm-font" th:id="${u.id}" th:text="${u.userName}">-->
+                            <!--                            </a>-->
                         </td>
                         <td>
                             <form class="offer-delete"
-                                  th:action="@{'/deleteUser/' + ${u.id}}" method="get">
+                                  th:action="@{'/deleteMessage/' + ${m.message.id}}" method="get">
                                 <button type="submit">
                                     <div class="btn f-group-btn">
                                         <img class="invert" alt="delete" src="/images/delete.svg">
@@ -74,14 +166,6 @@
                 </table>
             </li>
         </ul>
-    </div>
-
-    <div id="AddOffer" class="tabcontent">
-<!--        <span onclick="this.parentElement.style.display='none'" class="topright">&times;</span>-->
-<!--        <h3>Перейти на страницу создания объявления?</h3>-->
-<!--        <div class="container-login-form-btn m-t-17 logout-wrapper">-->
-<!--            <a th:href="@{/create}" class="login-form-btn logout" type="submit">Перейти</a>-->
-<!--        </div>-->
     </div>
 
     <div id="Logout" class="tabcontent">
@@ -101,7 +185,6 @@
 </html>
 
 
-
 <!--<!DOCTYPE html>-->
 <!--<html xmlns:th="http://www.thymeleaf.org">-->
 <!--<head>-->
@@ -112,7 +195,6 @@
 <!--    <p th:text="'Hello, ' + ${title} + '!'"></p>-->
 <!--</body>-->
 <!--</html>-->
-
 
 
 <!--<!DOCTYPE html>-->

@@ -4,6 +4,7 @@ import application.converter.MessageDtoToMessage;
 import application.converter.MessageToMessageDto;
 import application.dto.MessageDTO;
 import application.entity.Message;
+import application.entity.Offer;
 import application.entity.User;
 import application.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
@@ -87,5 +88,13 @@ public class MessageService {
     public void deleteMessageByUserIdAndOfferId(Long userId, Long offerId, Long roomId){
         List<Message> messages = messageRepository.findMessageByUserIdAndOfferId(userId, offerId);
         messages.forEach(m -> messageRepository.delete(m));
+    }
+
+    public Optional<Message> findById(Long id) {
+        return messageRepository.findById(id);
+    }
+
+    public List<Message> findAll() {
+        return messageRepository.findAll();
     }
 }
